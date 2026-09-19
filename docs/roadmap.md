@@ -1,8 +1,8 @@
 # Roadmap
 
-## Release candidate 0.1.0
+## Public preview 0.1.0
 
-Implemented: bilingual local playground, calendar/manual input, transparent relationships, Zi-hour comparison, optional cycles, exports and regression checks. Public launch and independent use remain separate validation steps.
+Implemented: bilingual local playground, calendar/manual input, transparent relationships, Zi-hour comparison, optional cycles, exports and regression checks. Public source and hosted demo are live; independent use remains a separate validation step.
 
 ## Next only when a real use case supports it
 

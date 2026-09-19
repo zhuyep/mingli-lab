@@ -2,13 +2,13 @@
 
 **看得见推演过程的八字实验室。改一个口径，看一张盘为什么变。**
 
-[English](README.md) · [计算口径](docs/method.md) · [参与贡献](CONTRIBUTING.md) · [MIT 许可](LICENSE)
+[**直接体验 →**](https://zhuyep.github.io/mingli-lab/) · [English](README.md) · [计算口径](docs/method.md) · [参与贡献](CONTRIBUTING.md) · [MIT 许可](LICENSE)
 
 ![明理排盘界面](docs/images/desktop.png)
 
 无需账号、无需 API Key、生日不上传。打开就是一张可以点击、对照和复算的四柱命盘。
 
-> 当前为 0.1.0 发布候选：本地代码与演示已就绪，公开仓库、线上演示和真实用户采用尚未核验。
+> 0.1.0 公开预览：源码和演示已上线。软件验收不等于真实用户采用，更不代表命理预测得到验证。
 
 ## 一分钟体验
 

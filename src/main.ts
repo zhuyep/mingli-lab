@@ -282,12 +282,10 @@ app.addEventListener('click', (event) => {
       ?.focus({ preventScroll: true });
     announce(t('已载入教学示例。', 'Teaching example loaded.'));
     if (innerWidth < 741)
-      document
-        .querySelector('#results')
-        ?.scrollIntoView({
-          behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-          block: 'start',
-        });
+      document.querySelector('#results')?.scrollIntoView({
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        block: 'start',
+      });
   }
   if (button.dataset.export) {
     const svg = button.dataset.export === 'svg';

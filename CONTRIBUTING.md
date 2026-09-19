@@ -1,6 +1,6 @@
 # Contributing / 参与贡献
 
-Run `npm ci`, `npm test`, and `npm run build` on Node.js 22.12+ before proposing a change. Prefer one bounded change per PR. Describe the old behavior, new behavior and a reproducible example. CI repeats the rule checks and build.
+Run `npm ci`, `npm run format:check`, `npm test`, and `npm run build` on Node.js 22.12+ before proposing a change. Prefer one bounded change per PR. Describe the old behavior, new behavior and a reproducible example. CI repeats the rule checks and build.
 
 ## Good first contributions
 

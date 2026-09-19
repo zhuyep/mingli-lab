@@ -4,7 +4,7 @@
 
 ## GitHub Pages (manual)
 
-1. Publish this repository only after the owner approves the public name, license and contents.
+1. Use a repository whose owner has authorized public source and demo publication.
 2. In repository Settings → Pages, select GitHub Actions as the build source.
 3. Run the **Deploy Pages** workflow manually. It tests, builds, uploads and deploys the static app.
 4. Inspect the completed job's URL in a browser, including a mobile viewport and the Zi-hour example. A queued workflow is not a verified live site.

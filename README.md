@@ -2,13 +2,13 @@
 
 **An explainable BaZi playground. Change a convention, see the chart change, trace the calculation.**
 
-[中文说明](README.zh-CN.md) · [Method](docs/method.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
+[**Try the live demo →**](https://zhuyep.github.io/mingli-lab/) · [中文说明](README.zh-CN.md) · [Method](docs/method.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
 
 ![Mingli interactive chart](docs/images/desktop.png)
 
 No account. No API key. No birth-data upload. A bilingual browser app and a small TypeScript core for exploring traditional Chinese Four Pillars (八字) rules.
 
-> Release candidate 0.1.0. Source and local demo are ready; public repository, hosted demo and community adoption are not yet verified. This line will be updated only after release readback.
+> Public preview 0.1.0. Source and live demo are available. Calendar conventions are explicit; independent user adoption and predictive validity are not claimed.
 
 ## Try it in a minute
 
