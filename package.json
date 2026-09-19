@@ -1,0 +1,31 @@
+{
+  "name": "mingli-lab",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An explainable, local-first BaZi playground. 明理：看得见推演过程的八字实验室。",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "chart": "tsx scripts/chart.ts",
+    "format": "prettier --write src scripts tests vite.config.ts",
+    "format:check": "prettier --check src scripts tests vite.config.ts"
+  },
+  "dependencies": {
+    "lunar-typescript": "1.8.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "prettier": "3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3",
+    "vite": "8.3.0"
+  }
+}

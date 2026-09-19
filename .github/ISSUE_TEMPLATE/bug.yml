@@ -1,0 +1,33 @@
+name: Reproducible issue / 问题报告
+description: Report a chart, interface or accessibility failure with a synthetic example.
+body:
+  - type: markdown
+    attributes:
+      value: "Please use teaching or fictional data. Do not post real birth records. 请用教学或虚构样例，不要公开真实生辰。"
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and example / 操作与样例
+      description: Include app version, browser, input mode, clock basis and day-boundary convention.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior and source / 预期与依据
+      description: For calendar differences, cite a checkable reference and its convention.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / 实际表现
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check / 隐私
+      options:
+        - label: This report contains no private birth data or credentials.
+          required: true

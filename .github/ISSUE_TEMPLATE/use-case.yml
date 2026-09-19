@@ -1,0 +1,25 @@
+name: Use case or feedback / 使用反馈
+description: Tell us what you tried and where the explanation helped or failed.
+body:
+  - type: textarea
+    id: task
+    attributes:
+      label: What were you trying to understand? / 你想弄懂什么？
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What worked, failed, or remained unclear? / 结果与困惑
+      description: Use a reference chart, not private birth information.
+    validations:
+      required: true
+  - type: dropdown
+    id: return
+    attributes:
+      label: Would you use it again? / 会再次使用吗？
+      options:
+        - Not sure yet / 还不确定
+        - Yes, for learning / 会，用于学习
+        - Yes, for development / 会，用于开发
+        - No / 不会
