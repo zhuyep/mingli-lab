@@ -11,3 +11,7 @@ The original pen-and-ink hand holds a symbolic sky. It creates atmosphere, not a
 Each chapter presents a plain lead, an everyday observation and one question. A short term translation keeps a professional foothold. Full technical prose and evidence expand only when requested. The result opens with a calm note; the chart itself is compact and expandable. Chapter navigation stays available, with a horizontal mobile index. Inputs, language switching and unknown-hour handling remain intact.
 
 The public repository and personal site's internal `games/wenchen` route stay stable. All visible branding is 天机簿 / Tianji Bu. Font and image provenance are in the third-party notices. Responsive and keyboard checks cover the implemented flow; real engagement effects still require user feedback.
+
+## v0.5: distinct questions and visible evidence
+
+The ink-and-paper direction stays. The contents now link directly to overview, work, money, relationships, health and years. Numbered answers use readable body type; each places its chart evidence immediately underneath. Sleep answers and adjacent-year rows have their own compact layouts. The repeated handwritten reflection box is removed.

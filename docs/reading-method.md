@@ -1,6 +1,6 @@
 # 天机簿解读方法 / Reading method
 
-Version: `tianji-rules-1-plain-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. The six chapters are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
+Version: `tianji-rules-2-topics-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
 
 ## What is calculated, and what is interpreted
 
@@ -9,10 +9,13 @@ Version: `tianji-rules-1-plain-1`. Calculation and technical rules were introduc
 | TJ-01 | Month branch, first hidden stem (main qi in the pinned library), its ten-god relation | Opens a theme; it does not establish a formal pattern or personality type |
 | TJ-02 | Same-phase hidden roots, main vs additional qi, exact hidden-stem exposure in year/month/hour stems, visible support/drain | Limited strength screening below; roots are recorded before considering transformations |
 | TJ-03 | Generating relationships relative to day phase | Conditional support/outlet candidates using a balancing approach, not a universally agreed useful god |
-| TJ-04 | Main month role plus other visible ten-god groups | Original reflective prose about temperament and work; not an empirically validated personality assessment |
-| TJ-05 | Whether expression and wealth roles both appear in visible stems | An available relationship to examine; presence alone does not establish an output-to-wealth pattern or predict income |
+| TJ-04 | Legacy structural layer only | No longer a separate personality chapter |
+| TJ-05 | Output/authority, authority/resource, output/wealth combinations in visible stems or main month qi; otherwise a single role family | Separate work-setting and friction analogies; no formal pattern, vocation or career outcome is established |
 | TJ-06 | All supported natal relationships involving the day branch; void branches separately recorded | Combinations never erase clashes. No spouse verdicts, compatibility scores or marriage predictions |
 | TJ-07 | Lichun-based annual pillar; optional cycle at selected date; annual/natal and annual/cycle pair matches | Selected date is evaluated at **12:00 UTC+8**. Only clash, pair-combination and harm additions are supported |
+
+| TJ-08 | Direct and indirect wealth separately; visible vs main-month vs other hidden roles; output and peer co-presence | Income, delivery/payment and collaboration are separate questions; not a money amount or investment rule |
+| TJ-09 | No health inference from chart symbols; optional actual sleep responses | General sleep notes based on CDC guidance; no diagnosis, storage or export of responses |
 
 ## Conservative strength screening
 
@@ -43,8 +46,24 @@ Sources were checked on 2026-09-20. Links identify conceptual context; they do *
 
 Tests cover different readings for the same day stem, root/exposure distinctions, withheld judgments, simultaneous clash and combination, Lichun, cycle intervals, unknown timing and day-boundary changes. Tests validate these software contracts, not life-outcome prediction. Professional review of the interpretation rules and independent user feedback remain open work.
 
-## Plain-language presentation
+## Topic selection and presentation
 
-The plain layer uses the same computed facts. The opening and work themes use the main month role. The additional personality angle uses the first different visible role in year/month/hour order; this is an editorial choice, not a strength ranking. Balance preserves supported/drained/mixed/withheld states. Relationship language retains clash and combination together. The annual theme uses the annual stem role, with separate supported pair observations.
+The six chapters are **overview, work, money, relationships, health and timing**. Each answer has a question and explicit chart basis; additional professional explanations remain collapsed. There is no repeated reflection-prompt template.
 
-Every chapter has a readable lead, an everyday example, a reflection prompt and a short term translation. Full technical prose and evidence remain available on demand and in exports. These modern analogies are not measured psychological traits or behavior predictions. Unknown-hour and other withheld cases remain explicit in the plain layer.
+Work selects the first applicable combination: output+authority, authority+resource, output+wealth; otherwise authority, output, resource, wealth, then peers. These are editorial priorities, not a traditional strength ranking. Candidate detection checks visible year/month/hour stems and the main hidden month stem; it does not equate all hidden stems with visible roles. Complete pattern formation, transformations and outcomes are not established.
+
+Money distinguishes direct/indirect/both, hidden-only and absent roles. Output-to-wealth is a candidate pathway; peer+wealth co-presence is a collaboration topic, not a loss prediction. Relationships use day-branch main qi and actual supported links to other positions. Palace-to-life analogies are modern editorial interpretations, not verified facts about a person. Cycle direction is not reused as gender or spouse-role data.
+
+Neighboring years use the same month/day at noon UTC+8, clamping February 29 to February 28 where necessary. Lichun determines each annual pillar. Each row independently resolves the active cycle; the supported range remains 1901–2199.
+
+Health content is invariant across charts. The two optional sleep responses change general observations only; unknown answers are not read as normal, and even positive responses do not establish overall health. They are not persisted, uploaded or exported, and reset when a new chart is opened.
+
+## Focused product research (2026-09-20)
+
+- [Xuanji BaZi Skills](https://github.com/AITCX08/xuanji-bazi-skills): separates natal evidence, timing and domains including career, income and relationships. Used as a question-organization reference; no code or prompts imported, and no prediction validity assumed.
+- [MingMing3 application dimensions](https://mingming3.com/en/bazi/articles/bazi_apply): illustrates common career, wealth, relationship and health categories. Its medical and event claims are not adopted.
+- [BaZiSifu](https://bazisifu.com/): distinguishes career methods and wealth themes. No profession list is copied or prescribed.
+- [三命通会卷五](https://zh.wikisource.org/wiki/三命通會/卷五): historical context for visible/hidden roles and conditional structures, not evidence of prediction accuracy.
+- [CDC About Sleep](https://www.cdc.gov/sleep/about/): source for consistent schedules, sleep-quality observations, a sleep diary and seeking healthcare support for recurring problems. No disease inference is made from birth data.
+
+New tests specifically compare different charts with the same day/month, verify the positions behind evidence, retain hidden/visible distinctions and simultaneous relationships, exercise adjacent years and verify that health notes do not depend on the chart. Independent user assessment of specificity and usefulness is still needed.

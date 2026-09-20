@@ -7,7 +7,7 @@
 
 ![天机簿黑白手绘首页](docs/images/desktop.png)
 
-翻开一卷黑白命书，在干支与五行之间，读一读自己的节奏、做事与相处。无需账号、无需 API Key、生日不上传。填写公历生日与时间，或直接看一个示例。六章白话解读，先看懂故事，再展开每一步推演。
+翻开一卷黑白命书，在干支与五行之间，分别读工作、收入、感情与年份。无需账号、无需 API Key、生日不上传。填写公历生日与时间，或直接看一个示例。六章白话解读，先看懂故事，再展开每一步推演。
 
 Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart and rules within reach. No account, no API key, no birth-data upload. [Read the full bilingual guide →](README.md)
 
@@ -15,16 +15,16 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 
 | 章节 | 内容 |
 | --- | --- |
-| 你的底色 | 从出生月份切入，看看熟悉的做事习惯 |
-| 找回你的节奏 | 分清需要行动还是支持；不确定处保留 |
-| 做自己，也留点余地 | 观察另一种侧面，不把人归成单一性格 |
-| 把力气用对地方 | 合作、作品、责任、学习怎样落到具体事情 |
-| 靠近，也保留自己 | 用生活中的相处场景理解连接与差异 |
-| 给这一年的提醒 | 按所选日期给出年度问题，可展开大运依据 |
+| 命局总览 | 月令、根气与哪些结论尚不能成立 |
+| 工作发展 | 工作方式、职责与授权、交付卡点 |
+| 财富与收入 | 正偏财、收入路径、合伙与分配 |
+| 感情关系 | 关系需求，及日支实际关联的位置 |
+| 健康与作息 | 八字与健康的边界；选填真实睡眠情况 |
+| 阶段与年份 | 所选大运、年度关系与前后年份对照 |
 
-每章先说白话、给生活例子，再留一个可以问自己的问题。术语配一句解释，点“看看术语与依据”可查看月令、根气、透干、用神候选等完整推演。文末有三项本地问答。可保存 Markdown 命书、SVG 四柱卡片，或包含原始输入与解读的 JSON。附录保留十神逐步推演和 23 点换日对照。
+每个回答旁列出本盘的字与位置，点“展开专业说明”查看规则。保留 Markdown 命书、SVG 卡片与 JSON 数据；睡眠回答只在本页使用，不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
 
-> v0.4.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
+> v0.5.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
 
 ## 本地运行
 
@@ -62,4 +62,4 @@ npm run chart -- --date 2005-12-23 --time 08:37
 
 If you enjoy the book, **star the project** to find it again. Specific usability or calculation feedback is welcome; please use fictional or reference dates in public.
 
-[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.4.0 双语发布说明](docs/releases/v0.4.0.md)
+[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.5.0 双语发布说明](docs/releases/v0.5.0.md)

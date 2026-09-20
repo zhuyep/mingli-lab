@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { calculate, compareZi, type Chart } from '../src/core.ts';
 import {
   annualContext,
-  buildReading,
+  buildStructureReading as buildReading,
   cycleWindows,
   features,
   readingMarkdown,
@@ -97,23 +97,13 @@ test('all six bilingual chapters carry evidence and rule identifiers; exports ar
   assert.equal(new Set(report.chapters.map((c) => c.id)).size, 6);
   for (const chapter of report.chapters) {
     assert.match(chapter.rule, /TJ-0[1-7]/);
-    for (const text of [
-      chapter.title,
-      chapter.lead,
-      ...chapter.paragraphs,
-      ...chapter.evidence,
-      chapter.plain.title,
-      chapter.plain.lead,
-      chapter.plain.prompt,
-      chapter.plain.term,
-      ...chapter.plain.paragraphs,
-    ]) {
+    for (const text of [chapter.title, chapter.lead, ...chapter.paragraphs, ...chapter.evidence]) {
       assert.ok(text.zh.length > 0 && text.en.length > 0);
       assert.ok(!text.zh.includes('undefined') && !text.en.includes('undefined'));
     }
   }
   assert.equal(readingMarkdown(c, '2026-09-20', 'zh'), readingMarkdown(c, '2026-09-20', 'zh'));
-  assert.match(readingMarkdown(c, '2026-09-20', 'en'), /Cycles & the year/);
+  assert.match(readingMarkdown(c, '2026-09-20', 'en'), /Cycles & years/);
 });
 test('invalid exploration dates are rejected without silently rolling to another day', () => {
   for (const date of ['', '2023-02-29', '2026-13-01', '1900-12-31', '2200-01-01'])

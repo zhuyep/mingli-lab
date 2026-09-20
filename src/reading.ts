@@ -1,4 +1,4 @@
-import { plainChapters } from './plain-reading';
+import { buildTopics } from './topics';
 import { Solar } from 'lunar-typescript';
 import { ELEMENTS, stemInfo, tenGod, type Chart } from './core';
 
@@ -12,7 +12,7 @@ export type Chapter = {
   evidence: Words[];
   rule: string;
 };
-export const READING_VERSION = 'tianji-rules-1-plain-1';
+export const READING_VERSION = 'tianji-rules-2-topics-1';
 const positions = ['年支', '月支', '日支', '时支'];
 const positionsEn = ['year branch', 'month branch', 'day branch', 'hour branch'];
 const phaseEn = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];
@@ -203,7 +203,7 @@ export function annualContext(chart: Chart, date: string) {
   return { date, pillar, god: tenGod(chart.dayMaster, pillar[0]).name, cycle, windows, links };
 }
 
-export function buildReading(chart: Chart, date = todayInChina()) {
+export function buildStructureReading(chart: Chart, date = todayInChina()) {
   const f = features(chart);
   const annual = annualContext(chart, date);
   const d = ELEMENTS.indexOf(f.day);
@@ -522,7 +522,6 @@ export function buildReading(chart: Chart, date = todayInChina()) {
     ],
     rule: 'TJ-07',
   });
-  const plain = plainChapters(chart, f, annual);
   return {
     version: READING_VERSION,
     features: f,
@@ -531,8 +530,23 @@ export function buildReading(chart: Chart, date = todayInChina()) {
       `${chart.dayMaster} ${phase(f.day)} · ${chart.pillars[1].branch} month`,
     ),
     subtitle: state,
-    chapters: chapters.map((c) => ({ ...c, plain: plain[c.id] })),
+    chapters,
     annual,
+  };
+}
+
+export function buildReading(chart: Chart, date = todayInChina()) {
+  const structure = buildStructureReading(chart, date);
+  const solar = asSolar(date);
+  const nearby = [-1, 0, 1]
+    .map((offset) => solar.nextYear(offset).toYmd())
+    .filter((d) => d >= '1901-01-01' && d <= '2199-12-31')
+    .map((d) => annualContext(chart, d));
+  return {
+    ...structure,
+    balance: structure.chapters.find((c) => c.id === 'balance')!,
+    chapters: buildTopics(chart, structure, nearby),
+    nearby,
   };
 }
 
@@ -545,8 +559,9 @@ export function readingMarkdown(chart: Chart, date: string, lang: 'zh' | 'en') {
     chart.pillars.map((p) => p.text).join(' '),
     ...report.chapters.map(
       (c) =>
-        `## ${c.plain.title[lang]}\n\n**${c.plain.lead[lang]}**\n\n${c.plain.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.plain.prompt[lang]}\n\n### ${lang === 'zh' ? '术语与依据' : 'Terms & reasoning'}\n\n${c.plain.term[lang]}\n\n${c.title[lang]}\n\n**${c.lead[lang]}**\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => `- ${e[lang]}`).join('\n')}\n\n${c.rule}`,
+        `## ${c.plain.title[lang]}\n\n**${c.plain.lead[lang]}**\n\n${c.findings.map((f) => `### ${f.question[lang]}\n\n${f.answer[lang]}\n\n> ${lang === 'zh' ? '本盘依据' : 'Chart basis'}: ${f.basis[lang]}${f.condition ? '\n\n' + f.condition[lang] : ''}`).join('\n\n')}\n\n${c.plain.term[lang]}\n\n<details><summary>${lang === 'zh' ? '术语与依据' : 'Terms & reasoning'}</summary>\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => `- ${e[lang]}`).join('\n')}\n\n${c.rule}\n\n</details>`,
     ),
+    `### ${lang === 'zh' ? '相邻年份对照（同月日）' : 'Adjacent years (same month/day)'}\n\n${report.nearby.map((a) => `- ${a.date}: ${a.pillar} · ${a.god} · ${a.links.map((l) => `${lang === 'zh' ? l.target : l.targetEn} ${l.branches} ${l.kind}`).join('; ') || (lang === 'zh' ? '无支持规则命中' : 'No supported pair')}`).join('\n')}`,
     `Method: ${READING_VERSION}\nhttps://github.com/zhuyep/mingli-lab/blob/main/docs/reading-method.md`,
   ].join('\n\n');
 }

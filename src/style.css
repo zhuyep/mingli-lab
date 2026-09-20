@@ -1401,3 +1401,151 @@ html[lang='en'] .deep-reading h2 {
     padding: 20px;
   }
 }
+.topic-findings {
+  margin: 30px 0 24px;
+}
+.topic-finding {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 14px;
+  padding: 24px 0;
+  border-top: 1px solid #d8d8d4;
+}
+.finding-number {
+  font: 11px/2.1 monospace;
+  color: #686863;
+}
+.topic-finding h4,
+.sleep-check h4,
+.year-comparison h4 {
+  margin: 0 0 13px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.topic-finding p,
+.sleep-check p {
+  margin: 0 0 15px;
+  font-size: 15px;
+  line-height: 1.95;
+}
+.finding-basis {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #65655f;
+}
+.finding-basis > span {
+  display: inline-block;
+  margin-right: 8px;
+  border-bottom: 1px solid #aaa;
+  color: #242421;
+}
+.sleep-check {
+  margin: 30px 0;
+  padding: 26px;
+  border: 1px solid #777;
+}
+.sleep-check .form-kicker {
+  font-size: 10px;
+}
+.sleep-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 20px 0;
+}
+.sleep-fields > div {
+  min-width: 0;
+}
+.sleep-fields label {
+  font-size: 12px;
+}
+.sleep-fields select {
+  width: 100%;
+  font-size: 13px;
+}
+.sleep-check > small {
+  display: block;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #62625d;
+}
+.sleep-check a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.year-comparison {
+  margin: 30px 0;
+}
+.year-comparison > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #62625d;
+}
+.year-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) 38px;
+  gap: 16px;
+  border-top: 1px solid #ccc;
+  padding: 20px 8px;
+}
+.year-row strong {
+  display: block;
+  font:
+    26px/1.2 Georgia,
+    serif;
+}
+.year-row span,
+.year-row small {
+  font-size: 11px;
+  line-height: 1.8;
+}
+.year-row b {
+  font-size: 13px;
+  font-weight: 500;
+}
+.year-row p {
+  font-size: 12px;
+  margin: 7px 0;
+  line-height: 1.8;
+}
+.selected-year {
+  border-top-color: #151513;
+  background: #edede8;
+}
+.year-marker {
+  align-self: start;
+  text-align: right;
+}
+@media (max-width: 600px) {
+  .topic-finding {
+    grid-template-columns: 18px minmax(0, 1fr);
+    gap: 9px;
+    padding: 22px 0;
+  }
+  .topic-finding h4 {
+    font-size: 16px;
+  }
+  .topic-finding p,
+  .sleep-check p {
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .sleep-check {
+    padding: 20px 16px;
+  }
+  .sleep-fields {
+    grid-template-columns: 1fr;
+  }
+  .year-row {
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 12px;
+    position: relative;
+    padding-top: 26px;
+  }
+  .year-marker {
+    position: absolute;
+    right: 8px;
+    top: 3px;
+  }
+}
