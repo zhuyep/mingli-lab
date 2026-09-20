@@ -1,49 +1,85 @@
 # 天机簿 · Tianji Bu
 
-**A few symbols. An unwritten life. Six plain-language chapters on habits, work and connection, with the reasoning beneath.**
+**一纸生辰，万象成章。你的故事，不止八个字。**<br>
+**A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
-[**Open a sample book →**](https://zhuyep.github.io/mingli-lab/) · [中文](README.zh-CN.md) · [Reading method](docs/reading-method.md) · [Calendar contract](docs/method.md) · [MIT license](LICENSE)
+翻开一卷黑白命书，在干支与五行之间，读一读自己的节奏、做事与相处。天机簿把八字排盘化为六章白话解读：先看懂故事，再展开每一步推演。
 
-![Tianji Bu black-and-white hand-drawn interface](docs/images/desktop.png)
+Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Explore six plain-language chapters on habits, work and connection, then unfold the chart and rules behind the reading.
 
-No account. No API key. No birth-data upload. A black-and-white, bilingual, local-first reading experience with a small TypeScript calculation and interpretation core.
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.4.0)
 
-## Read the whole chart
+**无需登录 · 无需 API Key · 生辰本地计算 · 中英双语**<br>
+**No account · No API key · Local birth-data processing · Chinese & English**
 
-1. **The whole chart** — month context, roots, visible support and exact hidden-stem exposure.
-2. **Balance & alternatives** — conditional pathways, with disagreement left visible.
-3. **Temperament & action** — month and visible roles as reflective themes.
-4. **Work & resources** — making, collaboration and practical outcomes.
-5. **Connection & boundaries** — day-branch relationships, with combinations and clashes kept together.
-6. **Cycles & the year** — select a date, inspect the Lichun-based annual pillar, optionally add a traditional cycle.
+![天机簿黑白手绘首页 · Tianji Bu, an ink-and-paper reading experience](docs/images/desktop.png)
 
-Each chapter starts with plain language, an everyday example and a reflection prompt. Technical interpretation, chart evidence and rule identifiers expand on demand. Guided local questions explain common ambiguities. Save the book as Markdown, a chart as SVG, or the complete input and reading as JSON. The appendix preserves the interactive ten-god trace and midnight/23:00 comparison.
+## 先翻一页 · Open the first page
 
-> Public preview 0.4.0. Strength screening is a documented project heuristic, not a classical authority or validated predictor. Unknown hours, mixed Earth months and some concentrated charts withhold judgment. Professional rule review and independent user feedback are still open.
+1. **不填生辰，也能先看示例。** 打开演示，选择示例命书。<br>
+   **Start without entering personal details.** Open the demo and read a sample.
+2. **用白话读六章，再看依据。** 每章有生活例子和一个留给自己的问题；好奇时再展开术语与推演。<br>
+   **Read first, inspect the reasoning next.** Each chapter has an everyday example and a reflection prompt; technical details stay within reach.
+3. **把这一卷留在自己手里。** 可导出 Markdown 命书、SVG 四柱卡片或 JSON 数据。<br>
+   **Keep a copy of your own.** Export the book as Markdown, the chart as SVG, or the full input and reading as JSON.
 
-## Try it locally
+## 六章命书 · Six chapters to explore
 
-Requires Node.js 22.12+:
+| 章节 · Chapter | 这一页读什么 · What to explore |
+| --- | --- |
+| 你的底色 · Your underlying pattern | 从月份、根气与透干读整张命盘。 / Explore the whole chart through month context, roots and visible stems. |
+| 找回你的节奏 · Find your rhythm | 看行动与支持的不同路径，保留分歧。 / Consider alternative paths of action and support, with uncertainty left visible. |
+| 做自己，也留点余地 · Make room for another side | 用传统角色观察做事习惯，不把人定成一种性格。 / Reflect on habits through symbolic roles, without reducing a person to a personality label. |
+| 把力气用对地方 · Put your energy to work | 从作品、合作、责任与学习，想一件具体的事。 / Explore making, collaboration, responsibility and learning through everyday situations. |
+| 靠近，也保留自己 · Connection and boundaries | 并看关系中的合与冲，不替你评判一段感情。 / Read combinations and clashes together, without passing judgment on a relationship. |
+| 给这一年的提醒 · Questions for the year | 选择日期，查看立春口径的流年与可选大运。 / Select a date to explore the Lichun-based annual pillar and optional traditional cycles. |
+
+每章先说白话，再给例子、留问题。文末三项本地问答解释常见疑惑；附录保留十神逐步推演与 23 点换日对照。
+
+Plain language comes first, followed by an example and a question. Three guided local questions address common ambiguities. The appendix preserves step-by-step ten-god reasoning and the midnight/23:00 comparison.
+
+## 意境之外，依据可查 · Atmosphere on the surface, rules underneath
+
+- **推演可展开。** 查看月令、根气、透干、条件化平衡路径与规则标识。<br>
+  **Inspectable reasoning.** Follow month context, roots, visible stems, conditional balance paths and rule identifiers.
+- **不确定就留白。** 未知时辰不补造；杂气月和部分集中结构不强行定强弱。<br>
+  **Uncertainty stays visible.** Unknown hours are not invented; mixed Earth months and some concentrated charts withhold strength judgments.
+- **私密、不依赖云模型。** 计算与解读均在浏览器本地完成，不调用模型服务、不存储命盘。<br>
+  **Private, without a cloud model.** Calculation and interpretation run in the browser, without model calls or chart storage.
+- **可复用的开源内核。** 不依赖 DOM 的 TypeScript 模块、规则案例与结构化导出，方便研究和二次开发。<br>
+  **A reusable open-source core.** DOM-independent TypeScript modules, rule cases and structured exports support inspection and adaptation.
+
+## 本地翻开 · Run locally
+
+需要 Node.js 22.12+。 / Requires Node.js 22.12+.
 
 ```sh
+git clone https://github.com/zhuyep/mingli-lab.git
+cd mingli-lab
 npm ci
 npm run dev
 ```
 
-Enter a Gregorian birth date and time, or choose **Read a sample**. Known pillars and optional cycle formulas are under **Options**. The repository slug remains `mingli-lab` to preserve existing links.
+打开终端给出的本地地址。输入公历生日和时间，或选择示例；已有四柱与可选大运位于“更多选项”。仓库沿用 `mingli-lab` 地址，原链接继续有效。
 
-## A concrete boundary example
+Open the local address printed in the terminal. Enter a Gregorian birth date and time, or read a sample. Known pillars and optional cycle formulas are under Options. The repository stays at `mingli-lab` to preserve existing links.
 
-Input: **1988-02-15 23:30, fixed UTC+08:00**.
+## 同一刻，两种换日口径 · One moment, two day boundaries
 
-| Convention | Year | Month | Day | Hour |
+示例 / Reference input: **1988-02-15 23:30，固定 UTC+08:00 / fixed UTC+08:00**.
+
+| 口径 · Convention | 年 · Year | 月 · Month | 日 · Day | 时 · Hour |
 | --- | --- | --- | --- | --- |
-| Midnight day boundary | 戊辰 | 甲寅 | 庚子 | 戊子 |
-| 23:00 day boundary | 戊辰 | 甲寅 | 辛丑 | 戊子 |
+| 00:00 换日 · Midnight boundary | 戊辰 | 甲寅 | 庚子 | 戊子 |
+| 23:00 换日 · Late-Zi boundary | 戊辰 | 甲寅 | 辛丑 | 戊子 |
 
-The hour stem follows the next day in both modes. The day pillar differs. Because ten gods are relative to the day stem, their labels can differ too. The UI makes that dependency visible rather than silently mixing conventions.
+两种模式的时干都随次日计算，日柱却不同。十神以日干为参照，因此关系名称也可能变化。天机簿把这种依赖摆出来，供你比较。
 
-## Use the calculation core
+The hour stem follows the next day in both modes, while the day pillar differs. Ten gods are relative to the day stem, so their labels can change too. The app makes that dependency visible for comparison.
+
+<a id="use-the-calculation-core"></a>
+
+## 调用计算内核 · Use the calculation core
 
 ```sh
 npm run chart -- --date 2005-12-23 --time 08:37
@@ -51,7 +87,8 @@ npm run chart -- --date 1988-02-15 --time 23:30 --sect 1
 npm run chart -- --pillars "乙酉 戊子 辛巳"
 ```
 
-For plain JSON on stdout (without npm's script banner):
+只输出 JSON，不含 npm 提示行：<br>
+For plain JSON on stdout, without npm's script banner:
 
 ```sh
 node --import tsx scripts/chart.ts --date 2005-12-23 --time 08:37
@@ -68,28 +105,48 @@ console.log(chart.pillars.map(p => p.text));
 // [ '乙酉', '戊子', '辛巳', '壬辰' ]
 ```
 
+`sect: 2` 为 00:00 换日，`sect: 1` 为 23:00 换日。`direction` 可选 `none`、`male` 或 `female`，仅选择传统大运公式。本仓库是应用，尚未发布为 npm 包。
+
 `sect: 2` uses midnight; `sect: 1` uses 23:00. `direction` is `none`, `male` or `female` and selects a traditional cycle formula only. This repository is an application, not a published npm package.
 
-## Time, evidence and privacy
+## 留白与边界 · What the book leaves open
 
-Supported date input: **1901–2099, Gregorian, fixed UTC+08:00 standard time**. No automatic birthplace, timezone, daylight-saving or apparent-solar-time conversion; no lunar-date input. If your recorded time uses another clock convention, use a separately verified conversion or enter already calculated pillars. A valid manual pair does not prove the whole chart corresponds to a real birth moment.
+**这是一种传统文化体验与自我反思工具，不是对命运的保证。** 白话类比不是心理测量；没有吉凶分数、疾病断言、投资时机或婚姻成败预测。
 
-Year/month boundaries and calendar tables use [lunar-typescript 1.8.6](https://github.com/6tail/lunar-typescript). Regression tests check upstream reference cases, convention edges, all 100 ten-god pairs and all 60 void-branch groups. These are rule-consistency tests, not independent astronomical certification or evidence that birth time predicts life outcomes.
+**This is a cultural experience and a tool for reflection, not a promise about fate.** Its everyday analogies are not psychological measurements. It offers no fortune scores, disease claims, investment timing or marriage predictions.
 
-The app makes no API requests and stores no chart in browser storage. A static host can still log normal asset requests. Calculations continue after the app has loaded; this release does not install an offline cache or claim offline cold-start support. See [privacy](docs/privacy.md) and [method](docs/method.md).
+- **日期口径 / Calendar:** 公历 1901–2099，固定东八区标准时；不自动换算出生地、时区、夏令时、真太阳时或农历。其他时间口径需另行核验转换，或输入已有四柱。手动干支字对合法不证明整盘对应真实出生时刻。<br>
+  Gregorian dates from 1901–2099, fixed UTC+08:00 standard time. No automatic birthplace, timezone, daylight-saving, apparent-solar-time or lunar-date conversion. Verify other time conventions separately, or enter known pillars. Valid manual pairs do not prove a real birth moment.
+- **方法与测试 / Method and tests:** 历法采用 [lunar-typescript 1.8.6](https://github.com/6tail/lunar-typescript)。测试核对参考案例、换日边界、100 组十神与 60 组旬空等软件规则，不构成独立天文认证或预测有效性证据。强弱筛选是公开的项目启发式，专业审阅与独立用户反馈仍待完成。<br>
+  Calendar calculations use lunar-typescript 1.8.6. Tests check reference cases, convention edges, all 100 ten-god pairs and all 60 void-branch groups, among other software rules. They do not certify astronomical or predictive validity. Strength screening is a documented project heuristic; professional review and independent user feedback remain open.
+- **隐私与离线 / Privacy and offline use:** 不发起 API 请求、不保存浏览器命盘数据；静态托管仍可记录普通访问元数据。已加载页面可离线计算，但不保证首次离线打开。导出与截图可能含个人四柱，JSON 还含原始输入，请自行保管。<br>
+  No API requests or browser chart storage. Static hosting can still log ordinary asset requests. Calculation works after the page has loaded; offline cold starts are not supported. Exports and screenshots may contain personal pillars, and JSON includes the original input. Keep them private.
 
-## Develop and contribute
+[解读方法 · Reading method](docs/reading-method.md) · [历法口径 · Calendar contract](docs/method.md) · [隐私说明 · Privacy](docs/privacy.md)
+
+## 一起续写 · Build the next page
+
+如果你喜欢这种有意境、也能追问依据的开源尝试，欢迎给天机簿一个 **Star**，方便日后回来。一个具体的“哪里看不懂、哪里算得不同、哪里用不顺”的反馈，同样珍贵。
+
+If you enjoy an atmospheric reading whose rules stay within reach, **star the project** to find it again. A specific report about confusing wording, a different calculation or a usability problem is just as welcome.
 
 ```sh
 npm test
+npm run format:check
 npm run build
 npm run preview
 ```
 
-Stack: TypeScript + Vite + one runtime dependency (`lunar-typescript`). The calculation core has no DOM dependency. Output is static HTML/CSS/JS; see [deployment](docs/deploy.md). CI checks types, rules and production build on pushes and pull requests. Pages deployment is manual.
+TypeScript + Vite，运行时仅依赖 `lunar-typescript`；输出为静态 HTML/CSS/JS。CI 检查格式、规则和构建，Pages 由手动工作流部署。欢迎贡献可复算案例、规则分歧、英文表达和无障碍改进；公开反馈请用虚构或参考日期。
 
-Useful contributions: sourced calendar edge cases, English terminology review, accessibility fixes, or a reproducible failure report. Please use fictional/reference dates in public issues. [Contribution guide](CONTRIBUTING.md) · [Roadmap](docs/roadmap.md).
+TypeScript + Vite, with `lunar-typescript` as the only runtime dependency; the output is static HTML/CSS/JS. CI checks formatting, rules and builds; Pages deployment is manual. Contribute reproducible cases, rule disagreements, English terminology or accessibility improvements. Please use fictional or reference dates in public feedback.
 
-## Credits
+[贡献指南 · Contributing](CONTRIBUTING.md) · [提交反馈 · Share feedback](https://github.com/zhuyep/mingli-lab/issues) · [部署说明 · Deployment](docs/deploy.md) · [路线图 · Roadmap](docs/roadmap.md)
 
-Calendar engine and hidden-stem tables: 6tail's MIT-licensed lunar-typescript. [Third-party notices](THIRD_PARTY_NOTICES.md). The UI, relation explanations and rule adapter are original project work. The cover is an original AI-assisted woodcut-style illustration; see the asset notice. No lecture PDF, transcript or living person's biographical chart is bundled, and no lecturer endorsement is implied.
+## 来处与致谢 · Sources and credits
+
+历法与藏干表来自 6tail 的 MIT 开源库 lunar-typescript；界面、关系解释与规则适配为本项目工作。封面是为项目创作的 AI 辅助手绘风插画，不是古籍扫描。Long Cang 字体子集遵循 SIL OFL 1.1，其余项目代码采用 MIT。未收录私人讲稿、逐字稿或在世人物的生辰叙事，不暗示任何讲者背书。
+
+Calendar and hidden-stem tables come from 6tail's MIT-licensed lunar-typescript; the interface, relationship explanations and rule adapter are project work. The cover is original AI-assisted ink artwork, not an antique scan. The Long Cang font subset uses SIL OFL 1.1; project code is MIT. No private lecture, transcript or living person's biographical chart is bundled, and no lecturer endorsement is implied.
+
+[MIT 许可 · MIT license](LICENSE) · [第三方许可与图片来源 · Third-party notices](THIRD_PARTY_NOTICES.md)

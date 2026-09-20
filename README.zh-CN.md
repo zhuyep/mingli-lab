@@ -1,12 +1,15 @@
 # 天机簿 · Tianji Bu
 
-**你的故事，不止八个字。用读得懂的话，聊聊性格、做事与相处。**
+**一纸生辰，万象成章。你的故事，不止八个字。**<br>
+**A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
-[**翻开命书 →**](https://zhuyep.github.io/mingli-lab/) · [English](README.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [完整双语说明 · Bilingual README](README.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
 
 ![天机簿黑白手绘首页](docs/images/desktop.png)
 
-无需账号、无需 API Key、生日不上传。填写公历生日与时间，或直接看一个示例。黑白手绘、手写标题、六章生活化解读；正文清楚好读，专业依据随时可查。
+翻开一卷黑白命书，在干支与五行之间，读一读自己的节奏、做事与相处。无需账号、无需 API Key、生日不上传。填写公历生日与时间，或直接看一个示例。六章白话解读，先看懂故事，再展开每一步推演。
+
+Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart and rules within reach. No account, no API key, no birth-data upload. [Read the full bilingual guide →](README.md)
 
 ## 一卷里有什么
 
@@ -39,7 +42,7 @@ npm run build
 npm run chart -- --date 2005-12-23 --time 08:37
 ```
 
-核心计算与解读均为不依赖 DOM 的 TypeScript 模块。开发接口见 [English README](README.md#use-the-calculation-core)。源码仓库沿用 `mingli-lab` 地址，原链接继续有效。
+核心计算与解读均为不依赖 DOM 的 TypeScript 模块。开发接口见 [双语 README](README.md#use-the-calculation-core)。源码仓库沿用 `mingli-lab` 地址，原链接继续有效。
 
 ## 输入与隐私
 
@@ -55,4 +58,8 @@ npm run chart -- --date 2005-12-23 --time 08:37
 
 欢迎提交可复算案例、规则分歧、英文表达和无障碍问题。测试验证软件规则，不验证性格或人生预测。没有吉凶分数、疾病断言、投资时机或婚姻成败判断。
 
-[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md)
+如果你喜欢这种有意境、也能追问依据的开源尝试，欢迎给天机簿一个 **Star**，方便日后回来。也欢迎提交具体的使用或失败反馈；公开示例请勿使用真实生辰。
+
+If you enjoy the book, **star the project** to find it again. Specific usability or calculation feedback is welcome; please use fictional or reference dates in public.
+
+[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.4.0 双语发布说明](docs/releases/v0.4.0.md)
