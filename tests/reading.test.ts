@@ -97,7 +97,17 @@ test('all six bilingual chapters carry evidence and rule identifiers; exports ar
   assert.equal(new Set(report.chapters.map((c) => c.id)).size, 6);
   for (const chapter of report.chapters) {
     assert.match(chapter.rule, /TJ-0[1-7]/);
-    for (const text of [chapter.title, chapter.lead, ...chapter.paragraphs, ...chapter.evidence]) {
+    for (const text of [
+      chapter.title,
+      chapter.lead,
+      ...chapter.paragraphs,
+      ...chapter.evidence,
+      chapter.plain.title,
+      chapter.plain.lead,
+      chapter.plain.prompt,
+      chapter.plain.term,
+      ...chapter.plain.paragraphs,
+    ]) {
       assert.ok(text.zh.length > 0 && text.en.length > 0);
       assert.ok(!text.zh.includes('undefined') && !text.en.includes('undefined'));
     }

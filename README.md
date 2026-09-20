@@ -1,12 +1,12 @@
 # 天机簿 · Tianji Bu
 
-**A moment becomes a chart. A chart becomes a book. Six readable chapters of Chinese BaZi, with the reasoning beneath.**
+**A few symbols. An unwritten life. Six plain-language chapters on habits, work and connection, with the reasoning beneath.**
 
 [**Open a sample book →**](https://zhuyep.github.io/mingli-lab/) · [中文](README.zh-CN.md) · [Reading method](docs/reading-method.md) · [Calendar contract](docs/method.md) · [MIT license](LICENSE)
 
-![Tianji Bu illustrated book cover](docs/images/desktop.png)
+![Tianji Bu black-and-white hand-drawn interface](docs/images/desktop.png)
 
-No account. No API key. No birth-data upload. An illustrated, bilingual, local-first reading experience with a small TypeScript calculation and interpretation core.
+No account. No API key. No birth-data upload. A black-and-white, bilingual, local-first reading experience with a small TypeScript calculation and interpretation core.
 
 ## Read the whole chart
 
@@ -17,9 +17,9 @@ No account. No API key. No birth-data upload. An illustrated, bilingual, local-f
 5. **Connection & boundaries** — day-branch relationships, with combinations and clashes kept together.
 6. **Cycles & the year** — select a date, inspect the Lichun-based annual pillar, optionally add a traditional cycle.
 
-Every chapter exposes its chart evidence and rule identifiers. Guided local questions explain common ambiguities. Save the book as Markdown, a chart as SVG, or the complete input and reading as JSON. The appendix preserves the interactive ten-god trace and midnight/23:00 comparison.
+Each chapter starts with plain language, an everyday example and a reflection prompt. Technical interpretation, chart evidence and rule identifiers expand on demand. Guided local questions explain common ambiguities. Save the book as Markdown, a chart as SVG, or the complete input and reading as JSON. The appendix preserves the interactive ten-god trace and midnight/23:00 comparison.
 
-> Public preview 0.3.0. Strength screening is a documented project heuristic, not a classical authority or validated predictor. Unknown hours, mixed Earth months and some concentrated charts withhold judgment. Professional rule review and independent user feedback are still open.
+> Public preview 0.4.0. Strength screening is a documented project heuristic, not a classical authority or validated predictor. Unknown hours, mixed Earth months and some concentrated charts withhold judgment. Professional rule review and independent user feedback are still open.
 
 ## Try it locally
 
@@ -30,7 +30,7 @@ npm ci
 npm run dev
 ```
 
-Enter a Gregorian birth date and time, or choose **Read a sample book**. Known pillars and optional cycle formulas are under **Options**. The repository slug remains `mingli-lab` to preserve existing links.
+Enter a Gregorian birth date and time, or choose **Read a sample**. Known pillars and optional cycle formulas are under **Options**. The repository slug remains `mingli-lab` to preserve existing links.
 
 ## A concrete boundary example
 

@@ -1,3 +1,4 @@
+import { plainChapters } from './plain-reading';
 import { Solar } from 'lunar-typescript';
 import { ELEMENTS, stemInfo, tenGod, type Chart } from './core';
 
@@ -11,7 +12,7 @@ export type Chapter = {
   evidence: Words[];
   rule: string;
 };
-export const READING_VERSION = 'tianji-rules-1';
+export const READING_VERSION = 'tianji-rules-1-plain-1';
 const positions = ['年支', '月支', '日支', '时支'];
 const positionsEn = ['year branch', 'month branch', 'day branch', 'hour branch'];
 const phaseEn = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];
@@ -521,6 +522,7 @@ export function buildReading(chart: Chart, date = todayInChina()) {
     ],
     rule: 'TJ-07',
   });
+  const plain = plainChapters(chart, f, annual);
   return {
     version: READING_VERSION,
     features: f,
@@ -529,7 +531,7 @@ export function buildReading(chart: Chart, date = todayInChina()) {
       `${chart.dayMaster} ${phase(f.day)} · ${chart.pillars[1].branch} month`,
     ),
     subtitle: state,
-    chapters,
+    chapters: chapters.map((c) => ({ ...c, plain: plain[c.id] })),
     annual,
   };
 }
@@ -543,7 +545,7 @@ export function readingMarkdown(chart: Chart, date: string, lang: 'zh' | 'en') {
     chart.pillars.map((p) => p.text).join(' '),
     ...report.chapters.map(
       (c) =>
-        `## ${c.title[lang]}\n\n**${c.lead[lang]}**\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => `- ${e[lang]}`).join('\n')}\n\n${c.rule}`,
+        `## ${c.plain.title[lang]}\n\n**${c.plain.lead[lang]}**\n\n${c.plain.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.plain.prompt[lang]}\n\n### ${lang === 'zh' ? '术语与依据' : 'Terms & reasoning'}\n\n${c.plain.term[lang]}\n\n${c.title[lang]}\n\n**${c.lead[lang]}**\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => `- ${e[lang]}`).join('\n')}\n\n${c.rule}`,
     ),
     `Method: ${READING_VERSION}\nhttps://github.com/zhuyep/mingli-lab/blob/main/docs/reading-method.md`,
   ].join('\n\n');

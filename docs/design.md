@@ -1,11 +1,13 @@
-# Tianji Bu · Eastern secret book (v0.3)
+# Tianji Bu · Ink, space and plain words (v0.4)
 
-The page lets a curious visitor open and read a six-chapter BaZi book with two primary inputs. The user selected this direction on 2026-09-20.
+The interface opens a six-chapter BaZi reading from two primary inputs. The 2026-09-20 revision responds to direct feedback: the earlier antique-book direction felt insufficiently distinctive, and interpretations assumed too much familiarity with terminology.
 
-Palette: pine #182c25, paper #f4f0e5, ink #27352e, muted sage #697268, vermilion #a44132, bronze #aa9365. Display uses local Songti/STSong serif; forms and body use system sans; dates use monospace. No remote font service.
+The visual reference is the restraint of [Co–Star](https://www.costarastrology.com/): black and white, confident typography, fine rules and a hand-drawn visual signature. It is not a clone. All artwork and layout are original; no reference-site assets are bundled.
 
-Signature: an original AI-assisted woodblock landscape on a sewn book cover, with live vertical type. The illustration is atmospheric, not a measured chart or individualized landscape. Desktop places a closed book beside the form; mobile uses a compact cover above the two inputs. The reading opens onto paper pages, a six-chapter index, four vertical pillar marks and vermilion annotations. No mandatory ritual, delay or sound.
+Palette: black #111, white #fff, gray #626262 and dividers #d8d8d8. Chinese display and short marginal questions use a locally hosted OFL handwriting font, subset from Long Cang. Body and controls use system sans; editorial subheadings use local Songti/Georgia. Long paragraphs never use handwriting.
 
-Critique and revision: an astrolabe can be swapped into almost any horoscope site. The book metaphor ties this brand to the actual reading structure. Dark cover and light text pages balance atmosphere with sustained reading. The six chapter labels encode the report order; technical evidence remains in expandable notes. Reduced motion disables the opening transition. Original comparison and exports remain in the appendix.
+The original pen-and-ink hand holds a symbolic sky. It creates atmosphere, not an individualized or measured chart. Desktop pairs the drawing with the short form; mobile crops it into a compact opening. No parchment, antique binding, mountain cover, mandatory ritual or artificial loading delay remains.
 
-The name changed from Wenchen to Tianji Bu. The GitHub slug and the personal site's internal games/wenchen route remain stable to preserve links; all visible branding uses Tianji Bu.
+Each chapter presents a plain lead, an everyday observation and one question. A short term translation keeps a professional foothold. Full technical prose and evidence expand only when requested. The result opens with a calm note; the chart itself is compact and expandable. Chapter navigation stays available, with a horizontal mobile index. Inputs, language switching and unknown-hour handling remain intact.
+
+The public repository and personal site's internal `games/wenchen` route stay stable. All visible branding is 天机簿 / Tianji Bu. Font and image provenance are in the third-party notices. Responsive and keyboard checks cover the implemented flow; real engagement effects still require user feedback.

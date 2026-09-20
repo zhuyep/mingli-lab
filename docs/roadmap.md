@@ -1,8 +1,8 @@
 # Roadmap
 
-## Public preview 0.3.0
+## Public preview 0.4.0
 
-Implemented: illustrated secret-book interface, six bilingual conditional reading chapters, month/roots/exposure, candidate balance paths, dated annual/cycle relationships, local guided questions, Markdown/SVG/JSON exports, and the original calculation appendix. Public source and hosted demo are live; independent use remains a separate validation step.
+Implemented: black-and-white hand-drawn interface, self-hosted handwriting font, plain-language reading with everyday examples and reflection prompts, six bilingual conditional reading chapters, month/roots/exposure, candidate balance paths, dated annual/cycle relationships, local guided questions, Markdown/SVG/JSON exports, and the original calculation appendix. Public source and hosted demo are live; independent use remains a separate validation step.
 
 ## Next only when a real use case supports it
 

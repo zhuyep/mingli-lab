@@ -23,3 +23,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+Font: TianjiHandSubset, subset of Long Cang. Copyright 2018 The Long Cang Project Authors. SIL OFL 1.1; full license in LongCang-OFL.txt. Source: https://github.com/google/fonts/tree/main/ofl/longcang

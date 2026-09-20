@@ -1,6 +1,6 @@
 # 天机簿解读方法 / Reading method
 
-Version: `tianji-rules-1`, introduced in v0.3.0. The six chapters are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
+Version: `tianji-rules-1-plain-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. The six chapters are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
 
 ## What is calculated, and what is interpreted
 
@@ -42,3 +42,9 @@ The annual layer currently excludes stem transformation, three-way combinations 
 Sources were checked on 2026-09-20. Links identify conceptual context; they do **not** endorse our heuristic, thresholds, modern reflective prose or the app. No historical passages, private lecture transcript or third-party rule dataset are copied into the product. In particular, we did not import the separately licensed bazi-engine knowledge base.
 
 Tests cover different readings for the same day stem, root/exposure distinctions, withheld judgments, simultaneous clash and combination, Lichun, cycle intervals, unknown timing and day-boundary changes. Tests validate these software contracts, not life-outcome prediction. Professional review of the interpretation rules and independent user feedback remain open work.
+
+## Plain-language presentation
+
+The plain layer uses the same computed facts. The opening and work themes use the main month role. The additional personality angle uses the first different visible role in year/month/hour order; this is an editorial choice, not a strength ranking. Balance preserves supported/drained/mixed/withheld states. Relationship language retains clash and combination together. The annual theme uses the annual stem role, with separate supported pair observations.
+
+Every chapter has a readable lead, an everyday example, a reflection prompt and a short term translation. Full technical prose and evidence remain available on demand and in exports. These modern analogies are not measured psychological traits or behavior predictions. Unknown-hour and other withheld cases remain explicit in the plain layer.
