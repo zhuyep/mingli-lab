@@ -1,14 +1,14 @@
-# 明理 · Bazi Lab
+# 问辰 · Wenchen
 
-**An explainable BaZi playground. Change a convention, see the chart change, trace the calculation.**
+**Your moment in the stars. A private, one-step BaZi reading with an explorable calculation trail.**
 
 [**Try the live demo →**](https://zhuyep.github.io/mingli-lab/) · [中文说明](README.zh-CN.md) · [Method](docs/method.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
 
-![Mingli interactive chart](docs/images/desktop.png)
+![Wenchen celestial interface](docs/images/desktop.png)
 
 No account. No API key. No birth-data upload. A bilingual browser app and a small TypeScript core for exploring traditional Chinese Four Pillars (八字) rules.
 
-> Public preview 0.1.0. Source and live demo are available. Calendar conventions are explicit; independent user adoption and predictive validity are not claimed.
+> Public preview 0.2.0. Source and live demo are available. Calendar conventions are explicit; independent user adoption and predictive validity are not claimed.
 
 ## Try it in a minute
 
@@ -19,7 +19,9 @@ npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. A reference chart is already loaded. Select the **month pillar** to see why 戊 is 正印 relative to 辛. Then select **What changes at 23:00?** to compare both day-boundary conventions side by side.
+Open the local address printed by Vite. Enter a birth date and time, or select **Try an example**. The result opens with a day-stem metaphor and your four pillars. Expand **A closer look** for the calculation, boundary comparison and JSON export. Known pillars and optional cycle formulas are under **More options**.
+
+Formerly 明理 / Bazi Lab. The repository URL remains `mingli-lab` so existing links keep working.
 
 ## What you can explore
 

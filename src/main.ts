@@ -5,7 +5,6 @@ import {
   ELEMENTS,
   stemInfo,
   tenGod,
-  type Chart,
   type Input,
   type Direction,
   type Sect,
@@ -16,23 +15,24 @@ type Language = 'zh' | 'en';
 let lang: Language = 'zh';
 let mode: Input['mode'] = 'solar';
 let draft = {
-  date: '2005-12-23',
-  time: '08:37',
+  date: '',
+  time: '',
   sect: '2',
   direction: 'none',
   pillars: '乙酉 戊子 辛巳 壬辰',
 };
 let result = calculate({
   mode: 'solar',
-  date: draft.date,
-  time: draft.time,
+  date: '2005-12-23',
+  time: '08:37',
   sect: 2,
   direction: 'none',
 });
 let selected = 2;
-let tab = 'reading';
+let showingResult = false;
+let advancedOpen = false;
 let isExample = true;
-let dirty = false;
+
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const t = (zh: string, en: string) => (lang === 'zh' ? zh : en);
 const pos = (i: number) =>
@@ -71,29 +71,22 @@ function option(value: string, current: string, zh: string, en: string) {
   return `<option value="${value}" ${value === current ? 'selected' : ''}>${t(zh, en)}</option>`;
 }
 
+function astrolabe() {
+  const branches = '子丑寅卯辰巳午未申酉戌亥'.split('');
+  return `<div class="astrolabe" aria-hidden="true"><svg viewBox="0 0 560 560"><defs><radialGradient id="aura"><stop stop-color="#c9a868" stop-opacity=".12"/><stop offset="1" stop-color="#c9a868" stop-opacity="0"/></radialGradient></defs><circle cx="280" cy="280" r="270" fill="url(#aura)"/><g class="orbit"><circle cx="280" cy="280" r="244"/><circle cx="280" cy="280" r="237"/>${Array.from({ length: 120 }, (_, i) => `<path transform="rotate(${i * 3} 280 280)" d="M280 43v${i % 10 === 0 ? 18 : i % 5 === 0 ? 12 : 5}" opacity="${i % 5 === 0 ? 0.85 : 0.4}"/>`).join('')}</g><circle cx="280" cy="280" r="206"/>${branches
+    .map((v, i) => {
+      const a = ((i * 30 - 90) * Math.PI) / 180;
+      return `<text x="${280 + 218 * Math.cos(a)}" y="${286 + 218 * Math.sin(a)}">${v}</text>`;
+    })
+    .join(
+      '',
+    )}<circle cx="280" cy="280" r="167" stroke-dasharray="2 10"/><path d="M280 92 468 280 280 468 92 280Z" opacity=".22"/><path d="M147 147H413V413H147Z" opacity=".18"/><circle cx="280" cy="280" r="124"/><path d="M280 140v23m0 234v23M140 280h23m234 0h23"/><g fill="#d8bb80"><circle cx="280" cy="92" r="3"/><circle cx="468" cy="280" r="3"/><circle cx="280" cy="468" r="3"/><circle cx="92" cy="280" r="3"/></g></svg><div class="astrolabe-center"><span class="north-star">✧</span><strong>问辰</strong><span>W E N C H E N</span><i>一 时 一 象 · 一 人 一 盘</i></div></div>`;
+}
 function form() {
-  return `<aside class="notebook"><div class="section-label">${t('从这里开始', 'START HERE')}<span>01</span></div>
-  <h2>${t('写下你的四柱', 'Find your four pillars')}</h2>
-  <div class="segmented" aria-label="${t('输入方式', 'Input mode')}">
-    <button data-mode="solar" aria-pressed="${mode === 'solar'}">${t('出生日期', 'Date & time')}</button>
-    <button data-mode="pillars" aria-pressed="${mode === 'pillars'}">${t('已有八字', 'Known pillars')}</button>
-  </div>
-  <form id="chart-form" autocomplete="off">
-  ${
-    mode === 'solar'
-      ? `<label for="date">${t('公历日期', 'Gregorian date')}</label><input id="date" name="date" type="date" min="1901-01-01" max="2099-12-31" required value="${esc(draft.date)}"/>
-    <label for="time">${t('出生时间', 'Birth time')}</label><input id="time" name="time" type="time" required value="${esc(draft.time)}"/>
-    <p class="field-note">${t('按东八区标准时（UTC+8）输入；不自动处理夏令时或真太阳时。', 'Enter UTC+08:00 standard time. No daylight-saving or true-solar-time correction.')}</p>
-    <label for="sect">${t('子时换日口径', 'Day boundary')}</label><select id="sect" name="sect">${option('2', draft.sect, '00:00 换日 · 晚子时保留日柱', '00:00 · midnight')}${option('1', draft.sect, '23:00 换日 · 晚子时用次日日柱', '23:00 · late Zi hour')}</select>`
-      : `<label for="pillars">${t('年、月、日、时，以空格分隔', 'Year, month, day, hour; separate with spaces')}</label><input id="pillars" name="pillars" type="text" required value="${esc(draft.pillars)}" spellcheck="false" autocomplete="off"/><p class="field-note">${t('例如：乙酉 戊子 辛巳 壬辰。时辰未知时只填前三柱；不推算起运。', 'Example: 乙酉 戊子 辛巳 壬辰. If the hour is unknown, enter only three pillars. No timed luck cycle is inferred.')}</p>`
-  }
-    <label for="direction">${t('大运顺逆公式', 'Traditional luck-cycle formula')}</label><select id="direction" name="direction">${option('none', draft.direction, '暂不计算', 'Skip for now')}${option('male', draft.direction, '阳男顺、阴男逆', 'Male convention')}${option('female', draft.direction, '阴女顺、阳女逆', 'Female convention')}</select>
-    <p class="field-note">${t('此项只选择传统公式，不用于推断性格或身份。', 'Selects a traditional formula only; not a claim about identity or character.')}</p>
-    <button type="submit" class="primary">${t('排盘，看推演', 'Build my chart')} <span aria-hidden="true">↗</span></button>
-    <p id="form-status" class="form-status" role="status">${dirty ? t('输入已修改，点击排盘更新结果。', 'Inputs changed. Build the chart to update.') : ''}</p>
-  </form>
-  <div class="examples"><span>${t('先试一个例子', 'EXPLORE AN EXAMPLE')}</span><button data-example="standard">${t('普通时刻', 'Standard time')} <span>↗</span></button><button data-example="zi">${t('23 点，会换一天吗？', 'What changes at 23:00?')} <span>↗</span></button><button data-example="unknown">${t('不知道时辰', 'Unknown birth hour')} <span>↗</span></button></div>
-  <p class="private-note"><span aria-hidden="true">◇</span>${t('计算留在浏览器。不收集生日。', 'Calculated in your browser. No birth-data collection.')}</p></aside>`;
+  return `<section class="entry"><div class="entry-world"><div class="eyebrow">${t('东方命理 · 四柱八字', 'A JOURNEY THROUGH CHINESE BAZI')}</div>${astrolabe()}<h1>${t('把你的生辰，<em>写进星河。</em>', 'Your moment in time.<em>A story in the stars.</em>')}</h1><p>${t('从出生的一刻，展开属于你的八字命盘。', 'Explore the traditional symbols of your birth moment.')}</p></div><div class="entry-form" id="workspace"><span class="form-kicker">${t('此刻，问辰', 'BEGIN YOUR READING')}</span><h2>${t('从你的生辰开始', 'Begin with your birth')}</h2><p class="form-intro">${t('填好日期和时间，剩下的交给问辰。', 'Just a date and time. We’ll draw the chart.')}</p><form id="chart-form" autocomplete="off">
+  ${mode === 'solar' ? `<label for="date">${t('出生日期 · 公历', 'Birth date · Gregorian')}</label><input id="date" name="date" type="date" min="1901-01-01" max="2099-12-31" required value="${esc(draft.date)}"/><label for="time">${t('出生时间', 'Birth time')}</label><input id="time" name="time" type="time" required value="${esc(draft.time)}"/><p class="field-note">${t('北京时间（东八区标准时）', 'China standard time · UTC+08:00')}</p>` : `<label for="pillars">${t('已有八字', 'Known pillars')}</label><input id="pillars" name="pillars" required value="${esc(draft.pillars)}" placeholder="乙酉 戊子 辛巳 壬辰"/><p class="field-note">${t('年、月、日、时，用空格分隔。时辰未知时只填前三柱。', 'Separate year, month, day and hour with spaces. Omit an unknown hour.')}</p>`}
+  <button type="submit" class="primary">${t('开启我的命盘', 'Reveal my chart')}<span aria-hidden="true">✧</span></button><p id="form-status" class="form-status" role="status"></p>
+  <details class="form-options" ${advancedOpen ? 'open' : ''}><summary>${t('更多选项', 'More options')}</summary><div class="segmented"><button type="button" data-mode="solar" aria-pressed="${mode === 'solar'}">${t('按生日', 'Birth date')}</button><button type="button" data-mode="pillars" aria-pressed="${mode === 'pillars'}">${t('已有八字', 'Known pillars')}</button></div>${mode === 'solar' ? `<label for="sect">${t('换日时间', 'Day boundary')}</label><select id="sect" name="sect">${option('2', draft.sect, '00:00 换日（默认）', '00:00 · midnight (default)')}${option('1', draft.sect, '23:00 换日', '23:00 · late Zi')}</select>` : ''}<label for="direction">${t('大运顺逆', 'Traditional cycle formula')}</label><select id="direction" name="direction">${option('none', draft.direction, '先不看大运', 'Skip cycles')}${option('male', draft.direction, '男命公式 · 阳顺阴逆', 'Male convention')}${option('female', draft.direction, '女命公式 · 阴顺阳逆', 'Female convention')}</select><p class="field-note">${t('默认 00:00 换日。不自动换算出生地、夏令时或真太阳时；特殊时间需先自行校正。', 'Default day boundary: midnight. No location, daylight-saving or true-solar-time conversion.')}</p></details></form><div class="sample-row"><span>${t('想先逛逛？', 'Just looking?')}</span><button data-example="standard">${t('看看示例命盘', 'Try an example')} <span aria-hidden="true">→</span></button></div><p class="private-note">${t('无需注册 · 生辰只在你的浏览器中计算', 'No signup · Birth details stay in your browser')}</p></div></section>`;
 }
 
 function pillarCards() {
@@ -117,26 +110,9 @@ function explanation() {
   </div>`;
 }
 
-function phaseWheel(chart: Chart) {
-  const points = [
-    [100, 25],
-    [171, 77],
-    [144, 158],
-    [56, 158],
-    [29, 77],
-  ];
-  return `<svg class="phase-wheel" viewBox="0 0 200 190" role="img" aria-label="${t('五行相生次序：木火土金水', 'Generating cycle: Wood, Fire, Earth, Metal, Water')}"><path d="M100 25L171 77L144 158L56 158L29 77Z" fill="none" stroke="#d9e3ee" stroke-width="1.5"/><circle cx="100" cy="98" r="45" fill="none" stroke="#e5edf5" stroke-dasharray="3 5"/><text x="100" y="95" text-anchor="middle" class="wheel-center">${chart.pillars.length * 2}</text><text x="100" y="114" text-anchor="middle" class="wheel-label">${t('显性字位', 'positions')}</text>${points.map(([x, y], i) => `<g class="${eClass(ELEMENTS[i])}"><circle cx="${x}" cy="${y}" r="20" fill="currentColor" opacity=".09"/><text x="${x}" y="${y + 6}" text-anchor="middle">${ELEMENTS[i]}</text></g>`).join('')}</svg>`;
-}
-
-function reading() {
-  return `${explanation()}<div class="insight-grid"><section class="phase-panel"><div class="section-label">${t('五行分布', 'FIVE PHASES')}<span>${t('计数 ≠ 强弱', 'COUNTS ≠ STRENGTH')}</span></div><div class="phase-content">${phaseWheel(result)}<div class="bars">${ELEMENTS.map((e, i) => `<div class="bar-row"><span>${elName(e)}</span><div class="bar-track"><div class="bar-fill ${eClass(e)}" style="width:${(result.counts[i] / (result.pillars.length * 2)) * 100}%"></div></div><b>${result.counts[i]}</b></div>`).join('')}</div></div><p class="caption">${t('每个天干、地支本气各计一次。藏干另列，不叠加为力量分数；不能据此“缺什么补什么”。', 'One count per visible stem and principal branch phase. Hidden stems are separate. This is not a strength score or a prescription.')}</p></section>
-    <section class="relations-panel"><div class="section-label">${t('地支关系', 'BRANCH RELATIONS')}<span>${t('符号匹配', 'SYMBOLIC')}</span></div><div class="relations">${result.relations.length ? result.relations.map((r) => `<div class="relation"><strong>${r.branches}</strong><span>${t(r.kind, namesEN[r.kind])}</span><small>${r.positions.map(pos).join(' / ')}</small></div>`).join('') : `<p class="muted">${t('已知地支中没有匹配到六合、六冲、六害或完整三合组合。', 'No listed pair or complete three-branch group matches the known branches.')}</p>`}</div><p class="caption">${t(`日柱旬空：${result.voidBranches.join('、')}。合与冲分别保留；有合不等于冲自动消失。`, `Day-pillar void branches: ${result.voidBranches.join(', ')}. Combinations and clashes are listed independently.`)}</p></section></div>
-    ${luckPanel()}`;
-}
-
 function luckPanel() {
   if (!result.luck)
-    return `<div class="quiet-note">${t('大运尚未计算。可在左侧选择传统顺逆公式；时辰未知时不推算大运。', 'Luck cycles are not calculated. Choose a traditional formula in the form; unknown-hour charts omit cycles.')}</div>`;
+    return `<div class="quiet-note">${t('大运尚未计算。可在“修改生辰 → 更多选项”中选择传统顺逆公式；时辰未知时不推算大运。', 'Luck cycles are not calculated. Choose a traditional formula in the form; unknown-hour charts omit cycles.')}</div>`;
   const luck = result.luck;
   return `<section class="luck-panel"><div class="section-label">${t('大运序列', 'TRADITIONAL CYCLES')}<span>${luck.forward ? t('顺排', 'FORWARD') : t('逆排', 'REVERSE')}</span></div><div class="luck-list">${luck.pillars.map((p, i) => `<div><small>${i + 1}</small><strong>${p}</strong></div>`).join('')}</div><p class="caption">${luck.start ? t(`历法库起运日期：${luck.start}（UTC+8）。按分钟折算口径；不是讲稿的整数虚岁法，也不表示现实运势。`, `Upstream cycle start: ${luck.start} (UTC+8), using minute-based offset conversion. This is a traditional convention, not a forecast.`) : t('手动四柱仅推演顺序。没有出生日期与交节间隔，起运日期未知。', 'Manual pillars provide a sequence only. Without a date and solar-term interval, the start date is unknown.')}</p></section>`;
 }
@@ -157,35 +133,91 @@ function provenance() {
   </ol><p class="caption">${t('计算依赖', 'Calendar engine')}：${result.engine} · <a href="https://github.com/6tail/lunar-typescript" target="_blank" rel="noreferrer">${t('开源算法与许可', 'Source & license')} ↗</a></p><p class="caption">${t('边界时刻精度取决于历法库；分钟内的交节、特殊历史历法与其他流派需另行校核。测试核对规则一致性，不验证命运预测。', 'Boundary precision depends on the library. Sub-minute term crossings, historical edge cases and other schools require separate verification. Tests check rules, not fortune-telling validity.')}</p></section>`;
 }
 
+const imagery: Record<string, [string, string, string, string]> = {
+  甲: [
+    '参天之木',
+    'A tall tree',
+    '以生长为意象，向上舒展，也向下扎根。',
+    'Growth above, roots below.',
+  ],
+  乙: [
+    '柔韧之藤',
+    'A winding vine',
+    '以柔韧为意象，沿着自己的节奏寻找光。',
+    'Finding light through flexibility.',
+  ],
+  丙: [
+    '朗照之阳',
+    'The bright sun',
+    '以日光为意象，温暖与明亮相伴。',
+    'Warmth and clarity, like daylight.',
+  ],
+  丁: [
+    '静夜之灯',
+    'A quiet lantern',
+    '以灯火为意象，微光也能照亮一方。',
+    'A small light illuminates a quiet corner.',
+  ],
+  戊: [
+    '巍然之山',
+    'A steady mountain',
+    '以山岳为意象，安静地承载与积累。',
+    'A symbol of steadiness and quiet accumulation.',
+  ],
+  己: [
+    '温厚之田',
+    'The patient earth',
+    '以田园为意象，留出空间，让万物生长。',
+    'Making room for things to grow.',
+  ],
+  庚: [
+    '淬炼之金',
+    'Forged metal',
+    '以金铁为意象，在磨砺中渐见轮廓。',
+    'Taking shape through refinement.',
+  ],
+  辛: [
+    '含光之玉',
+    'A polished jewel',
+    '以珠玉为意象，细处藏光，静中见质。',
+    'Light in the details, beauty in the quiet.',
+  ],
+  壬: [
+    '流转之海',
+    'The open sea',
+    '以江海为意象，容纳百川，也走向远方。',
+    'Gathering streams, reaching distant shores.',
+  ],
+  癸: [
+    '润物之雨',
+    'A gentle rain',
+    '以雨露为意象，细水无声，润泽有时。',
+    'A gentle rhythm, a quiet renewal.',
+  ],
+};
 function board() {
-  return `<section class="board" id="results" aria-label="${t('排盘结果', 'Chart results')}"><div class="board-heading"><div><div class="section-label">${isExample ? t('教学示例', 'TEACHING EXAMPLE') : t('当前结果', 'CURRENT CHART')}<span>${t('点击四柱，逐步看懂', 'SELECT A PILLAR TO EXPLORE')}</span></div><h2>${t('四柱之间，自有来路', 'Every symbol has a reason')}</h2></div><span class="chart-seal">${t('明<br/>理', '明<br/>理')}</span></div>
-  ${pillarCards()}<div class="result-meta"><span>${result.input.mode === 'solar' ? `${esc(result.input.date)} · ${esc(result.input.time)} · UTC+8` : t('手动四柱 · 未核验历法对应', 'Manual pillars · calendar correspondence unchecked')}</span><span>${t('日主', 'Day master')} ${result.dayMaster} · ${elName(stemInfo(result.dayMaster).element)}</span></div>
-  <nav class="tabs" aria-label="${t('结果视图', 'Result view')}">${[
-    ['reading', '结构解读', 'Read the chart'],
-    ['compare', '子时对照', 'Zi-hour lab'],
-    ['sources', '演算依据', 'How it works'],
-  ]
-    .map(
-      ([id, zh, en]) =>
-        `<button data-tab="${id}" aria-pressed="${tab === id}">${t(zh, en)}</button>`,
-    )
-    .join('')}</nav>
-  <div id="result-detail">${tab === 'reading' ? reading() : tab === 'compare' ? comparison() : provenance()}</div>
-  <div class="export-row"><span>${t('把推演带走', 'KEEP THE CALCULATION')}</span><button data-export="svg">${t('下载命盘卡片', 'Download chart card')} ↓</button><button data-export="json">${t('导出 JSON（含输入）', 'Export JSON (includes inputs)')} ↓</button></div><p class="export-note">${t('卡片不含原始生日，但四柱仍可能涉及隐私。JSON 包含全部输入，请自行保管。', 'The card omits raw birth details, but pillars can still be personal data. JSON includes all inputs; store it privately.')}</p></section>`;
+  const day = stemInfo(result.dayMaster),
+    story = imagery[result.dayMaster];
+  return `<section class="board" id="results" tabindex="-1" aria-label="${t('排盘结果', 'Chart results')}"><div class="result-top"><button id="edit" class="text-button">← ${t('修改生辰', 'Edit birth details')}</button><span>${isExample ? t('示例命盘', 'EXAMPLE CHART') : t('你的命盘', 'YOUR CHART')}</span><button data-export="svg" class="text-button">${t('保存命盘', 'Save chart')} ↓</button></div><div class="reading-hero"><span class="form-kicker">${t('你的日主 · ' + day.polarity + day.element, 'YOUR DAY STEM · ' + (day.polarity === '阳' ? 'Yang' : 'Yin') + ' ' + elName(day.element))}</span><div class="day-emblem">${result.dayMaster}<span>${day.element}</span></div><h1>${t(story[0], story[1])}</h1><p>${t(story[2], story[3])}</p><small>${t('传统五行意象，留给自己一个思考的角度。', 'A traditional metaphor, offered as a reflection prompt.')}</small></div>
+  <div class="simple-pillars">${Array.from({ length: 4 }, (_, i) => {
+    const p = result.pillars[i];
+    return `<div class="${i === 2 ? 'is-day' : ''}"><span>${pos(i)}</span><strong>${p?.stem ?? '—'}<br/>${p?.branch ?? '—'}</strong><small>${p ? elName(p.element) + ' · ' + elName(p.branchElement) : t('时辰未知', 'Unknown hour')}</small></div>`;
+  }).join(
+    '',
+  )}</div><p class="result-meta">${result.input.mode === 'solar' ? esc(result.input.date) + ' · ' + esc(result.input.time) + ' · UTC+8' : t('手动八字 · 历法对应未经核验', 'Manual pillars · calendar correspondence unchecked')}</p>
+  <section class="element-overview"><div><h2>${t('五行一览', 'The five phases')}</h2><p>${t('看看八字里的五种元素。', 'The five elements in the visible chart.')}</p></div><div class="element-counts">${ELEMENTS.map((e, i) => `<div class="${eClass(e)}"><b>${elName(e)}</b><span class="element-dots" aria-label="${result.counts[i]}">${Array.from({ length: 8 }, (_, n) => `<i class="${n < result.counts[i] ? 'filled' : ''}"></i>`).join('')}</span><strong>${result.counts[i]}</strong></div>`).join('')}</div><p class="caption">${t('字数多少不代表五行强弱，也不需要“缺什么补什么”。', 'Counts describe symbols, not strength or what you need to “fix”.')}</p></section>
+  <div class="deep-reading"><h2>${t('想再看深一点', 'A closer look')}</h2><p>${t('好奇时再打开，不懂术语也没关系。', 'Open what interests you. No expertise needed.')}</p><details><summary>${t('八字是怎样组成的？', 'How do these symbols connect?')}<span>＋</span></summary><div class="detail-body">${pillarCards()}<div id="explanation">${explanation()}</div>${luckPanel()}<div class="relations">${result.relations.map((r) => `<div class="relation"><strong>${r.branches}</strong><span>${t(r.kind, namesEN[r.kind])}</span><small>${r.positions.map(pos).join(' / ')}</small></div>`).join('')}</div><p class="caption">${t('合、冲、害是传统关系名称，不是吉凶预告；日柱旬空：', 'These are traditional relationship names, not forecasts. Void branches: ')}${result.voidBranches.join('、')}</p></div></details><details><summary>${t('晚上 11 点，算哪一天？', 'Which day begins at 11 pm?')}<span>＋</span></summary><div class="detail-body">${comparison()}</div></details><details><summary>${t('这张命盘的计算依据', 'How this chart was calculated')}<span>＋</span></summary><div class="detail-body">${provenance()}<button data-export="json" class="secondary">${t('导出计算数据 JSON', 'Export calculation JSON')} ↓</button><p class="caption">${t('JSON 含原始生日与全部输入，请自行保管。', 'JSON contains all original birth inputs. Keep it private.')}</p></div></details></div><p class="export-note">${t('保存的卡片省略原始生日，但八字仍可能涉及个人隐私。', 'Saved cards omit raw birth details; the pillars may still be personal data.')}</p></section>`;
 }
-
 function render() {
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-  document.title = t('明理 · 看得见推演的八字实验室', 'Mingli · An explainable BaZi lab');
-  app.innerHTML = `<a class="skip-link" href="#workspace">${t('跳至排盘', 'Skip to the chart')}</a><header class="site-header"><a href="#" class="brand"><img src="./mark.svg" width="36" height="36" alt=""/><strong>明理</strong><span>BAZI LAB</span></a><nav><a href="#workspace">${t('排盘实验室', 'Playground')}</a><a href="#about">${t('读盘方法', 'Reading guide')}</a><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header>
-  <main><section class="intro"><div><div class="eyebrow"><span></span>${t('传统文化 × 可解释计算', 'CHINESE TRADITION × EXPLAINABLE COMPUTING')}</div><h1>${t('一张命盘，<br/><em>看见推演的来路。</em>', 'A chart to explore.<br/><em>A method to understand.</em>')}</h1><p>${t('从八个字开始，认识五行与十神。<br/>每一步有依据，每一种口径都说清。', 'Explore the eight characters, five phases and ten gods.<br/>Follow each calculation. Understand every convention.')}</p><a class="preview-link" href="#results">${t('直接看示例命盘', 'Explore the example chart')} ↓</a></div><div class="intro-aside"><span>开</span><div><b>${t('打开就能用', 'Ready when you are')}</b><p>${t('无需账号 · 无需 API Key<br/>浏览器本地计算 · 中英双语', 'No account · No API key<br/>Local calculations · 中文 / English')}</p></div></div></section>
-  <div class="workspace" id="workspace">${form()}${board()}</div>
-  <section id="about" class="about"><div class="about-title"><div class="section-label">${t('读懂，而非断言', 'UNDERSTAND, THEN QUESTION')}</div><h2>${t('把命理当成<br/>一套可以追问的语言。', 'A symbolic language<br/>you can question.')}</h2></div><div class="about-copy"><div><h3>${t('先看关系，再看解释', 'Start with relationships')}</h3><p>${t('“伤官”“七杀”是传统关系名，不是坏事预告。月令、藏干、通根与流派都会影响解释；简单计数不能自动选出用神。', 'Traditional names such as Seven killings are relationship labels, not warnings. Season, hidden stems and schools shape interpretations; counts alone cannot select a useful god.')}</p></div><div><h3>${t('保留未知，才有讨论的起点', 'Make uncertainty visible')}</h3><p>${t('这是一款传统文化学习与娱乐工具。规则能复算，不代表能预测人生；不据此判断疾病、投资、婚姻成败。首版聚焦四柱，不包含住宅风水。', 'This is a cultural learning and entertainment tool. Reproducible rules do not establish predictive validity. Do not use it for medical, investment or relationship decisions. Home Feng Shui is outside this release.')}</p></div></div></section>
-  </main><footer><span>明理 · BAZI LAB <small>v0.1.0</small></span><span>${t('MIT 开源代码 · 无分析追踪 · 无远程字体', 'MIT source · No analytics · No remote fonts')} · <a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">GitHub ↗</a></span></footer><div id="toast" class="toast" role="status"></div>`;
+  document.title = t('问辰 · 把生辰写进星河', 'Wenchen · Your moment in the stars');
+  app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><div class="sky" aria-hidden="true"></div><header class="site-header"><button class="brand" id="home" aria-label="${t('问辰首页', 'Wenchen home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>问辰</strong><span>WENCHEN</span></button><nav><span class="nav-note">${t('生辰有迹 · 万象有序', 'A MOMENT · A PATTERN')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>问辰 · WENCHEN <small>v0.2.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p><a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源于 GitHub', 'Open source on GitHub')} ↗</a></footer><div id="toast" class="toast" role="status"></div>`;
 }
-
-function updateBoard() {
-  document.querySelector('#results')!.outerHTML = board();
+function showResult() {
+  showingResult = true;
+  render();
+  window.scrollTo(0, 0);
+  document.querySelector<HTMLElement>('#results')?.focus({ preventScroll: true });
 }
 function announce(message: string) {
   const el = document.querySelector('#toast')!;
@@ -207,14 +239,7 @@ function readInput(): Input {
 }
 app.addEventListener('input', (event) => {
   const el = event.target as HTMLInputElement;
-  if (el.name in draft) {
-    (draft as Record<string, string>)[el.name] = el.value;
-    dirty = true;
-    document.querySelector('#form-status')!.textContent = t(
-      '输入已修改，点击排盘更新结果。',
-      'Inputs changed. Build the chart to update.',
-    );
-  }
+  if (el.name in draft) (draft as Record<string, string>)[el.name] = el.value;
 });
 app.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -222,12 +247,7 @@ app.addEventListener('submit', (event) => {
     result = calculate(readInput());
     selected = 2;
     isExample = false;
-    dirty = false;
-    updateBoard();
-    document.querySelector('#form-status')!.textContent = t(
-      '已更新。点击四柱查看推演。',
-      'Updated. Select a pillar to explore.',
-    );
+    showResult();
   } catch (err) {
     document.querySelector('#form-status')!.textContent =
       err instanceof Error ? err.message : String(err);
@@ -238,65 +258,68 @@ app.addEventListener('click', (event) => {
   if (!button) return;
   if (button.id === 'language') {
     lang = lang === 'zh' ? 'en' : 'zh';
+    advancedOpen = !!document.querySelector<HTMLDetailsElement>('.form-options')?.open;
     render();
     document.querySelector<HTMLButtonElement>('#language')?.focus();
   }
+  if (button.id === 'edit' || button.id === 'home') {
+    showingResult = false;
+    render();
+    window.scrollTo(0, 0);
+    document.querySelector<HTMLInputElement>('#date, #pillars')?.focus({ preventScroll: true });
+  }
   if (button.dataset.mode) {
     mode = button.dataset.mode as Input['mode'];
-    dirty = true;
+    advancedOpen = true;
     render();
     document.querySelector<HTMLButtonElement>(`[data-mode="${mode}"]`)?.focus();
   }
   if (button.dataset.pillar) {
     selected = Number(button.dataset.pillar);
-    updateBoard();
+    document.querySelector('#explanation')!.innerHTML = explanation();
     document
-      .querySelector<HTMLButtonElement>(`[data-pillar="${selected}"]`)
-      ?.focus({ preventScroll: true });
-  }
-  if (button.dataset.tab) {
-    tab = button.dataset.tab;
-    updateBoard();
-    document
-      .querySelector<HTMLButtonElement>(`[data-tab="${tab}"]`)
-      ?.focus({ preventScroll: true });
+      .querySelectorAll('[data-pillar]')
+      .forEach((el) =>
+        el.setAttribute(
+          'aria-pressed',
+          String((el as HTMLElement).dataset.pillar === String(selected)),
+        ),
+      );
   }
   if (button.dataset.example) {
     const kind = button.dataset.example;
-    mode = kind === 'unknown' ? 'pillars' : 'solar';
+    mode = 'solar';
     draft = {
       date: kind === 'zi' ? '1988-02-15' : '2005-12-23',
       time: kind === 'zi' ? '23:30' : '08:37',
       sect: '2',
       direction: 'none',
-      pillars: '乙酉 戊子 辛巳',
+      pillars: '乙酉 戊子 辛巳 壬辰',
     };
     result = calculate(readInput());
-    tab = kind === 'zi' ? 'compare' : 'reading';
     selected = 2;
     isExample = true;
-    dirty = false;
-    render();
-    document
-      .querySelector<HTMLButtonElement>(`[data-example="${kind}"]`)
-      ?.focus({ preventScroll: true });
-    announce(t('已载入教学示例。', 'Teaching example loaded.'));
-    if (innerWidth < 741)
-      document.querySelector('#results')?.scrollIntoView({
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
-        block: 'start',
-      });
+    showResult();
+    if (kind === 'zi') {
+      const detail = document.querySelectorAll<HTMLDetailsElement>('.deep-reading>details')[1];
+      detail.open = true;
+      detail.scrollIntoView({ block: 'start' });
+    }
   }
   if (button.dataset.export) {
     const svg = button.dataset.export === 'svg';
     download(
-      svg ? 'mingli-chart.svg' : 'mingli-chart.json',
+      svg ? 'wenchen-chart.svg' : 'wenchen-chart.json',
       svg ? chartSvg(result) : JSON.stringify(result, null, 2),
       svg ? 'image/svg+xml' : 'application/json',
     );
-    announce(
-      t('已生成下载文件；请留意浏览器下载提示。', 'File prepared. Check your browser downloads.'),
-    );
+    announce(t('命盘已备好，请留意下载提示。', 'Your chart is ready. Check your downloads.'));
   }
 });
 render();
+// Same-origin parent handshake: the personal workbench waits for a rendered app.
+if (window.parent !== window)
+  window.parent.postMessage(
+    { type: 'daji-game-load', game: 'wenchen', stage: 'ready' },
+    window.location.origin,
+  );

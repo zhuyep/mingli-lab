@@ -1,8 +1,8 @@
 {
   "name": "mingli-lab",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "An explainable, local-first BaZi playground. 明理：看得见推演过程的八字实验室。",
+  "description": "问辰 Wenchen — your moment in the stars. A private, one-step BaZi reading with an explorable calculation trail.",
   "type": "module",
   "license": "MIT",
   "engines": {
