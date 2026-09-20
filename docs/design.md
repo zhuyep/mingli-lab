@@ -1,13 +1,11 @@
-# 问辰 · Wenchen design direction (v0.2)
+# Tianji Bu · Eastern secret book (v0.3)
 
-Audience: curious visitors to 诸事大吉 who want a simple, evocative BaZi experience. The page has one job: enter a birthday and time, then open a readable chart.
+The page lets a curious visitor open and read a six-chapter BaZi book with two primary inputs. The user selected this direction on 2026-09-20.
 
-Tokens: night #101b2a, deep ink #0b121d, antique gold #d8bb80, moon white #f3e9d5, muted mist #a9b3c0, soft jade #95b9a5. Local Songti/STSong/serif for the brand and symbolic characters; system sans for forms; monospace for timestamps. No remote fonts.
+Palette: pine #182c25, paper #f4f0e5, ink #27352e, muted sage #697268, vermilion #a44132, bronze #aa9365. Display uses local Songti/STSong serif; forms and body use system sans; dates use monospace. No remote font service.
 
-Layout: two-panel desktop with a symbolic twelve-branch astrolabe and a quiet input panel. On mobile, compact celestial identity above a full-width form. The result is a separate view: day-stem metaphor, four pillars, phase counts, then collapsed explanations. Editing preserves inputs.
+Signature: an original AI-assisted woodblock landscape on a sewn book cover, with live vertical type. The illustration is atmospheric, not a measured chart or individualized landscape. Desktop places a closed book beside the form; mobile uses a compact cover above the two inputs. The reading opens onto paper pages, a six-chapter index, four vertical pillar marks and vermilion annotations. No mandatory ritual, delay or sound.
 
-Signature: custom vector astrolabe with twelve earthly branches and slowly rotating tick marks. It is symbolic ornament, not astronomical positions or a forecast.
+Critique and revision: an astrolabe can be swapped into almost any horoscope site. The book metaphor ties this brand to the actual reading structure. Dark cover and light text pages balance atmosphere with sustained reading. The six chapter labels encode the report order; technical evidence remains in expandable notes. Reduced motion disables the opening transition. Original comparison and exports remain in the appendix.
 
-Plan critique: a neon horoscope dashboard would add more noise. Use restrained antique-gold lines, no luck scores or prediction graphs, and just one ambient rotation. Avoid surfacing engineering explanations before the first chart. Keep all v0.1 conventions, local privacy, comparison and exports accessible in secondary controls. No compulsory animation or artificial waiting. Respect reduced motion; controls remain keyboard and touch accessible.
-
-Brand changed from 明理 / Bazi Lab to 问辰 / Wenchen. Keep the GitHub slug `mingli-lab` stable for existing links.
+The name changed from Wenchen to Tianji Bu. The GitHub slug and the personal site's internal games/wenchen route remain stable to preserve links; all visible branding uses Tianji Bu.

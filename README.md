@@ -1,39 +1,36 @@
-# 问辰 · Wenchen
+# 天机簿 · Tianji Bu
 
-**Your moment in the stars. A private, one-step BaZi reading with an explorable calculation trail.**
+**A moment becomes a chart. A chart becomes a book. Six readable chapters of Chinese BaZi, with the reasoning beneath.**
 
-[**Try the live demo →**](https://zhuyep.github.io/mingli-lab/) · [中文说明](README.zh-CN.md) · [Method](docs/method.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE)
+[**Open a sample book →**](https://zhuyep.github.io/mingli-lab/) · [中文](README.zh-CN.md) · [Reading method](docs/reading-method.md) · [Calendar contract](docs/method.md) · [MIT license](LICENSE)
 
-![Wenchen celestial interface](docs/images/desktop.png)
+![Tianji Bu illustrated book cover](docs/images/desktop.png)
 
-No account. No API key. No birth-data upload. A bilingual browser app and a small TypeScript core for exploring traditional Chinese Four Pillars (八字) rules.
+No account. No API key. No birth-data upload. An illustrated, bilingual, local-first reading experience with a small TypeScript calculation and interpretation core.
 
-> Public preview 0.2.0. Source and live demo are available. Calendar conventions are explicit; independent user adoption and predictive validity are not claimed.
+## Read the whole chart
 
-## Try it in a minute
+1. **The whole chart** — month context, roots, visible support and exact hidden-stem exposure.
+2. **Balance & alternatives** — conditional pathways, with disagreement left visible.
+3. **Temperament & action** — month and visible roles as reflective themes.
+4. **Work & resources** — making, collaboration and practical outcomes.
+5. **Connection & boundaries** — day-branch relationships, with combinations and clashes kept together.
+6. **Cycles & the year** — select a date, inspect the Lichun-based annual pillar, optionally add a traditional cycle.
 
-Requires Node.js 22.12+ and npm. From this directory:
+Every chapter exposes its chart evidence and rule identifiers. Guided local questions explain common ambiguities. Save the book as Markdown, a chart as SVG, or the complete input and reading as JSON. The appendix preserves the interactive ten-god trace and midnight/23:00 comparison.
+
+> Public preview 0.3.0. Strength screening is a documented project heuristic, not a classical authority or validated predictor. Unknown hours, mixed Earth months and some concentrated charts withhold judgment. Professional rule review and independent user feedback are still open.
+
+## Try it locally
+
+Requires Node.js 22.12+:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. Enter a birth date and time, or select **Try an example**. The result opens with a day-stem metaphor and your four pillars. Expand **A closer look** for the calculation, boundary comparison and JSON export. Known pillars and optional cycle formulas are under **More options**.
-
-Formerly 明理 / Bazi Lab. The repository URL remains `mingli-lab` so existing links keep working.
-
-## What you can explore
-
-- Gregorian date → four pillars, hidden stems and ten gods, with visible calculation steps.
-- Midnight vs. 23:00 boundary comparison: the same input produces different day stems and relationships.
-- Known-pillar input, including three-pillar charts when the birth hour is unknown.
-- Five-phase counts, branch pairs, complete three-branch groups and day-pillar void branches.
-- Optional traditional luck-cycle sequence and upstream minute-based starting date.
-- Download a local SVG chart card or reproducible JSON. JSON includes your input; the card omits raw birth details, but pillars can still be personal data.
-- Chinese / English UI, mobile layout, keyboard controls, no remote fonts or tracking.
-
-This release explains symbolic structure. It does not generate personality verdicts, compatibility scores, financial guidance or health predictions. No AI model is needed to calculate a chart.
+Enter a Gregorian birth date and time, or choose **Read a sample book**. Known pillars and optional cycle formulas are under **Options**. The repository slug remains `mingli-lab` to preserve existing links.
 
 ## A concrete boundary example
 
@@ -95,4 +92,4 @@ Useful contributions: sourced calendar edge cases, English terminology review, a
 
 ## Credits
 
-Calendar engine and hidden-stem tables: 6tail's MIT-licensed lunar-typescript. [Third-party notices](THIRD_PARTY_NOTICES.md). The UI, relation explanations and rule adapter are original project work. No lecture PDF, transcript or living person's biographical chart is bundled, and no lecturer endorsement is implied.
+Calendar engine and hidden-stem tables: 6tail's MIT-licensed lunar-typescript. [Third-party notices](THIRD_PARTY_NOTICES.md). The UI, relation explanations and rule adapter are original project work. The cover is an original AI-assisted woodcut-style illustration; see the asset notice. No lecture PDF, transcript or living person's biographical chart is bundled, and no lecturer endorsement is implied.

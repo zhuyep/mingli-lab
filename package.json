@@ -1,8 +1,8 @@
 {
   "name": "mingli-lab",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "问辰 Wenchen — your moment in the stars. A private, one-step BaZi reading with an explorable calculation trail.",
+  "description": "Tianji Bu - an illustrated, local-first book of BaZi with six evidence-linked reading chapters.",
   "type": "module",
   "license": "MIT",
   "engines": {

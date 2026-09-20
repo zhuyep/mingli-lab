@@ -12,8 +12,8 @@
 
 CI on push/PR does not deploy. Runtime needs no secrets, database or model keys. Never deploy the parent project directory: it contains private source-reading material outside this open-source package.
 
-The host should use HTTPS. A strict CSP can allow same-origin scripts and styles plus inline style attributes used only for count-bar widths. No third-party resources are needed. This release has no service worker and does not promise offline cold starts.
+The host should use HTTPS. A strict CSP can allow same-origin scripts, images and styles. No third-party resources are needed. This release has no service worker and does not promise offline cold starts.
 
 ## Personal workbench integration
 
-The 诸事大吉 workbench includes a pinned static build under `games/wenchen/`, opened from 放松. Its `scripts/sync-wenchen.mjs /path/to/mingli-lab` imports a clean, committed build and records revision plus SHA-256 checksums in SOURCE.json. It preserves the MIT license and upstream notices. The application sends only a same-origin readiness message to the host; birth data is not sent.
+The 诸事大吉 workbench includes Tianji Bu as a pinned static build under `games/wenchen/`, opened from 放松. Its `scripts/sync-wenchen.mjs /path/to/mingli-lab` imports a clean, committed build and records revision plus SHA-256 checksums in SOURCE.json. It preserves the MIT license and upstream notices. The application sends only a same-origin readiness message to the host; birth data is not sent.
