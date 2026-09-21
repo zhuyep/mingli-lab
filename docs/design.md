@@ -15,3 +15,7 @@ The public repository and personal site's internal `games/wenchen` route stay st
 ## v0.5: distinct questions and visible evidence
 
 The ink-and-paper direction stays. The contents now link directly to overview, work, money, relationships, health and years. Numbered answers use readable body type; each places its chart evidence immediately underneath. Sleep answers and adjacent-year rows have their own compact layouts. The repeated handwritten reflection box is removed.
+
+## v0.6: term, explanation, example, action
+
+Keep one short professional statement visible first. Explain it in everyday language immediately below, then give a full example. A simple choice reveals three situation-specific steps, a sample phrase and a check afterward. No situation is inferred from the chart. Full technical details remain expandable.

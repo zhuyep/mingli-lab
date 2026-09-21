@@ -1,3 +1,4 @@
+import { selectedActions, type ActionSelection } from './actions';
 import { buildTopics } from './topics';
 import { Solar } from 'lunar-typescript';
 import { ELEMENTS, stemInfo, tenGod, type Chart } from './core';
@@ -12,7 +13,7 @@ export type Chapter = {
   evidence: Words[];
   rule: string;
 };
-export const READING_VERSION = 'tianji-rules-2-topics-1';
+export const READING_VERSION = 'tianji-rules-2-plain-actions-1';
 const positions = ['年支', '月支', '日支', '时支'];
 const positionsEn = ['year branch', 'month branch', 'day branch', 'hour branch'];
 const phaseEn = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];
@@ -550,17 +551,23 @@ export function buildReading(chart: Chart, date = todayInChina()) {
   };
 }
 
-export function readingMarkdown(chart: Chart, date: string, lang: 'zh' | 'en') {
+export function readingMarkdown(
+  chart: Chart,
+  date: string,
+  lang: 'zh' | 'en',
+  selection: ActionSelection = {},
+) {
   const report = buildReading(chart, date);
   return [
     `# 天机簿 · Tianji Bu`,
     report.title[lang],
     `> ${lang === 'zh' ? '传统文化解读，不是确定的人生预测。含四柱资料，请自行保管。' : 'A cultural reading, not a prediction. Contains personal chart data; keep it private.'}`,
     chart.pillars.map((p) => p.text).join(' '),
-    ...report.chapters.map(
-      (c) =>
-        `## ${c.plain.title[lang]}\n\n**${c.plain.lead[lang]}**\n\n${c.findings.map((f) => `### ${f.question[lang]}\n\n${f.answer[lang]}\n\n> ${lang === 'zh' ? '本盘依据' : 'Chart basis'}: ${f.basis[lang]}${f.condition ? '\n\n' + f.condition[lang] : ''}`).join('\n\n')}\n\n${c.plain.term[lang]}\n\n<details><summary>${lang === 'zh' ? '术语与依据' : 'Terms & reasoning'}</summary>\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => `- ${e[lang]}`).join('\n')}\n\n${c.rule}\n\n</details>`,
-    ),
+    ...report.chapters.map((c) => {
+      const plain = c.everyday;
+      const action = selectedActions(selection).find((a) => a.topic === c.id)?.plan;
+      return `## ${plain.title[lang]}\n\n${lang === 'zh' ? '命理说法' : 'Traditional term'}：${plain.professional[lang]}\n\n**${plain.lead[lang]}**\n\n${plain.notes.map((p) => p[lang]).join('\n\n')}${plain.example ? '\n\n' + (lang === 'zh' ? '举个例子：' : 'For example: ') + plain.example[lang] : ''}\n\n${action ? `### ${action.label[lang]}\n\n${action.title[lang]}\n\n${action.steps.map((s, i) => `${i + 1}. ${s[lang]}`).join('\n')}\n\n${action.example[lang]}\n\n${action.check[lang]}` : ''}\n\n<details><summary>${lang === 'zh' ? '这句话怎么来的？看依据' : 'How was this derived?'}</summary>\n\n${c.plain.term[lang]}\n\n${c.findings.map((f) => `${f.answer[lang]}\n\n> ${lang === 'zh' ? '本盘依据' : 'Chart basis'}：${f.basis[lang]}${f.condition ? '\n\n' + f.condition[lang] : ''}`).join('\n\n')}\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => '- ' + e[lang]).join('\n')}\n\n${c.rule}\n\n</details>`;
+    }),
     `### ${lang === 'zh' ? '相邻年份对照（同月日）' : 'Adjacent years (same month/day)'}\n\n${report.nearby.map((a) => `- ${a.date}: ${a.pillar} · ${a.god} · ${a.links.map((l) => `${lang === 'zh' ? l.target : l.targetEn} ${l.branches} ${l.kind}`).join('; ') || (lang === 'zh' ? '无支持规则命中' : 'No supported pair')}`).join('\n')}`,
     `Method: ${READING_VERSION}\nhttps://github.com/zhuyep/mingli-lab/blob/main/docs/reading-method.md`,
   ].join('\n\n');

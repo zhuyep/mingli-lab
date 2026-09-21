@@ -1,4 +1,5 @@
 import { ELEMENTS, stemInfo, type Chart } from './core';
+import { everydayChapters, type Everyday } from './everyday';
 import type { Words, Chapter, buildStructureReading, annualContext } from './reading';
 
 const w = (zh: string, en: string): Words => ({ zh, en });
@@ -33,6 +34,7 @@ const describe = (r: RoleFact): Words =>
   );
 export type TopicFinding = { question: Words; answer: Words; basis: Words; condition?: Words };
 export type TopicChapter = Chapter & {
+  everyday?: Everyday;
   plain: { title: Words; lead: Words; paragraphs: Words[]; term: Words };
   findings: TopicFinding[];
 };
@@ -82,7 +84,11 @@ export const topicForGod = (god: string): Words =>
           ? w('学习、资历与支持条件', 'Learning, qualifications and support')
           : w('同伴、分工与自主权', 'Peers, ownership and autonomy');
 
-export function buildTopics(chart: Chart, report: Structure, nearby: Annual[]): TopicChapter[] {
+export function buildTopics(
+  chart: Chart,
+  report: Structure,
+  nearby: Annual[],
+): Array<TopicChapter & { everyday: Everyday & { professional: Words } }> {
   const facts = roleFacts(chart),
     f = report.features,
     annual = report.annual;
@@ -662,7 +668,145 @@ export function buildTopics(chart: Chart, report: Structure, nearby: Annual[]): 
       ),
     ),
   ];
-  return [overview, work, wealth, relationships, health, timing];
+  const everyday = everydayChapters({
+    career: careerKey,
+    money: wealthMode,
+    relationship: dayGroup,
+    linkedPositions,
+    clash,
+    combine,
+    complete: f.complete,
+    annualGod: annual.god,
+    date: annual.date,
+    cycle: annual.cycle,
+  });
+  const professional: Record<string, Words> = {
+    overview: w(
+      `${chart.dayMaster}${f.day}日主；月支本气${f.monthMain.stem}，为${f.monthMain.god}。`,
+      `${chart.dayMaster} day stem; month main qi ${f.monthMain.stem} (${f.monthMain.god}).`,
+    ),
+    work: w(
+      {
+        expression_authority: '食伤与官杀并见',
+        authority_resource: '官杀与印星并见',
+        output_wealth: '食伤与财星并见',
+        authority: '官杀进入主要线索',
+        output: '食伤进入主要线索',
+        resource: '印星进入主要线索',
+        wealth: '财星进入主要线索',
+        peer: '比劫进入主要线索',
+      }[careerKey],
+      {
+        expression_authority: 'Output and authority',
+        authority_resource: 'Authority and resource',
+        output_wealth: 'Output and wealth',
+        authority: 'Authority role',
+        output: 'Output role',
+        resource: 'Resource role',
+        wealth: 'Wealth role',
+        peer: 'Peer role',
+      }[careerKey],
+    ),
+    wealth: w(
+      {
+        both: '正财、偏财并见',
+        direct: '正财进入主要线索',
+        indirect: '偏财进入主要线索',
+        hidden: '财星只见于其他藏干',
+        absent: '已知字中未见财星',
+      }[wealthMode],
+      {
+        both: 'Direct and indirect wealth',
+        direct: 'Direct wealth',
+        indirect: 'Indirect wealth',
+        hidden: 'Wealth in other hidden stems only',
+        absent: 'No wealth role in supplied symbols',
+      }[wealthMode],
+    ),
+    relationships: w(
+      `日支本气为${dayRole.god}${clash && combine ? '，相关合冲并存' : clash ? '，另见日支相冲' : combine ? '，另见日支相合' : ''}。`,
+      `Main day-branch role: ${dayRole.god}${clash && combine ? '; combination and clash coexist' : clash ? '; a day-branch clash' : combine ? '; a day-branch combination' : ''}.`,
+    ),
+    health: w('命理“身强身弱”，不等于身体强弱。', 'Chart strength is not physical health.'),
+    timing: w(
+      `${annual.pillar}流年，年干为${annual.god}。`,
+      `${annual.pillar} year; annual stem role ${annual.god}.`,
+    ),
+  };
+  const examples: Record<string, Words> = {
+    work: {
+      expression_authority: w(
+        '比如想换一种做表的办法：先拿一张表试给负责人看，说“这次只改这一张，能省哪一步、出了问题怎么改回去”，比直接说旧办法不行更容易讨论。',
+        'For a different spreadsheet method, demonstrate one sheet and explain what it changes and how to revert it.',
+      ),
+      authority_resource: w(
+        '比如一直帮同事准备材料：下次可以说“这类材料我已经做过三次，这一份能不能让我从整理到讲解都负责？你帮我把最后一关。”',
+        'If you repeatedly prepare material for colleagues, ask to own one piece from preparation through explanation, with a final review.',
+      ),
+      output_wealth: w(
+        '比如有人请你做设计：先问清给谁看、主要想表达什么、预算是多少。先做一张草图，确认方向后再做整套，避免做完才发现不是对方要的。',
+        'For a design request, ask who it is for, its purpose and budget. Agree a rough sketch before producing the full set.',
+      ),
+      authority: w(
+        '比如被要求周五完成一份报告，关键数据却在别的部门。可以说“我能按时写完，但周三前需要拿到这两项数据，能否请你帮忙确认？”',
+        'For a Friday report depending on another team, name the two inputs needed by Wednesday and ask who can confirm them.',
+      ),
+      output: w(
+        '比如想做剪辑，不必先说自己学了多少软件。拿一段三十秒的小片，说明原素材是什么、你改了哪里，让别人看到你的本事。',
+        'For video editing, show a thirty-second sample and explain the changes rather than listing software learned.',
+      ),
+      resource: w(
+        '比如学表格工具：今天先用一个新功能整理自己的清单。真正卡住了，再找那一步的教程，不用把所有课程看完才开始。',
+        'When learning a spreadsheet tool, use one feature on your own list before watching a full course.',
+      ),
+      wealth: w(
+        '比如本周已经有两件急事，又来一个新任务。先把三个截止日期放在一起，问“这周只能保证两件，您希望哪两件先完成？”',
+        'If a third urgent task arrives, put the deadlines together and ask which two should come first.',
+      ),
+      peer: w(
+        '比如两个人准备一次活动：一个联系场地，一个通知参加者；谁今天确认、谁明天提醒，都写在同一张清单上。',
+        'For a shared event, put venue arrangements, invitations, owners and dates on one list.',
+      ),
+    }[careerKey],
+    wealth:
+      wealthMode === 'indirect' || wealthMode === 'both'
+        ? w(
+            '比如接了一份兼职，谈好了三千元，但要两个月后才付。现在要交的房租，不能先当作已经有这笔钱来安排。这里看的是到账时间，不是“运气好不好”。',
+            'A side job may promise payment two months later. That is different from cash available for this month’s rent.',
+          )
+        : w(
+            '比如每月到手五千元，房租和日常必需花销是三千五。先记清剩下的一千五去了哪里，再决定改哪一项；不用凭感觉给自己贴上“存不住钱”的标签。',
+            'If monthly take-home pay is 5,000 and necessities cost 3,500, trace the remaining 1,500 before deciding what to change.',
+          ),
+    relationships: (
+      {
+        0: w(
+          '比如周末，一个人想一起出门，一个人想独处。可以商量“周六一起安排，周日上午各做各的”，而不是把独处直接理解为不在乎。',
+          'If one person wants company and another wants time alone, discuss a shared Saturday and separate Sunday morning.',
+        ),
+        1: w(
+          '比如你想说说工作里的烦心事，可以先问“现在能听我讲十分钟吗？我主要想让你听听，不用马上给建议。”',
+          'Before discussing a difficult day, ask for ten minutes of listening and say whether advice is wanted.',
+        ),
+        2: w(
+          '比如两个人都觉得家务做得多：把做饭、洗碗、洗衣分别列出来，试着轮换一周，再看看哪项安排不合适。',
+          'If both feel they do more chores, list cooking, dishes and laundry, try a week of shared responsibilities, then review.',
+        ),
+        3: w(
+          '比如原本约好见面，临时加班了。相比一句“以后注意”，可以约定“知道要晚，就提前发消息，说明大概几点能到”。',
+          'If work delays a meeting, agree to send a message as soon as the delay is known, with an estimated arrival time.',
+        ),
+        4: w(
+          '比如你经常陪对方处理事情，自己很累却不说。可以试着讲“我今天想早点休息，这件事明晚再一起看，可以吗？”',
+          'If helping has left you tired, try: “I need an early night. Could we look at this together tomorrow?”',
+        ),
+      } as Record<number, Words>
+    )[dayGroup],
+  };
+  return [overview, work, wealth, relationships, health, timing].map((c) => ({
+    ...c,
+    everyday: { ...everyday[c.id], professional: professional[c.id], example: examples[c.id] },
+  }));
 }
 
 export type SleepCheck = {

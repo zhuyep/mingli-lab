@@ -3,11 +3,11 @@
 **一纸生辰，万象成章。你的故事，不止八个字。**<br>
 **A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
-翻开一卷黑白命书，在干支与五行之间，分别看工作、收入、感情与年份。每章回答具体问题，旁边直接列出本盘依据。
+翻开一卷黑白命书，在干支与五行之间，分别看工作、收入、感情与年份。每章先给一句专业说法，再用大白话解释，配生活例子与具体做法。
 
-Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Explore six distinct topics on work, money, relationships, health and years, with the chart evidence beside each answer.
+Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Explore six distinct topics on work, money, relationships, health and years, with a traditional term, plain explanation, everyday example and practical steps.
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.5.0)
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.6.0)
 
 **无需登录 · 无需 API Key · 生辰本地计算 · 中英双语**<br>
 **No account · No API key · Local birth-data processing · Chinese & English**
@@ -18,8 +18,8 @@ Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Exp
 
 1. **不填生辰，也能先看示例。** 打开演示，选择示例命书。<br>
    **Start without entering personal details.** Open the demo and read a sample.
-2. **用白话读六章，再看依据。** 每章回答不同的实际问题，显示对应的字与位置；可进一步展开专业说明。<br>
-   **Read first, inspect the reasoning next.** Each chapter answers distinct practical questions and identifies its supporting chart positions.
+2. **用白话读六章，再看依据。** 专业说法之后有详细解释和例子；按实际困扰选择三步做法，完整依据可展开。<br>
+   **Read first, inspect the reasoning next.** Each term has an everyday explanation and example; choose a real situation to see three practical steps.
 3. **把这一卷留在自己手里。** 可导出 Markdown 命书、SVG 四柱卡片或 JSON 数据。<br>
    **Keep a copy of your own.** Export the book as Markdown, the chart as SVG, or the full input and reading as JSON.
 
@@ -27,16 +27,16 @@ Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Exp
 
 | 章节 · Chapter | 这一页读什么 · What to explore |
 | --- | --- |
-| 命局总览 · Chart overview | 月令、根气与判断的成立条件。 / Month context, roots and remaining uncertainty. |
-| 工作发展 · Work & career | 工作方式、职责与自主空间、交付卡点。 / Work setting, responsibilities, autonomy and delivery. |
-| 财富与收入 · Money & income | 正偏财、能力与回款、合作分配。 / Income themes, the pathway to payment and shared resources. |
-| 感情关系 · Love & relationships | 日支所见的关系需求，以及实际关联的生活位置。 / Relationship needs and positions linked to the day branch. |
-| 健康与作息 · Health & sleep | 解释八字的健康边界，选填真实睡眠情况。 / Limits of chart symbolism and optional actual sleep observations. |
-| 阶段与年份 · Cycles & years | 大运、流年与相邻年份的具体差异。 / Dated cycles, annual roles and adjacent-year differences. |
+| 先看重点 · Start here | 月令、根气与判断的成立条件。 / Month context, roots and remaining uncertainty. |
+| 工作 · Work | 工作方式、职责与自主空间、交付卡点。 / Work setting, responsibilities, autonomy and delivery. |
+| 钱与收入 · Money | 正偏财、能力与回款、合作分配。 / Income themes, the pathway to payment and shared resources. |
+| 感情 · Relationships | 日支所见的关系需求，以及实际关联的生活位置。 / Relationship needs and positions linked to the day branch. |
+| 睡眠与作息 · Sleep | 解释八字的健康边界，选填真实睡眠情况。 / Limits of chart symbolism and optional actual sleep observations. |
+| 今年与前后几年 · This year and nearby years | 大运、流年与相邻年份的具体差异。 / Dated cycles, annual roles and adjacent-year differences. |
 
-每个回答列出本盘依据；专业术语配短解释。健康提示只根据作息回答生成，不由八字推断，也不进入导出。文末保留本地问答、十神推演与 23 点换日对照。
+专业说法 → 大白话详解 → 生活例子 → 具体做法。工作、金钱、感情共有九个困扰选项，每个选项有三步做法、示例话和检查点。选中的做法会进入 Markdown/JSON 导出。健康提示只根据作息回答生成，不由八字推断，也不进入导出。文末保留本地问答、十神推演与 23 点换日对照。
 
-Answers show their chart basis and short term explanations. Sleep notes use only actual responses, independently of birth symbols, and stay out of exports. The appendix retains guided questions, ten-god reasoning and day-boundary comparisons.
+Terms are followed by detailed plain explanations and examples. Nine real-life situations offer steps, a sample phrase and a check afterward. Sleep notes use only actual responses, independently of birth symbols, and stay out of exports. The appendix retains guided questions, ten-god reasoning and day-boundary comparisons.
 
 ## 意境之外，依据可查 · Atmosphere on the surface, rules underneath
 

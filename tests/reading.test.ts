@@ -103,7 +103,7 @@ test('all six bilingual chapters carry evidence and rule identifiers; exports ar
     }
   }
   assert.equal(readingMarkdown(c, '2026-09-20', 'zh'), readingMarkdown(c, '2026-09-20', 'zh'));
-  assert.match(readingMarkdown(c, '2026-09-20', 'en'), /Cycles & years/);
+  assert.match(readingMarkdown(c, '2026-09-20', 'en'), /This year and nearby years/);
 });
 test('invalid exploration dates are rejected without silently rolling to another day', () => {
   for (const date of ['', '2023-02-29', '2026-13-01', '1900-12-31', '2200-01-01'])

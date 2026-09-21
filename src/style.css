@@ -1549,3 +1549,128 @@ html[lang='en'] .deep-reading h2 {
     top: 3px;
   }
 }
+.professional-note {
+  margin: 28px 0 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #ddd;
+}
+.professional-note > span,
+.plain-label,
+.life-example > span {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: #686863;
+}
+.professional-note p {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.everyday-reading > p,
+.life-example p {
+  font-size: 16px;
+  line-height: 2;
+  margin: 12px 0;
+}
+.life-example {
+  margin: 24px 0 34px;
+  padding: 5px 0 5px 20px;
+  border-left: 2px solid #222;
+}
+.action-panel {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f4f4ef;
+  border: 1px solid #b3b3aa;
+}
+.action-panel h4 {
+  margin: 0;
+  font-size: 18px;
+}
+.action-hint,
+.action-empty {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #595952;
+}
+.situation-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 0;
+}
+.situation-choices button {
+  border: 1px solid #85857d;
+  padding: 10px 12px;
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: left;
+  min-height: 44px;
+}
+.situation-choices button[aria-pressed='true'] {
+  background: #20201c;
+  color: white;
+  border-color: #20201c;
+}
+.action-result h5 {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 26px 0 14px;
+}
+.action-result ol {
+  padding-left: 22px;
+}
+.action-result li {
+  padding: 5px 0 5px 3px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.action-result blockquote {
+  margin: 20px 0;
+  padding: 15px 18px;
+  background: white;
+  border-left: 2px solid #222;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.action-check {
+  font-size: 13px;
+  line-height: 1.9;
+}
+.action-check b {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin-bottom: 5px;
+}
+.technical-finding {
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+}
+@media (max-width: 600px) {
+  .professional-note {
+    margin: 22px 0;
+  }
+  .everyday-reading > p,
+  .life-example p {
+    font-size: 15px;
+    line-height: 1.95;
+  }
+  .action-panel {
+    padding: 20px 16px;
+  }
+  .situation-choices {
+    display: grid;
+  }
+  .situation-choices button {
+    width: 100%;
+  }
+  .action-result li,
+  .action-result blockquote {
+    font-size: 14px;
+  }
+  .year-row > div:first-child span {
+    overflow-wrap: anywhere;
+  }
+}

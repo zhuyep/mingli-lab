@@ -1,6 +1,6 @@
 # 天机簿解读方法 / Reading method
 
-Version: `tianji-rules-2-topics-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
+Version: `tianji-rules-2-plain-actions-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
 
 ## What is calculated, and what is interpreted
 
@@ -48,7 +48,7 @@ Tests cover different readings for the same day stem, root/exposure distinctions
 
 ## Topic selection and presentation
 
-The six chapters are **overview, work, money, relationships, health and timing**. Each answer has a question and explicit chart basis; additional professional explanations remain collapsed. There is no repeated reflection-prompt template.
+The six chapters are **overview, work, money, relationships, health and timing**. v0.6 shows a short professional statement first, followed by plain explanation, an example and optional situation-based steps; full chart facts and technical answers remain expandable. There is no repeated reflection-prompt template.
 
 Work selects the first applicable combination: output+authority, authority+resource, output+wealth; otherwise authority, output, resource, wealth, then peers. These are editorial priorities, not a traditional strength ranking. Candidate detection checks visible year/month/hour stems and the main hidden month stem; it does not equate all hidden stems with visible roles. Complete pattern formation, transformations and outcomes are not established.
 
@@ -67,3 +67,17 @@ Health content is invariant across charts. The two optional sleep responses chan
 - [CDC About Sleep](https://www.cdc.gov/sleep/about/): source for consistent schedules, sleep-quality observations, a sleep diary and seeking healthcare support for recurring problems. No disease inference is made from birth data.
 
 New tests specifically compare different charts with the same day/month, verify the positions behind evidence, retain hidden/visible distinctions and simultaneous relationships, exercise adjacent years and verify that health notes do not depend on the chart. Independent user assessment of specificity and usefulness is still needed.
+
+## v0.6: explanations and actions (2026-09-21)
+
+The user asked to retain professional terms at the front and then explain them in detail. `everyday.ts` maps the same explicit role-selection keys to short, original explanations and examples. It does not change chart calculations or claim the analogy describes measured personality. A reader can inspect the original facts and conditional interpretation under each chapter.
+
+`actions.ts` contains nine optional situations across work, money and relationships. No situation is selected from a chart. Each has three small steps, a sample phrase and an observable check. These are everyday suggestions, not computed destiny or verified personalized advice. Selected situations persist while changing language or year, reset for a new chart, and enter Markdown/JSON only when the user chooses to download. Sleep data stays out of exports.
+
+General references checked on 2026-09-21:
+
+- [CFPB Your Money, Your Goals toolkit](https://www.consumerfinance.gov/consumer-tools/educator-tools/your-money-your-goals/toolkit/): supports recording actual income, spending and bill timing. The app's short examples and collaboration checklist are original editorial suggestions, not legal or investment advice.
+- [Gottman Institute: Soften Your Start-Up](https://www.gottman.com/blog/softening-startup/): informs describing a specific event, feeling and request without character blame. App wording is original; no claim is made that these prompts resolve all relationship problems.
+- [CDC About Sleep](https://www.cdc.gov/sleep/about/): existing general sleep notes retained; no health inference from chart symbols.
+
+Software checks cover selection isolation, explanation/example order, distinct scenarios, bilingual fields and selected-only exports. Readability and usefulness still require user review; neither test count nor successful publication is acceptance.

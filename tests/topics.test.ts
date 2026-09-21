@@ -114,8 +114,8 @@ test('health reading is invariant under changed birth symbols, and sleep notes d
 });
 test('saved reading contains topic questions, evidence and years, but no sleep response', () => {
   const text = readingMarkdown(outputOfficer(), '2026-09-20', 'zh');
-  assert.match(text, /## 财富与收入/);
-  assert.match(text, /## 健康与作息/);
+  assert.match(text, /## 钱与收入/);
+  assert.match(text, /## 睡眠与作息/);
   assert.match(text, /本盘依据.*年干庚/);
   assert.match(text, /2025-09-20/);
   assert.doesNotMatch(text, /你选了作息|你选了经常|你填写的是|sleepCheck/);

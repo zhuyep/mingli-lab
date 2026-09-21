@@ -11,3 +11,7 @@ Use teaching examples when sharing screenshots or reporting issues. The release 
 Optional sleep responses remain only in page memory. They do not enter the chart object, Markdown, SVG or JSON exports. Opening a new chart resets them. Responses are never sent to the linked CDC site.
 
 选填睡眠回答只在当前页面中使用；新开命盘时重置，不进入任何下载文件，也不会传给来源网站。
+
+Optional work, money and relationship choices are held only on the current page and reset with a new chart. Unlike sleep responses, selected action plans are included when you explicitly download Markdown or JSON. SVG does not include these choices. No choice is sent to a source site.
+
+工作、金钱、感情的选项只留在本页；选择保存 Markdown/JSON 时会带上已选做法，新命盘会清空选项。SVG 不带这些选项；睡眠回答仍不进入任何导出。
