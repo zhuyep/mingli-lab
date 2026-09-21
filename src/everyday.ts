@@ -1,11 +1,11 @@
 import type { Words } from './reading';
+import { workPortraits, moneyPortraits, relationshipPortraits, type Portrait } from './portraits';
 const w = (zh: string, en: string): Words => ({ zh, en });
 export type Everyday = {
   title: Words;
-  lead: Words;
-  notes: Words[];
   professional?: Words;
-  example?: Words;
+  analysis: { headline: Words; notes: Words[]; strength?: Words; pitfall?: Words };
+  adjustment?: { title: Words; notes: Words[]; example?: Words };
 };
 export type EverydayContext = {
   career: string;
@@ -163,7 +163,12 @@ const relationships: [Words, Words][] = [
     ),
   ],
 ];
-export function yearNote(god: string): { title: Words; action: Words } {
+export function yearNote(god: string): {
+  title: Words;
+  action: Words;
+  theme: Words;
+  description: Words;
+} {
   const rows: Record<string, [string, string, string, string]> = {
     食神: [
       '把擅长的事做出来',
@@ -228,108 +233,182 @@ export function yearNote(god: string): { title: Words; action: Words } {
   };
   const row = rows[god];
   if (!row) throw new Error('Unknown annual role');
-  return { title: w(row[0], row[2]), action: w(row[1], row[3]) };
+  const themes: Record<string, [Words, Words]> = {
+    食神: [
+      w('作品与表达', 'Making and expression'),
+      w(
+        '传统上把食神类比为比较从容的表达与产出。这里只确定这一年的符号话题，不能说明现实中已经有了成果。',
+        'Eating god is associated with expression and making. This identifies a symbolic theme, not an actual completed result.',
+      ),
+    ],
+    伤官: [
+      w('个人想法与外部要求', 'Personal ideas and outside expectations'),
+      w(
+        '传统上把伤官类比为表达不同意见、改动旧办法。它不证明这一年一定会有冲突或变化。',
+        'Hurting officer is associated with differing ideas and changing methods, without establishing an actual conflict or change.',
+      ),
+    ],
+    正财: [
+      w('稳定报酬与日常安排', 'Regular reward and daily commitments'),
+      w(
+        '正财在这里对应稳定付出与约定报酬的话题，不能据此判断这一年收入涨跌。',
+        'Direct wealth points to agreed reward and regular effort, without predicting income changes.',
+      ),
+    ],
+    偏财: [
+      w('阶段性机会与资源流动', 'Occasional opportunities and changing resources'),
+      w(
+        '偏财在这里对应项目、合作等类比话题，不表示现实中已经出现机会或一定进账。',
+        'Indirect wealth suggests the theme of projects and changing resources, not an actual opportunity or payment.',
+      ),
+    ],
+    正官: [
+      w('责任、标准与约定', 'Responsibility, standards and agreements'),
+      w(
+        '正官在这里对应角色和要求的话题，不能据此认定升职、考核或岗位变化已经发生。',
+        'Direct officer suggests roles and expectations, not an established promotion, review or job change.',
+      ),
+    ],
+    七杀: [
+      w('要求、压力与应对', 'Demands, pressure and response'),
+      w(
+        '七杀在这里类比更急、更强的外部要求，不等于你现实中一定正承受压力。',
+        'Seven killings symbolizes stronger demands; it does not establish actual stress.',
+      ),
+    ],
+    正印: [
+      w('学习、支持与积累', 'Learning, support and preparation'),
+      w(
+        '正印在这里对应知识和支持条件的话题，不代表今年一定有人相助或考试通过。',
+        'Direct resource suggests learning and support, without promising help or a successful examination.',
+      ),
+    ],
+    偏印: [
+      w('独立理解与探索', 'Independent understanding and exploration'),
+      w(
+        '偏印在这里类比用自己的方式理解问题，不表示你已经换方向或脱离原有环境。',
+        'Indirect resource suggests an individual way of understanding, not an actual change of direction or environment.',
+      ),
+    ],
+    比肩: [
+      w('自主与同伴', 'Autonomy and peers'),
+      w(
+        '比肩在这里对应自主、同伴与分工的话题，不能据此认定已有合作或竞争。',
+        'Peer symbolizes autonomy and shared work; actual cooperation or competition remains unknown.',
+      ),
+    ],
+    劫财: [
+      w('共同投入与分配', 'Shared effort and allocation'),
+      w(
+        '劫财在这里对应同伴和资源分配的话题，不等于破财，也不预告有人会拿走你的钱。',
+        'Rob wealth suggests shared resources and allocation; it does not predict financial loss or theft.',
+      ),
+    ],
+  };
+  return {
+    title: w(row[0], row[2]),
+    action: w(row[1], row[3]),
+    theme: themes[god][0],
+    description: themes[god][1],
+  };
 }
 export function everydayChapters(c: EverydayContext): Record<string, Everyday> {
   const job = work[c.career],
     cash = money[c.money],
     love = relationships[c.relationship];
+  const workStyle = workPortraits[c.career],
+    moneyStyle = moneyPortraits[c.money],
+    loveStyle = relationshipPortraits[c.relationship];
   const year = yearNote(c.annualGod);
-  const workMeaning: Record<string, Words> = {
-    expression_authority: w(
-      '这句话放到工作里，可以理解为：一边想按自己的办法做，一边要满足单位或客户的要求。要找的是两边都能接受的做法。',
-      'In work, this symbolizes having your own approach while meeting an employer’s or client’s requirements.',
-    ),
-    authority_resource: w(
-      '这句话把“懂得怎么做”和“被交付责任”连在一起。光有知识还不够，还需要一次机会，让别人看到你能把事情负责到底。',
-      'This connects knowing how to do something with being trusted to take responsibility through to the end.',
-    ),
-    output_wealth: w(
-      '这句话说的是“本事”和“有人需要”这两头：你能做出东西，也要有人觉得有用、愿意付钱。会做，和能靠它赚钱，中间还隔着这一步。',
-      'This connects a skill with someone needing it. Being able to make something and being paid for it are two different steps.',
-    ),
-    authority: w(
-      '这里的说法，放到日常就是“别人要求你做什么，你又能决定什么”。两边对得上，事情才比较好推进。',
-      'In everyday work, this asks what others expect and what you are allowed to decide.',
-    ),
-    output: w(
-      '这里说的“输出”，就是把脑子里的本事变成别人看得见的东西：写出来、做出来，或者讲清楚。',
-      'Output means turning something you know into something another person can see, use or understand.',
-    ),
-    resource: w(
-      '这里说的“印”，可以先理解成帮助你做好事情的知识、经验和支持。关键是把学来的东西用在眼前的事上。',
-      'Resource is used as an analogy for knowledge, experience and support that help with an actual task.',
-    ),
-    wealth: w(
-      '这里先不谈能赚多少钱，而是看你怎样把时间、人手和东西安排好，完成答应别人的事。',
-      'Here the work analogy concerns arranging time, help and materials to do what you promised.',
-    ),
-    peer: w(
-      '这个说法关心的是“自己”和“同伴”怎样一起做事：能互相帮忙，也各自知道自己该做什么。',
-      'The peer analogy concerns helping one another while knowing who is responsible for each part.',
-    ),
-  };
+  const analysis = (p: Portrait) => ({
+    headline: p.headline,
+    notes: [p.description],
+    strength: p.strength,
+    pitfall: p.pitfall,
+  });
   return {
     overview: {
-      title: w('先看重点', 'Start here'),
-      lead: w('先读像你的地方，再选一件小事试试。', 'Read what fits. Try one small step.'),
-      notes: [
-        w(`工作上：${job[0].zh} 钱上：${cash[0].zh}`, `Work: ${job[0].en} Money: ${cash[0].en}`),
-        c.complete
-          ? w(
-              '下面是这张八字带出的几个提醒，不是对你的定论。真正要做什么，还得看你正在碰到什么事。',
-              'These are reminders suggested by the traditional chart, not established facts about you. What to do depends on your actual situation.',
-            )
-          : w(
-              '你没有填出生时间，这份解读少了一部分信息。下面先聊能看的部分，不把缺的内容猜出来。',
-              'Birth time is missing, so this reading is partial. Missing information stays unknown.',
-            ),
-      ],
+      title: w('整体风格', 'Overall style'),
+      analysis: {
+        headline: workStyle.headline,
+        notes: [
+          w(`对待钱：${moneyStyle.headline.zh}`, `Money: ${moneyStyle.headline.en}`),
+          w(`与人相处：${loveStyle.headline.zh}`, `Relationships: ${loveStyle.headline.en}`),
+          c.complete
+            ? w(
+                '这是下面各章命理倾向的概括。工作、收入、关系和身体的实际现状，尚未由你确认。',
+                'This summarizes the symbolic tendencies below. Your actual work, money, relationship and health situation has not been confirmed.',
+              )
+            : w(
+                '你没有填出生时间，整体风格只是已知三柱的初步解读。实际生活情况仍需你自己对照。',
+                'Birth time is missing. This is a partial reading of three supplied pillars, to be compared with actual experience.',
+              ),
+        ],
+      },
     },
-    work: { title: w('工作', 'Work'), lead: job[0], notes: [workMeaning[c.career], job[1]] },
-    wealth: { title: w('钱与收入', 'Money'), lead: cash[0], notes: [cash[1]] },
+    work: {
+      title: w('工作', 'Work'),
+      analysis: analysis(workStyle),
+      adjustment: { title: job[0], notes: [job[1]] },
+    },
+    wealth: {
+      title: w('钱与收入', 'Money'),
+      analysis: analysis(moneyStyle),
+      adjustment: { title: cash[0], notes: [cash[1]] },
+    },
     relationships: {
       title: w('感情', 'Relationships'),
-      lead: love[0],
-      notes: [
-        love[1],
-        c.linkedPositions.length
-          ? w(
-              `如果相处里总有同一类分歧，可以先聊${c.linkedPositions.map((p) => ['双方家人的意见', '工作和陪伴的时间', '', '今后的打算'][p]).join('、')}。${c.clash && c.combine ? '在乎对方和有不同想法，可以同时存在。' : ''}`,
-              `If the same disagreement recurs, consider ${c.linkedPositions.map((p) => ['family opinions', 'work and time together', '', 'future plans'][p]).join(', ')}. Caring and disagreeing can coexist.`,
-            )
-          : w(
-              '有没有对象、关系怎样，这张盘并不知道。下面选一个你真的碰到的问题，再看对应的做法。',
-              'The chart does not know your relationship status. Choose a real situation below to see a matching step.',
-            ),
-      ],
+      analysis: {
+        ...analysis(loveStyle),
+        notes: [
+          loveStyle.description,
+          w(
+            '这部分说的是相处倾向，不能据此知道你有没有伴侣、正在吵架还是感情稳定。',
+            'This describes a relational analogy, not your relationship status or whether things are strained or stable.',
+          ),
+        ],
+      },
+      adjustment: {
+        title: w(
+          '把在意的事说成一个具体、双方能商量的请求。',
+          'Turn what matters into a request both people can discuss.',
+        ),
+        notes: [love[1]],
+      },
     },
     health: {
       title: w('睡眠与作息', 'Sleep'),
-      lead: w(
-        '最近睡得怎么样，先听身体自己的反馈。',
-        'Start with how you have actually been sleeping.',
-      ),
-      notes: [
-        w(
-          '八字看不出你哪里有病，也不能判断寿命。下面两项按最近的真实情况选，提示只根据你的回答。',
-          'A birth chart cannot diagnose illness or lifespan. The two questions below use your actual recent experience.',
+      analysis: {
+        headline: w(
+          '身体的现状，要从真实感受说起。',
+          'Actual experience is the starting point for sleep.',
         ),
-      ],
+        notes: [
+          w(
+            '命理里的“身强身弱”不等于身体强弱。这里不从八字描述健康；下方先由你填写最近的情况，再单独给作息提示。',
+            'Chart strength is not physical health. Report recent sleep below; any guidance is shown separately and based on those answers.',
+          ),
+        ],
+      },
     },
     timing: {
       title: w('今年与前后几年', 'This year and nearby years'),
-      lead: w(
-        `${c.date.slice(0, 4)}年，留给你的一个提醒：${year.title.zh}。`,
-        `${c.date.slice(0, 4)}: ${year.title.en}.`,
-      ),
-      notes: [
-        year.action,
-        w(
-          '这是传统命理给出的年度话题，供你回看生活；它不能预告升职、发财或分手。可以换年份比较，也可以展开查看算法。',
-          'This is a traditional yearly theme for reflection, not a forecast of promotion, wealth or separation. Compare years or open the calculation details.',
+      analysis: {
+        headline: w(
+          `${c.date.slice(0, 4)}年的命理话题：${year.theme.zh}。`,
+          `${c.date.slice(0, 4)} symbolic theme: ${year.theme.en}.`,
         ),
-      ],
+        notes: [year.description],
+      },
+      adjustment: {
+        title: year.title,
+        notes: [
+          w(
+            `如果这个话题与你正在经历的事有关，可以这样试：${year.action.zh}`,
+            `If this theme is relevant to what you are experiencing: ${year.action.en}`,
+          ),
+        ],
+      },
     },
   };
 }

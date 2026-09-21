@@ -1674,3 +1674,125 @@ html[lang='en'] .deep-reading h2 {
     overflow-wrap: anywhere;
   }
 }
+
+/* Separate interpretation from action without relying on color. */
+.analysis-section {
+  padding: 28px 0 0;
+}
+.reading-section-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.analysis-section > .reading-section-label {
+  display: inline-block;
+  padding: 7px 11px;
+  border: 1px solid #222;
+}
+.analysis-section .professional-note {
+  margin: 22px 0 18px;
+}
+.analysis-section h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.5;
+}
+.trait-row {
+  margin: 20px 0;
+  padding-left: 16px;
+  border-left: 1px solid #999;
+}
+.trait-row b {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.trait-row p {
+  margin: 7px 0;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.analysis-section .evidence {
+  margin-bottom: 0;
+}
+.adjustment-section {
+  margin-top: 28px;
+  padding: 25px 28px;
+  border-top: 2px solid #222;
+  background: #f4f4ef;
+}
+.adjustment-section > .reading-section-label {
+  font-size: 16px;
+}
+.adjustment-section > h4 {
+  margin: 20px 0 12px;
+  font-size: 23px;
+  line-height: 1.6;
+  font-family:
+    Songti SC,
+    Georgia,
+    serif;
+}
+.adjustment-section > p {
+  line-height: 1.95;
+  font-size: 15px;
+}
+.adjustment-section .advice-condition {
+  color: #595952;
+  font-size: 12px;
+  margin: 10px 0 0;
+}
+.adjustment-section .life-example {
+  margin-bottom: 20px;
+}
+.situation-tools {
+  border-top: 1px solid #b3b3aa;
+  margin-top: 24px;
+  padding-top: 15px;
+}
+.situation-tools > summary {
+  font-size: 13px;
+  line-height: 1.8;
+  cursor: pointer;
+  padding: 7px 0;
+}
+.situation-tools .action-panel {
+  background: white;
+  margin: 15px 0 0;
+  padding: 20px;
+}
+.reported-context {
+  margin-top: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.reported-context b {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+.matched-advice-label {
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 22px;
+}
+.action-result .matched-advice-label + h5 {
+  margin-top: 10px;
+}
+.sleep-check .sleep-advice-label {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #bbb;
+  font-size: 15px;
+}
+@media (max-width: 600px) {
+  .adjustment-section {
+    padding: 22px 16px;
+  }
+  .adjustment-section > h4 {
+    font-size: 21px;
+  }
+  .situation-tools .action-panel {
+    padding: 16px 12px;
+  }
+}

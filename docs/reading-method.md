@@ -1,6 +1,6 @@
 # 天机簿解读方法 / Reading method
 
-Version: `tianji-rules-2-plain-actions-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
+Version: `tianji-rules-2-analysis-advice-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
 
 ## What is calculated, and what is interpreted
 
@@ -48,7 +48,7 @@ Tests cover different readings for the same day stem, root/exposure distinctions
 
 ## Topic selection and presentation
 
-The six chapters are **overview, work, money, relationships, health and timing**. v0.6 shows a short professional statement first, followed by plain explanation, an example and optional situation-based steps; full chart facts and technical answers remain expandable. There is no repeated reflection-prompt template.
+The six chapters are **overview, work, money, relationships, health and timing**. v0.7 separates a short professional statement and descriptive analysis from conditional suggestions. Full chart facts and technical answers remain expandable within the analysis section. There is no repeated reflection-prompt template.
 
 Work selects the first applicable combination: output+authority, authority+resource, output+wealth; otherwise authority, output, resource, wealth, then peers. These are editorial priorities, not a traditional strength ranking. Candidate detection checks visible year/month/hour stems and the main hidden month stem; it does not equate all hidden stems with visible roles. Complete pattern formation, transformations and outcomes are not established.
 
@@ -81,3 +81,13 @@ General references checked on 2026-09-21:
 - [CDC About Sleep](https://www.cdc.gov/sleep/about/): existing general sleep notes retained; no health inference from chart symbols.
 
 Software checks cover selection isolation, explanation/example order, distinct scenarios, bilingual fields and selected-only exports. Readability and usefulness still require user review; neither test count nor successful publication is acceptance.
+
+## v0.7: analysis is not advice (2026-09-21)
+
+The owner found v0.6 confusing: imperative headings and examples of what to do appeared to describe the reader's existing life. The primary reading now has distinct `analysis` and optional `adjustment` fields in `everyday.ts`. `portraits.ts` maps existing symbolic selection keys to original descriptive analogies (style, possible strengths and possible friction). They are not measured traits or established personal facts. This revision introduces no new chart calculation or claim of predictive validity.
+
+The overview summarizes style; work, money and relationships explain it in more detail. Financial styles are withheld where this version lacks a prominent supporting role. Each conditional suggestion appears after the analysis and its expandable basis. Examples of a change belong only to the suggestion section. Nearby-year rows describe symbolic themes, not instructions presented as yearly findings.
+
+Optional situations sit in a collapsed control. Only an explicit choice creates a “Your reported context” label, followed by separately labelled matching suggestions. Choosing a situation never changes the symbolic analysis. Health continues to depend on actual sleep answers rather than chart symbols. Markdown mirrors the section boundaries; JSON retains separate analysis, adjustment and chosenSituations fields. This changes the exported presentation schema from v0.6; consumers should check the reading version.
+
+Tests and page review check these content boundaries and interactions, not whether the portraits describe a reader accurately. The owner's assessment of the revised structure remains pending.

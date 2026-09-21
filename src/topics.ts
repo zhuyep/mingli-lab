@@ -805,7 +805,13 @@ export function buildTopics(
   };
   return [overview, work, wealth, relationships, health, timing].map((c) => ({
     ...c,
-    everyday: { ...everyday[c.id], professional: professional[c.id], example: examples[c.id] },
+    everyday: {
+      ...everyday[c.id],
+      professional: professional[c.id],
+      ...(everyday[c.id].adjustment
+        ? { adjustment: { ...everyday[c.id].adjustment!, example: examples[c.id] } }
+        : {}),
+    },
   }));
 }
 

@@ -19,3 +19,7 @@ The ink-and-paper direction stays. The contents now link directly to overview, w
 ## v0.6: term, explanation, example, action
 
 Keep one short professional statement visible first. Explain it in everyday language immediately below, then give a full example. A simple choice reveals three situation-specific steps, a sample phrase and a check afterward. No situation is inferred from the chart. Full technical details remain expandable.
+
+## v0.7: analysis and suggestions have separate visual boundaries
+
+Descriptive analysis uses an outlined label, professional statement, plain style description and two labelled rows for strengths and friction. Full basis stays inside that section. Conditional suggestions follow a strong dividing rule on a pale background, with a distinct heading and examples explicitly labelled as actions to try. The overview presents style without instructions. Nine optional real-life situations are collapsed by default; selected situations are labelled as the reader's report. Layout, labels and export headings all carry the distinction, so it does not depend on color alone.

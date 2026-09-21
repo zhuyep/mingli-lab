@@ -15,16 +15,16 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 
 | 章节 | 内容 |
 | --- | --- |
-| 先看重点 | 月令、根气与哪些结论尚不能成立 |
+| 整体风格 | 做事、对待钱、相处的倾向概括 |
 | 工作 | 工作方式、职责与授权、交付卡点 |
 | 钱与收入 | 正偏财、收入路径、合伙与分配 |
 | 感情 | 关系需求，及日支实际关联的位置 |
 | 睡眠与作息 | 八字与健康的边界；选填真实睡眠情况 |
 | 今年与前后几年 | 所选大运、年度关系与前后年份对照 |
 
-专业说法后紧接大白话详解和例子；工作、金钱、感情共有九个困扰选项，每个提供三步做法、示例话和检查点。点“这句话怎么来的？看依据”查看规则。保留 Markdown 命书、SVG 卡片与 JSON 数据；睡眠回答只在本页使用，不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
+专业说法后先讲风格、长处和卡点；调整建议另起一栏，配白话改法与生活例子。九个困扰选项默认收起，选择后明确标为“你填写的现状”，再提供对应步骤。点“这句话怎么来的？看依据”查看规则。保留 Markdown 命书、SVG 卡片与 JSON 数据；睡眠回答只在本页使用，不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
 
-> v0.6.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
+> v0.7.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
 
 ## 本地运行
 
@@ -62,4 +62,4 @@ npm run chart -- --date 2005-12-23 --time 08:37
 
 If you enjoy the book, **star the project** to find it again. Specific usability or calculation feedback is welcome; please use fictional or reference dates in public.
 
-[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.6.0 双语发布说明](docs/releases/v0.6.0.md)
+[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.7.0 双语发布说明](docs/releases/v0.7.0.md)
