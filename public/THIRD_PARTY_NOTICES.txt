@@ -25,3 +25,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Font: TianjiHandSubset, subset of Long Cang. Copyright 2018 The Long Cang Project Authors. SIL OFL 1.1; full license in LongCang-OFL.txt. Source: https://github.com/google/fonts/tree/main/ofl/longcang
+
+
+Classical excerpts (v0.8)
+
+Eight short public-domain original passages from Zi Ping Zhen Quan and San Ming Tong Hui are identified by chapter and transcription URL in src/classics.ts and in the reading. Checked 2026-09-21. Modern transcription annotations are not reproduced as classical text. Explanations and contemporary examples are original project writing. The application MIT license does not confer exclusive rights over public-domain text.

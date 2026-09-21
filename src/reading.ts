@@ -1,3 +1,4 @@
+import { CLASSICS, depthMarkdown } from './classics';
 import { selectedActions, type ActionSelection } from './actions';
 import { buildTopics } from './topics';
 import { Solar } from 'lunar-typescript';
@@ -13,7 +14,7 @@ export type Chapter = {
   evidence: Words[];
   rule: string;
 };
-export const READING_VERSION = 'tianji-rules-2-analysis-advice-1';
+export const READING_VERSION = 'tianji-rules-2-classical-depth-1';
 const positions = ['年支', '月支', '日支', '时支'];
 const positionsEn = ['year branch', 'month branch', 'day branch', 'hour branch'];
 const phaseEn = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];
@@ -547,6 +548,7 @@ export function buildReading(chart: Chart, date = todayInChina()) {
     ...structure,
     balance: structure.chapters.find((c) => c.id === 'balance')!,
     chapters: buildTopics(chart, structure, nearby),
+    sources: CLASSICS,
     nearby,
   };
 }
@@ -568,7 +570,7 @@ export function readingMarkdown(
       const action = selectedActions(selection).find((a) => a.topic === c.id)?.plan;
       const analysis = plain.analysis,
         adjustment = plain.adjustment;
-      return `## ${plain.title[lang]}\n\n### ${lang === 'zh' ? (c.id === 'health' ? '现状从哪里来' : '命理倾向分析') : c.id === 'health' ? 'Source of actual context' : 'Symbolic analysis'}\n\n${lang === 'zh' ? '命理说法' : 'Traditional term'}：${plain.professional[lang]}\n\n**${analysis.headline[lang]}**\n\n${analysis.notes.map((p) => p[lang]).join('\n\n')}${analysis.strength ? '\n\n**' + (lang === 'zh' ? '可能的长处' : 'Possible strength') + '**：' + analysis.strength[lang] : ''}${analysis.pitfall ? '\n\n**' + (lang === 'zh' ? '容易卡住的地方' : 'Possible friction') + '**：' + analysis.pitfall[lang] : ''}\n\n<details><summary>${lang === 'zh' ? '这句话怎么来的？看依据' : 'How was this derived?'}</summary>\n\n${c.plain.term[lang]}\n\n${c.findings.map((f) => `${f.answer[lang]}\n\n> ${lang === 'zh' ? '本盘依据' : 'Chart basis'}：${f.basis[lang]}${f.condition ? '\n\n' + f.condition[lang] : ''}`).join('\n\n')}\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => '- ' + e[lang]).join('\n')}\n\n${c.rule}\n\n</details>${adjustment ? `\n\n### ${lang === 'zh' ? '调整建议' : 'Suggestions'}\n\n${lang === 'zh' ? '如果上述卡点或话题符合你的经历，可以尝试；不符合就跳过。' : 'Try this if the friction or theme fits your experience; otherwise leave it aside.'}\n\n**${adjustment.title[lang]}**\n\n${adjustment.notes.map((p) => p[lang]).join('\n\n')}${adjustment.example ? '\n\n' + (lang === 'zh' ? '可以这样做 · 举例：' : 'Example of what to try: ') + adjustment.example[lang] : ''}` : ''}${action ? `\n\n#### ${lang === 'zh' ? '你填写的现状' : 'Your reported context'}\n\n${action.label[lang]}\n\n#### ${lang === 'zh' ? '针对这件事的建议' : 'Suggestions for this situation'}\n\n${action.title[lang]}\n\n${action.steps.map((s, i) => `${i + 1}. ${s[lang]}`).join('\n')}\n\n${action.example[lang]}\n\n${action.check[lang]}` : ''}`;
+      return `## ${plain.title[lang]}\n\n### ${lang === 'zh' ? (c.id === 'health' ? '现状从哪里来' : '命理倾向分析') : c.id === 'health' ? 'Source of actual context' : 'Symbolic analysis'}\n\n${lang === 'zh' ? '命理说法' : 'Traditional term'}：${plain.professional[lang]}\n\n**${analysis.headline[lang]}**\n\n${analysis.notes.map((p) => p[lang]).join('\n\n')}${analysis.strength ? '\n\n**' + (lang === 'zh' ? '可能的长处' : 'Possible strength') + '**：' + analysis.strength[lang] : ''}${analysis.pitfall ? '\n\n**' + (lang === 'zh' ? '容易卡住的地方' : 'Possible friction') + '**：' + analysis.pitfall[lang] : ''}\n\n${depthMarkdown(c.depth, lang)}\n\n<details><summary>${lang === 'zh' ? '这句话怎么来的？看依据' : 'How was this derived?'}</summary>\n\n${c.plain.term[lang]}\n\n${c.findings.map((f) => `${f.answer[lang]}\n\n> ${lang === 'zh' ? '本盘依据' : 'Chart basis'}：${f.basis[lang]}${f.condition ? '\n\n' + f.condition[lang] : ''}`).join('\n\n')}\n\n${c.paragraphs.map((p) => p[lang]).join('\n\n')}\n\n${c.evidence.map((e) => '- ' + e[lang]).join('\n')}\n\n${c.rule}\n\n</details>${adjustment ? `\n\n### ${lang === 'zh' ? '调整建议' : 'Suggestions'}\n\n${lang === 'zh' ? '如果上述卡点或话题符合你的经历，可以尝试；不符合就跳过。' : 'Try this if the friction or theme fits your experience; otherwise leave it aside.'}\n\n**${adjustment.title[lang]}**\n\n${adjustment.notes.map((p) => p[lang]).join('\n\n')}${adjustment.example ? '\n\n' + (lang === 'zh' ? '可以这样做 · 举例：' : 'Example of what to try: ') + adjustment.example[lang] : ''}` : ''}${action ? `\n\n#### ${lang === 'zh' ? '你填写的现状' : 'Your reported context'}\n\n${action.label[lang]}\n\n#### ${lang === 'zh' ? '针对这件事的建议' : 'Suggestions for this situation'}\n\n${action.title[lang]}\n\n${action.steps.map((s, i) => `${i + 1}. ${s[lang]}`).join('\n')}\n\n${action.example[lang]}\n\n${action.check[lang]}` : ''}`;
     }),
     `### ${lang === 'zh' ? '相邻年份对照（同月日）' : 'Adjacent years (same month/day)'}\n\n${report.nearby.map((a) => `- ${a.date}: ${a.pillar} · ${a.god} · ${a.links.map((l) => `${lang === 'zh' ? l.target : l.targetEn} ${l.branches} ${l.kind}`).join('; ') || (lang === 'zh' ? '无支持规则命中' : 'No supported pair')}`).join('\n')}`,
     `Method: ${READING_VERSION}\nhttps://github.com/zhuyep/mingli-lab/blob/main/docs/reading-method.md`,

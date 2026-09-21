@@ -13,3 +13,8 @@ Vite, TypeScript, tsx and @types/node are development dependencies. Their resolv
 ## Handwriting font
 
 `public/tianji-hand.woff` is a character subset of **Long Cang**, copyright 2018 The Long Cang Project Authors, licensed under SIL OFL 1.1. Source: [Google Fonts / Long Cang](https://github.com/google/fonts/tree/main/ofl/longcang), retrieved 2026-09-20. The derivative font name is `TianjiHandSubset`; the full license is in [public/LongCang-OFL.txt](public/LongCang-OFL.txt). This font is governed by OFL, not the application's MIT license. It is served locally, without requests to a font service. Body copy uses system fonts.
+
+
+Classical excerpts (v0.8)
+
+Eight short public-domain original passages from Zi Ping Zhen Quan and San Ming Tong Hui are identified by chapter and transcription URL in src/classics.ts and in the reading. Checked 2026-09-21. Modern transcription annotations are not reproduced as classical text. Explanations and contemporary examples are original project writing. The application MIT license does not confer exclusive rights over public-domain text.

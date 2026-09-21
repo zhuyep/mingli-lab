@@ -1,3 +1,5 @@
+import { buildDepth } from './depth';
+import type { DepthSection } from './classics';
 import { ELEMENTS, stemInfo, type Chart } from './core';
 import { everydayChapters, type Everyday } from './everyday';
 import type { Words, Chapter, buildStructureReading, annualContext } from './reading';
@@ -35,6 +37,7 @@ const describe = (r: RoleFact): Words =>
 export type TopicFinding = { question: Words; answer: Words; basis: Words; condition?: Words };
 export type TopicChapter = Chapter & {
   everyday?: Everyday;
+  depth?: DepthSection[];
   plain: { title: Words; lead: Words; paragraphs: Words[]; term: Words };
   findings: TopicFinding[];
 };
@@ -88,7 +91,7 @@ export function buildTopics(
   chart: Chart,
   report: Structure,
   nearby: Annual[],
-): Array<TopicChapter & { everyday: Everyday & { professional: Words } }> {
+): Array<TopicChapter & { everyday: Everyday & { professional: Words }; depth: DepthSection[] }> {
   const facts = roleFacts(chart),
     f = report.features,
     annual = report.annual;
@@ -668,7 +671,7 @@ export function buildTopics(
       ),
     ),
   ];
-  const everyday = everydayChapters({
+  const context = {
     career: careerKey,
     money: wealthMode,
     relationship: dayGroup,
@@ -679,7 +682,9 @@ export function buildTopics(
     annualGod: annual.god,
     date: annual.date,
     cycle: annual.cycle,
-  });
+  };
+  const everyday = everydayChapters(context);
+  const depth = buildDepth(chart, report, facts, context);
   const professional: Record<string, Words> = {
     overview: w(
       `${chart.dayMaster}${f.day}日主；月支本气${f.monthMain.stem}，为${f.monthMain.god}。`,
@@ -805,6 +810,7 @@ export function buildTopics(
   };
   return [overview, work, wealth, relationships, health, timing].map((c) => ({
     ...c,
+    depth: depth[c.id],
     everyday: {
       ...everyday[c.id],
       professional: professional[c.id],

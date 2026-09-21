@@ -42,7 +42,7 @@ The annual layer currently excludes stem transformation, three-way combinations 
 - Historical context: 万民英《三命通会》卷二，sections on earthly branches, qi rulership, seasonal strength and cycles. [Public transcription](https://zh.wikisource.org/zh-hant/三命通會/卷二). The text treats season and whole-chart relationships as separate considerations and also contains historical claims this app does not adopt.
 - Terminology contrast: 《子平真诠》〈论用神〉 uses a month-centered pattern approach. [Public transcription](https://donglishuzhai.net/chapter/3721.html). This app's balancing candidates should not be mistaken for an implementation of that complete method.
 
-Sources were checked on 2026-09-20. Links identify conceptual context; they do **not** endorse our heuristic, thresholds, modern reflective prose or the app. No historical passages, private lecture transcript or third-party rule dataset are copied into the product. In particular, we did not import the separately licensed bazi-engine knowledge base.
+Sources were checked on 2026-09-20. Links identify conceptual context; they do **not** endorse our heuristic, thresholds, modern reflective prose or the app. From v0.8, short public-domain classical passages are included with chapter links; private lecture transcripts and third-party rule datasets are not imported. In particular, we did not import the separately licensed bazi-engine knowledge base.
 
 Tests cover different readings for the same day stem, root/exposure distinctions, withheld judgments, simultaneous clash and combination, Lichun, cycle intervals, unknown timing and day-boundary changes. Tests validate these software contracts, not life-outcome prediction. Professional review of the interpretation rules and independent user feedback remain open work.
 
@@ -91,3 +91,24 @@ The overview summarizes style; work, money and relationships explain it in more 
 Optional situations sit in a collapsed control. Only an explicit choice creates a “Your reported context” label, followed by separately labelled matching suggestions. Choosing a situation never changes the symbolic analysis. Health continues to depend on actual sleep answers rather than chart symbols. Markdown mirrors the section boundaries; JSON retains separate analysis, adjustment and chosenSituations fields. This changes the exported presentation schema from v0.6; consumers should check the reading version.
 
 Tests and page review check these content boundaries and interactions, not whether the portraits describe a reader accurately. The owner's assessment of the revised structure remains pending.
+
+## v0.8: classical depth and chart-specific reasoning
+
+The owner found the six directions too thin. `depth.ts` adds 16 visible sections across the six chapters: terminology, chart positions, everyday illustrations and conditions that keep interpretation provisional. Work has eight distinct explanations selected by the existing topic keys. Calendar and selection logic remain unchanged. The same work theme can carry different root/support evidence; wealth visibility, day-branch links and annual context use the supplied chart. Health depth remains chart-invariant.
+
+`classics.ts` contains eight short excerpts from public-domain original texts, checked against linked public transcriptions on **2026-09-21**. Modern editorial notes in those transcriptions are not quoted as original text. These are transcription checks, not a critical edition or scan collation. Excerpts retain the inspected Chinese wording; bilingual explanations and modern analogies are original project writing, not literal translations or claims validated by the sources.
+
+| Text and chapter | What is used |
+| --- | --- |
+| 子平真诠 · 论用神 | Month-centered use of 用神, not automatic compensation for missing phases |
+| 论十干得时不旺失时不弱 | Roots and season differ from visible symbol counts |
+| 论食神 | Output and wealth; the following conditions matter, and food-god rules do not automatically settle hurting-officer configurations |
+| 论财 | Wealth as a relative resource relation, not a salary/windfall lookup |
+| 论妻子 | Palace versus role; historical male-centered spouse judgments are not adopted |
+| 论用神配气候得失 | Classical seasonal context, not bodily measurements |
+| 论行运 | Read incoming symbols with the natal chart rather than as standalone year labels |
+| 三命通会 · 卷五 · 论古人立印食官财名义 | Relative generation and control behind role names |
+
+The complete excerpt-to-URL mapping is in [`src/classics.ts`](../src/classics.ts). These sources do not endorse the project's screening heuristic, contemporary analogies or recommendations. Strength exclusions and cultural-use boundaries above still apply. No private lecture text, modern transcription commentary or third-party rule database is included.
+
+Markdown includes each excerpt, source link and expanded analysis before advice. JSON includes `depth`, a `sources` catalog and version `tianji-rules-2-classical-depth-1`; source IDs remain resolvable offline. Checks exercise all ten wealth-polarity mappings, changed evidence within one theme, unknown hours, simultaneous links, yearly updates, health invariance and export separation. User assessment of readability and depth remains pending.

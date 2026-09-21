@@ -1785,6 +1785,90 @@ html[lang='en'] .deep-reading h2 {
   border-top: 1px solid #bbb;
   font-size: 15px;
 }
+.depth-reading {
+  margin-top: 38px;
+  border-top: 1px solid #aaa99f;
+  padding-top: 18px;
+}
+.depth-kicker {
+  font-family: 'TianjiHandSubset', cursive;
+  font-size: 27px;
+  margin: 0 0 26px;
+}
+.depth-section {
+  margin: 30px 0;
+}
+.depth-section h4 {
+  font-family: 'Songti SC', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.65;
+  margin: 0 0 17px;
+}
+.depth-section h4 > span {
+  font: 12px monospace;
+  color: #6b6a60;
+  margin-right: 12px;
+}
+.depth-section > p {
+  font-size: 15px;
+  line-height: 2;
+  margin: 14px 0;
+}
+.classic-excerpt {
+  margin: 18px 0 22px;
+  padding: 4px 0 4px 19px;
+  border-left: 2px solid #24241f;
+}
+.classic-excerpt blockquote {
+  font-family: 'Songti SC', Georgia, serif;
+  font-size: 21px;
+  line-height: 1.7;
+  margin: 0 0 9px;
+}
+.classic-excerpt figcaption {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #626158;
+}
+.classic-excerpt a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.depth-section .depth-basis {
+  font-size: 13px;
+  padding: 14px 16px;
+  border: 1px dashed #b6b5aa;
+  line-height: 1.9;
+}
+.depth-basis b {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+.depth-authorship {
+  font-size: 11px;
+  color: #626158;
+  line-height: 1.9;
+}
+@media (max-width: 600px) {
+  .depth-section h4 {
+    font-size: 19px;
+  }
+  .depth-section > p {
+    line-height: 1.95;
+  }
+  .classic-excerpt {
+    padding-left: 14px;
+  }
+  .classic-excerpt blockquote {
+    font-size: 20px;
+  }
+  .depth-section .depth-basis {
+    padding: 12px;
+  }
+}
 @media (max-width: 600px) {
   .adjustment-section {
     padding: 22px 16px;

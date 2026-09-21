@@ -1,3 +1,4 @@
+import { CLASSICS, type DepthSection } from './classics';
 import './style.css';
 import { sleepAdvice, type SleepCheck } from './topics';
 import { yearNote } from './everyday';
@@ -148,6 +149,17 @@ function actionPanel(topic: string) {
   const chosen = ACTIONS[key].find((p) => p.id === actionSelection[key]);
   return `<section class="action-panel" id="action-${key}" aria-labelledby="action-title-${key}"><h4 id="action-title-${key}">${t('填写你的实际情况', 'Add your actual context')}</h4><p class="action-hint">${t('只有你选中的情况才算你的自述，下面的步骤由此匹配。', 'Only your chosen situation is treated as self-reported context; steps are matched to it.')}</p><div class="situation-choices">${ACTIONS[key].map((p) => `<button data-action-topic="${key}" data-situation="${p.id}" aria-pressed="${p.id === actionSelection[key]}">${p.label[lang]}</button>`).join('')}</div><div class="action-result" aria-live="polite">${chosen ? `<p class="reported-context"><b>${t('你填写的现状', 'YOUR REPORTED CONTEXT')}</b>${chosen.label[lang]}</p><p class="matched-advice-label">${t('针对这件事的建议', 'SUGGESTIONS FOR THIS SITUATION')}</p><h5>${chosen.title[lang]}</h5><ol>${chosen.steps.map((s) => `<li>${s[lang]}</li>`).join('')}</ol><blockquote>${chosen.example[lang]}</blockquote><p class="action-check"><b>${t('做完怎么看', 'What to check')}</b>${chosen.check[lang]}</p><button class="text-button" data-clear-action="${key}">${t('收起这条建议', 'Clear this choice')}</button>` : `<p class="action-empty">${t('尚未填写实际情况。没有符合的可以跳过。', 'No actual context reported. Skip if none fits.')}</p>`}</div></section>`;
 }
+function depthView(sections: DepthSection[]) {
+  return `<div class="depth-reading"><p class="depth-kicker">${t('把这条分析展开说', 'READ THE REASONING')}</p>${sections
+    .map((s, i) => {
+      const source = s.source ? CLASSICS[s.source] : null;
+      return `<section class="depth-section"><h4><span aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>${s.title[lang]}</h4>${source ? `<figure class="classic-excerpt"><blockquote lang="zh-Hant">${source.quote}</blockquote><figcaption>${t('古籍短引', 'ORIGINAL CHINESE EXCERPT')} · <a href="${esc(source.url)}" target="_blank" rel="noreferrer">${source.title[lang]} ↗</a></figcaption></figure>` : ''}${s.paragraphs.map((p) => `<p>${p[lang]}</p>`).join('')}${s.basis ? `<p class="depth-basis"><b>${t('对照本盘', 'IN THIS CHART')}</b>${s.basis[lang]}</p>` : ''}</section>`;
+    })
+    .join(
+      '',
+    )}<p class="depth-authorship">${t('短引据公开古籍录文；白话解释与生活例子由本项目编写。', 'Excerpts follow public historical transcriptions; explanations and everyday analogies are written by this project.')}</p></div>`;
+}
+
 function chapterView(c: ReturnType<typeof buildReading>['chapters'][number], index: number) {
   const report = c.id === 'timing' ? buildReading(result, readingDate) : null;
   const plain = c.everyday,
@@ -159,6 +171,7 @@ function chapterView(c: ReturnType<typeof buildReading>['chapters'][number], ind
     <h3>${analysis.headline[lang]}</h3><div class="everyday-reading"><span class="plain-label">${t('说白了', 'IN EVERYDAY WORDS')}</span>${analysis.notes.map((p) => `<p>${p[lang]}</p>`).join('')}</div>
     ${analysis.strength ? `<div class="trait-row"><b>${t('可能的长处', 'POSSIBLE STRENGTH')}</b><p>${analysis.strength[lang]}</p></div>` : ''}
     ${analysis.pitfall ? `<div class="trait-row pitfall"><b>${t('容易卡住的地方', 'POSSIBLE FRICTION')}</b><p>${analysis.pitfall[lang]}</p></div>` : ''}
+    ${depthView(c.depth)}
     ${report ? `<div class="time-controls"><div><label for="reading-date">${t('换个日期看看', 'Try another date')}</label><input type="date" id="reading-date" min="1901-01-01" max="2199-12-31" value="${readingDate}"/></div><details class="cycle-options"><summary>${t('还想看十年的阶段？', 'Explore a ten-year cycle?')}</summary>${result.pillars.length === 4 ? `<label for="cycle-direction">${t('选择传统大运公式', 'Choose a traditional convention')}</label><select id="cycle-direction">${option('none', result.input.direction, '暂不叠加大运', 'Annual reading only')}${option('male', result.input.direction, '男命 · 阳顺阴逆', 'Male convention')}${option('female', result.input.direction, '女命 · 阴顺阳逆', 'Female convention')}</select>` : `<p>${t('出生时辰未知，暂不计算大运。', 'An unknown hour leaves cycles uncalculated.')}</p>`}<p>${t('这是传统命理里约十年一段的说法，不是这十年一定会发生什么。', 'This is a traditional roughly ten-year cycle, not a forecast of events.')}</p></details></div><p id="timing-status" role="status"></p>${yearComparison(report)}` : ''}
     <details class="evidence"><summary>${t('这句话怎么来的？看依据', 'How was this derived?')} <span>＋</span></summary><div class="technical-reading"><p class="term-note">${c.plain.term[lang]}</p>${c.findings.map((f) => `<section class="technical-finding"><h4>${f.question[lang]}</h4><p>${f.answer[lang]}</p><p class="finding-basis">${t('本盘依据', 'Chart basis')}：${f.basis[lang]}</p>${f.condition ? `<p>${f.condition[lang]}</p>` : ''}</section>`).join('')}${c.paragraphs.map((p) => `<p>${p[lang]}</p>`).join('')}${report?.annual.windows.length ? `<div class="cycle-scroll" aria-label="${t('大运时间轴', 'Cycle timeline')}">${report.annual.windows.map((cycle) => `<div class="cycle ${report.annual.cycle?.pillar === cycle.pillar ? 'current' : ''}"><small>${cycle.start.slice(0, 4)} — ${cycle.end.slice(0, 4)}</small><strong>${cycle.pillar}</strong><span>${report.annual.cycle?.pillar === cycle.pillar ? t('所选日期', 'Selected date') : cycle.start.slice(0, 10)}</span></div>`).join('')}</div>` : ''}<ul>${c.evidence.map((e) => `<li>${e[lang]}</li>`).join('')}</ul><p class="rule-reference">${c.rule} · <a href="https://github.com/zhuyep/mingli-lab/blob/main/docs/reading-method.md" target="_blank" rel="noreferrer">${t('方法与边界', 'Method & limits')} ↗</a></p></div></details>
     </section>
@@ -183,7 +196,7 @@ function render() {
   document.body.classList.toggle('reading-open', showingResult);
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
   document.title = t('天机簿 · 天机可问，人生自书', 'Tianji Bu · A personal book of BaZi');
-  app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><header class="site-header"><button class="brand" id="home" aria-label="${t('天机簿首页', 'Tianji Bu home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>天机簿</strong><span>TIANJI BU</span></button><nav><span class="nav-note">${t('天机可问，人生自书。', 'YOUR LIFE IS STILL YOURS.')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>天机簿 · TIANJI BU <small>v0.7.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p><a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源于 GitHub', 'Open source on GitHub')} ↗</a></footer><div id="toast" class="toast" role="status"></div>`;
+  app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><header class="site-header"><button class="brand" id="home" aria-label="${t('天机簿首页', 'Tianji Bu home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>天机簿</strong><span>TIANJI BU</span></button><nav><span class="nav-note">${t('天机可问，人生自书。', 'YOUR LIFE IS STILL YOURS.')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>天机簿 · TIANJI BU <small>v0.8.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p><a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源于 GitHub', 'Open source on GitHub')} ↗</a></footer><div id="toast" class="toast" role="status"></div>`;
 }
 function showResult() {
   actionSelection = {};

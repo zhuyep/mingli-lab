@@ -3,11 +3,11 @@
 **一纸生辰，万象成章。你的故事，不止八个字。**<br>
 **A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
-翻开一卷黑白命书，在干支与五行之间，分别看工作、收入、感情与年份。先讲这类命盘的风格、长处和卡点，再把调整建议单独列出；你填写的实际情况另有标记。
+翻开一卷黑白命书，在干支与五行之间，分别看工作、收入、感情与年份。每章从术语、古籍短引讲到本盘依据与生活例子，说明哪些条件会改变判断；分析、调整建议和你填写的实际情况分开阅读。
 
-Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Explore six distinct topics on work, money, relationships, health and years, with symbolic style analysis clearly separated from suggestions and self-reported circumstances.
+Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Six chapters combine classical excerpts, original plain-language explanations and chart-specific reasoning. Analysis stays separate from suggestions and self-reported circumstances.
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.7.0)
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.8.0)
 
 **无需登录 · 无需 API Key · 生辰本地计算 · 中英双语**<br>
 **No account · No API key · Local birth-data processing · Chinese & English**

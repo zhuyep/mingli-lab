@@ -22,9 +22,9 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 | 睡眠与作息 | 八字与健康的边界；选填真实睡眠情况 |
 | 今年与前后几年 | 所选大运、年度关系与前后年份对照 |
 
-专业说法后先讲风格、长处和卡点；调整建议另起一栏，配白话改法与生活例子。九个困扰选项默认收起，选择后明确标为“你填写的现状”，再提供对应步骤。点“这句话怎么来的？看依据”查看规则。保留 Markdown 命书、SVG 卡片与 JSON 数据；睡眠回答只在本页使用，不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
+专业说法后先讲风格、长处和卡点，再用 16 个展开小节说明术语、古籍出处、本盘字位和判断条件。八则古籍短引可点击核对，白话与生活例子为项目编写；调整建议另起一栏。九个困扰选项默认收起，选择后明确标为“你填写的现状”，再提供对应步骤。Markdown 命书保留短引与链接，JSON 同带出处目录；睡眠回答不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
 
-> v0.7.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
+> v0.8.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
 
 ## 本地运行
 
@@ -62,4 +62,4 @@ npm run chart -- --date 2005-12-23 --time 08:37
 
 If you enjoy the book, **star the project** to find it again. Specific usability or calculation feedback is welcome; please use fictional or reference dates in public.
 
-[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.7.0 双语发布说明](docs/releases/v0.7.0.md)
+[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.8.0 双语发布说明](docs/releases/v0.8.0.md)
