@@ -11,7 +11,7 @@ import {
   JIAZI,
   type Input,
 } from '../src/core.ts';
-import { chartSvg } from '../src/export.ts';
+import { chartSvg, demoFlipUrl, shareBlurb, shareCardSvg } from '../src/export.ts';
 const solar = (date = '2005-12-23', time = '08:37'): Extract<Input, { mode: 'solar' }> => ({
   mode: 'solar',
   date,
@@ -145,6 +145,34 @@ test('SVG omits raw date and input category, retains boundary metadata and is sc
   assert.ok(svg.includes('midnight boundary'));
   assert.ok(!/<script|foreignObject|onload=|https?:\/\/[^w]/i.test(svg));
 });
+test('share flip card shows both day boundaries, frames the split, keeps birth time private', () => {
+  const c = calculate(solar('1988-02-15', '23:30'));
+  const svg = shareCardSvg(c);
+  assert.ok(svg.includes('庚'));
+  assert.ok(svg.includes('子'));
+  assert.ok(svg.includes('辛'));
+  assert.ok(svg.includes('丑'));
+  assert.ok(svg.includes('00:00'));
+  assert.ok(svg.includes('23:00'));
+  assert.ok(svg.includes('#sample/flip'));
+  assert.ok(!svg.includes('1988-02-15'));
+  assert.ok(!svg.includes('23:30'));
+  assert.ok(!/<script|foreignObject|onload=/i.test(svg));
+});
+test('share flip card falls back for manual pillars and share helpers stay stable', () => {
+  const manual = calculate({
+    mode: 'pillars',
+    pillars: ['乙酉', '戊子', '辛巳', '壬辰'],
+    direction: 'none',
+  });
+  const svg = shareCardSvg(manual);
+  assert.ok(svg.includes('乙'));
+  assert.ok(svg.includes('Manual symbolic input'));
+  assert.equal(demoFlipUrl(), 'https://zhuyep.github.io/mingli-lab/#sample/flip');
+  assert.ok(shareBlurb('zh').includes('#sample/flip'));
+  assert.ok(shareBlurb('en').includes('github.com/zhuyep/mingli-lab'));
+});
+
 test('input snapshots are immutable from the caller perspective', () => {
   const input = solar();
   const chart = calculate(input);

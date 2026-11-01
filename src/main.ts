@@ -17,7 +17,14 @@ import {
   type Direction,
   type Sect,
 } from './core';
-import { chartSvg, download, escapeHtml as esc } from './export';
+import {
+  chartSvg,
+  demoFlipUrl,
+  download,
+  escapeHtml as esc,
+  shareBlurb,
+  shareCardSvg,
+} from './export';
 
 type Language = 'zh' | 'en';
 let lang: Language = 'zh';
@@ -200,9 +207,19 @@ function boundaryPlayground() {
   return `<section class="boundary-live" id="boundary-live"><div class="reading-section-label">${t('当场可校准', 'LIVE CHECK')}</div><h3>${t('换日口径 · 点一下，四柱当场变', 'Day boundary · tap once, pillars update')}</h3><p class="boundary-lead">${boundaryHeadline(changed.length, lang)} · ${esc(result.input.date)} ${esc(result.input.time)} UTC+8</p><div class="segmented boundary-toggle" role="group" aria-label="${t('换日口径', 'Day boundary')}"><button type="button" data-sect="2" aria-pressed="${active === 2}">${t('00:00 换日', '00:00 boundary')}</button><button type="button" data-sect="1" aria-pressed="${active === 1}">${t('23:00 换日', '23:00 boundary')}</button></div>${livePillars(changed)}<p class="boundary-caption">${changed.length ? t('高亮的是两种口径下不同的柱。切换后，下方六章会按新日柱重写；分析与建议仍分栏，无吉凶分。', 'Highlights mark pillars that differ across conventions. After a flip, the six chapters rewrite from the new day stem. Analysis and advice stay separate; no fortune scores.') : t('此刻两种口径一致。换一个晚子时生辰（如示例 23:30）更能看出差异。', 'Both conventions match right now. A late-Zi birth time (like the 23:30 sample) shows the split more clearly.')}</p><div class="boundary-dual" aria-hidden="true"><div><span>00:00</span><b>${compare.midnight.pillars.map((p) => p.text).join(' ')}</b></div><div><span>23:00</span><b>${compare.lateZi.pillars.map((p) => p.text).join(' ')}</b></div></div></section>`;
 }
 
+function sharePanel() {
+  const canDual = result.input.mode === 'solar';
+  const link = isExample
+    ? `${location.origin}${location.pathname}#${hashForSample(result.input.mode === 'solar' ? result.input.sect : 2)}`
+    : demoFlipUrl(
+        location.origin.includes('github.io') ? location.origin : 'https://zhuyep.github.io',
+      );
+  return `<section class="share-panel" id="share-panel" aria-label="${t('保存与分享', 'Save & share')}"><div class="reading-section-label">${t('带走这一页', 'TAKE THIS PAGE')}</div><h3>${t('保存对照卡 · 本地私密也能晒体验', 'Save the flip card · private, still shareable')}</h3><p>${canDual ? t('黑白双口径卡：00:00 与 23:00 同屏，差异柱加框。不含原始生日；四柱仍可能涉及隐私，分享前请自检。', 'Ink dual-boundary card: 00:00 and 23:00 side by side, changed pillars framed. Raw birth time omitted; pillars may still be personal—review before sharing.') : t('手动四柱会导出单盘卡片。想体验双口径对照，请打开晚子时示例。', 'Manual pillars export a single chart card. Open the late-Zi sample for the dual-boundary visual.')}</p><div class="share-actions"><button type="button" class="share-primary" data-export="share">${t('保存对照卡', 'Save flip card')} ↓</button><button type="button" class="secondary" data-copy-link="${esc(link)}">${t('复制体验链接', 'Copy demo link')}</button><button type="button" class="secondary" data-copy-blurb>${t('复制求星短文', 'Copy star blurb')}</button></div><p class="share-meta"><span>${t('推荐深链', 'Deep link')}</span> <code>#sample/flip</code> · <a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('给仓库一颗星', 'Star the repo')} ★</a></p></section>`;
+}
+
 function board() {
   const report = buildReading(result, readingDate);
-  return `<section class="board" id="results" tabindex="-1" aria-label="${t('命书结果', 'Your reading')}"><div class="result-top"><button id="edit" class="text-button">← ${t('修改生辰', 'Edit details')}</button><span>${isExample ? t('示例命书', 'SAMPLE BOOK') : t('私人命书', 'YOUR BOOK')}</span><button data-export="reading" class="text-button">${t('保存命书', 'Save reading')} ↓</button></div><div class="book-spread"><aside class="book-index"><span class="index-seal" aria-hidden="true">✳</span><p>${t('慢慢读，也没关系', 'TAKE YOUR TIME')}</p><nav aria-label="${t('命书目录', 'Reading chapters')}">${report.chapters.map((c, i) => `<a href="#chapter-${c.id}"><small>0${i + 1}</small>${c.everyday.title[lang]}</a>`).join('')}</nav><small class="index-note">${t('先看风格<br/>再谈调整', 'Style first.<br/>Suggestions next.')}</small><button type="button" class="index-evidence" data-scroll-boundary>${t('换日校准', 'Day boundary')}</button></aside><div class="book-pages"><div class="reading-hero"><span class="form-kicker">${t('见字如面，这一页写给你。', 'A NOTE TO YOURSELF.')}</span><h1>${t('先看你的风格，<br/>再谈怎么调整。', 'Understand the style.<br/>Then consider a change.')}</h1><p class="hero-note">${t('“命理倾向分析”讲这张盘对应的风格、长处和卡点；“调整建议”另起一栏。倾向不等于已确认的现状，实际遇到什么由你补充。', 'Symbolic analysis describes a style, strengths and possible friction. Suggestions have their own section. Actual circumstances come from you, not the chart.')}</p><div class="chart-card"><div class="chart-card-top"><span class="reading-section-label">${t('你的八字', 'YOUR CHART')}</span><span class="chart-card-seal">${isExample ? t('示例', 'SAMPLE') : t('本机', 'LOCAL')}</span></div><p class="chart-card-sub">${report.title[lang]} · ${report.subtitle[lang]}</p><div class="simple-pillars">${Array.from(
+  return `<section class="board" id="results" tabindex="-1" aria-label="${t('命书结果', 'Your reading')}"><div class="result-top"><button id="edit" class="text-button">← ${t('修改生辰', 'Edit details')}</button><span>${isExample ? t('示例命书', 'SAMPLE BOOK') : t('私人命书', 'YOUR BOOK')}</span><div class="result-top-actions"><button data-export="share" class="text-button">${t('保存对照卡', 'Save flip card')} ↓</button><button data-export="reading" class="text-button">${t('保存命书', 'Save reading')} ↓</button></div></div><div class="book-spread"><aside class="book-index"><span class="index-seal" aria-hidden="true">✳</span><p>${t('慢慢读，也没关系', 'TAKE YOUR TIME')}</p><nav aria-label="${t('命书目录', 'Reading chapters')}">${report.chapters.map((c, i) => `<a href="#chapter-${c.id}"><small>0${i + 1}</small>${c.everyday.title[lang]}</a>`).join('')}</nav><small class="index-note">${t('先看风格<br/>再谈调整', 'Style first.<br/>Suggestions next.')}</small><button type="button" class="index-evidence" data-scroll-boundary>${t('换日校准', 'Day boundary')}</button></aside><div class="book-pages"><div class="reading-hero"><span class="form-kicker">${t('见字如面，这一页写给你。', 'A NOTE TO YOURSELF.')}</span><h1>${t('先看你的风格，<br/>再谈怎么调整。', 'Understand the style.<br/>Then consider a change.')}</h1><p class="hero-note">${t('“命理倾向分析”讲这张盘对应的风格、长处和卡点；“调整建议”另起一栏。倾向不等于已确认的现状，实际遇到什么由你补充。', 'Symbolic analysis describes a style, strengths and possible friction. Suggestions have their own section. Actual circumstances come from you, not the chart.')}</p><div class="chart-card"><div class="chart-card-top"><span class="reading-section-label">${t('你的八字', 'YOUR CHART')}</span><span class="chart-card-seal">${isExample ? t('示例', 'SAMPLE') : t('本机', 'LOCAL')}</span></div><p class="chart-card-sub">${report.title[lang]} · ${report.subtitle[lang]}</p><div class="simple-pillars">${Array.from(
     { length: 4 },
     (_, i) => {
       const p = result.pillars[i];
@@ -210,7 +227,7 @@ function board() {
     },
   ).join(
     '',
-  )}</div><p class="result-meta">${result.input.mode === 'solar' ? esc(result.input.date) + ' · ' + esc(result.input.time) + ' · UTC+8 · ' + (result.input.sect === 2 ? t('00:00 换日', '00:00 boundary') : t('23:00 换日', '23:00 boundary')) : t('手动四柱 · 历法对应未经核验', 'Manual pillars · calendar correspondence unchecked')}</p></div>${boundaryPlayground()}<small class="reading-note">${t('分析回答“像什么样的人”；建议回答“如果符合，可以怎么改”。分析与建议分栏，无吉凶分。', 'Analysis describes a style; suggestions describe a possible change if it fits. Separate columns; no fortune scores.')}</small></div><div id="chapters">${report.chapters.map(chapterView).join('')}</div><section class="reader-questions"><h2>${t('读到这里，你也许想问', 'Questions along the way')}</h2><div class="question-buttons"><button data-question="roots">${t('为什么同一天出生，解读会不同？', 'Why can the same birthday read differently?')}</button><button data-question="balance">${t('缺什么，真的就要补什么？', 'Do missing symbols need fixing?')}</button><button data-question="timing">${t('能看出今年会发生什么吗？', 'Can this tell me what will happen?')}</button></div><div id="question-answer" role="status"></div><small>${t('按本卷规则解释 · 全程本地', 'Rule-based explanations · entirely local')}</small></section><div class="deep-reading"><h2>${t('附录 · 查盘与校对', 'Appendix · chart & conventions')}</h2><details><summary>${t('四柱、十神与五行', 'Pillars, roles & phases')}<span>＋</span></summary><div class="detail-body">${pillarCards()}<div id="explanation">${explanation()}</div><div class="element-counts">${ELEMENTS.map((e, i) => `<div><b>${elName(e)}</b><span>${'●'.repeat(result.counts[i]) || '—'}</span><strong>${result.counts[i]}</strong></div>`).join('')}</div><p class="caption">${t('显性字位计数，不代表五行力量。', 'Visible-symbol counts, not phase strength.')}</p><div id="appendix-luck">${luckPanel()}</div><div class="relations">${result.relations.map((r) => `<div class="relation"><strong>${r.branches}</strong><span>${t(r.kind, namesEN[r.kind])}</span><small>${r.positions.map(pos).join(' / ')}</small></div>`).join('')}</div></div></details><details><summary>${t('晚上 11 点，算哪一天？', 'Which day begins at 11 pm?')}<span>＋</span></summary><div class="detail-body">${comparison()}</div></details><details><summary>${t('历法依据与数据导出', 'Calendar trail & data export')}<span>＋</span></summary><div class="detail-body">${provenance()}<button data-export="svg" class="secondary">${t('保存四柱卡片', 'Save chart card')} ↓</button><button data-export="json" class="secondary">${t('导出计算数据', 'Export chart JSON')} ↓</button><p class="caption">${t('保存命书会带上已选的做法；作息回答不保存。文件含四柱，JSON 还含原始生辰，请自行保管。', 'Readings and cards contain pillars; JSON also includes raw birth details. Keep them private.')}</p></div></details></div><p class="colophon">${t('天机可问，人生自书。', 'Read the symbols. Write your own life.')}<span>天机簿 · TIANJI BU</span></p></div></div></section>`;
+  )}</div><p class="result-meta">${result.input.mode === 'solar' ? esc(result.input.date) + ' · ' + esc(result.input.time) + ' · UTC+8 · ' + (result.input.sect === 2 ? t('00:00 换日', '00:00 boundary') : t('23:00 换日', '23:00 boundary')) : t('手动四柱 · 历法对应未经核验', 'Manual pillars · calendar correspondence unchecked')}</p></div>${boundaryPlayground()}${sharePanel()}<small class="reading-note">${t('分析回答“像什么样的人”；建议回答“如果符合，可以怎么改”。分析与建议分栏，无吉凶分。', 'Analysis describes a style; suggestions describe a possible change if it fits. Separate columns; no fortune scores.')}</small></div><div id="chapters">${report.chapters.map(chapterView).join('')}</div><section class="reader-questions"><h2>${t('读到这里，你也许想问', 'Questions along the way')}</h2><div class="question-buttons"><button data-question="roots">${t('为什么同一天出生，解读会不同？', 'Why can the same birthday read differently?')}</button><button data-question="balance">${t('缺什么，真的就要补什么？', 'Do missing symbols need fixing?')}</button><button data-question="timing">${t('能看出今年会发生什么吗？', 'Can this tell me what will happen?')}</button></div><div id="question-answer" role="status"></div><small>${t('按本卷规则解释 · 全程本地', 'Rule-based explanations · entirely local')}</small></section><div class="deep-reading"><h2>${t('附录 · 查盘与校对', 'Appendix · chart & conventions')}</h2><details><summary>${t('四柱、十神与五行', 'Pillars, roles & phases')}<span>＋</span></summary><div class="detail-body">${pillarCards()}<div id="explanation">${explanation()}</div><div class="element-counts">${ELEMENTS.map((e, i) => `<div><b>${elName(e)}</b><span>${'●'.repeat(result.counts[i]) || '—'}</span><strong>${result.counts[i]}</strong></div>`).join('')}</div><p class="caption">${t('显性字位计数，不代表五行力量。', 'Visible-symbol counts, not phase strength.')}</p><div id="appendix-luck">${luckPanel()}</div><div class="relations">${result.relations.map((r) => `<div class="relation"><strong>${r.branches}</strong><span>${t(r.kind, namesEN[r.kind])}</span><small>${r.positions.map(pos).join(' / ')}</small></div>`).join('')}</div></div></details><details><summary>${t('晚上 11 点，算哪一天？', 'Which day begins at 11 pm?')}<span>＋</span></summary><div class="detail-body">${comparison()}</div></details><details><summary>${t('历法依据与数据导出', 'Calendar trail & data export')}<span>＋</span></summary><div class="detail-body">${provenance()}<button data-export="share" class="secondary">${t('保存对照卡', 'Save flip card')} ↓</button><button data-export="svg" class="secondary">${t('保存单盘卡片', 'Save single chart')} ↓</button><button data-export="json" class="secondary">${t('导出计算数据', 'Export chart JSON')} ↓</button><p class="caption">${t('对照卡突出双换日；命书带已选做法；作息回答不保存。文件含四柱，JSON 还含原始生辰，请自行保管。', 'Flip card highlights dual boundaries; readings include chosen actions. Sleep answers are never exported. Files contain pillars; JSON also has raw birth details—keep private.')}</p></div></details></div><p class="colophon">${t('天机可问，人生自书。', 'Read the symbols. Write your own life.')}<span>天机簿 · TIANJI BU</span></p></div></div></section>`;
 }
 function render() {
   document.body.classList.toggle('reading-open', showingResult);
@@ -463,35 +480,58 @@ app.addEventListener('click', (event) => {
       .querySelectorAll('[data-question]')
       .forEach((el) => el.setAttribute('aria-pressed', String(el === button)));
   }
+  if (button.dataset.copyLink != null) {
+    const link = button.dataset.copyLink || demoFlipUrl();
+    void navigator.clipboard.writeText(link).then(
+      () => announce(t('体验链接已复制。', 'Demo link copied.')),
+      () => announce(t('复制失败，请手动选择链接。', 'Copy failed — select the link manually.')),
+    );
+    return;
+  }
+  if (button.dataset.copyBlurb != null) {
+    void navigator.clipboard.writeText(shareBlurb(lang)).then(
+      () => announce(t('求星短文已复制。', 'Star blurb copied.')),
+      () => announce(t('复制失败，请手动粘贴短文。', 'Copy failed — paste the blurb manually.')),
+    );
+    return;
+  }
   if (button.dataset.export) {
     const kind = button.dataset.export;
     download(
       kind === 'reading'
         ? 'tianji-book.md'
-        : kind === 'svg'
-          ? 'tianji-chart.svg'
-          : 'tianji-chart.json',
+        : kind === 'share'
+          ? 'tianji-flip-card.svg'
+          : kind === 'svg'
+            ? 'tianji-chart.svg'
+            : 'tianji-chart.json',
       kind === 'reading'
         ? readingMarkdown(result, readingDate, lang, actionSelection)
-        : kind === 'svg'
-          ? chartSvg(result)
-          : JSON.stringify(
-              {
-                ...result,
-                evidenceVersion: EVIDENCE_VERSION,
-                reading: buildReading(result, readingDate),
-                chosenSituations: selectedActions(actionSelection),
-              },
-              null,
-              2,
-            ),
+        : kind === 'share'
+          ? shareCardSvg(result)
+          : kind === 'svg'
+            ? chartSvg(result)
+            : JSON.stringify(
+                {
+                  ...result,
+                  evidenceVersion: EVIDENCE_VERSION,
+                  reading: buildReading(result, readingDate),
+                  chosenSituations: selectedActions(actionSelection),
+                },
+                null,
+                2,
+              ),
       kind === 'reading'
         ? 'text/markdown;charset=utf-8'
-        : kind === 'svg'
+        : kind === 'share' || kind === 'svg'
           ? 'image/svg+xml'
           : 'application/json',
     );
-    announce(t('已备好，请留意下载提示。', 'Ready. Check your downloads.'));
+    announce(
+      kind === 'share'
+        ? t('对照卡已备好，可保存或转发。', 'Flip card ready — save or share.')
+        : t('已备好，请留意下载提示。', 'Ready. Check your downloads.'),
+    );
   }
 });
 
