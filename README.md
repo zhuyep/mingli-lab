@@ -25,8 +25,8 @@ Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Six
    **Start without entering personal details.** Open the demo and read a sample.
 2. **先读倾向分析，再看调整建议。** 专业说法之后用白话解释风格、长处与卡点；建议另起一栏，选填实际情况后再看具体步骤。<br>
    **Analysis first, suggestions separately.** Read the symbolic style, strengths and friction; suggestions have their own section. Add real context for matching steps.
-3. **把这一卷留在自己手里。** 可导出 Markdown 命书、SVG 四柱卡片或 JSON 数据。<br>
-   **Keep a copy of your own.** Export the book as Markdown, the chart as SVG, or the full input and reading as JSON.
+3. **把这一卷留在自己手里。** 可导出 Markdown 命书、**换日对照卡**（双口径 SVG）、单盘卡片或 JSON。<br>
+   **Keep a copy of your own.** Export Markdown, a **dual day-boundary flip card**, a single chart SVG, or full JSON.
 
 ## 六章命书 · Six chapters to explore
 
