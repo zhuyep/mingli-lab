@@ -5,8 +5,10 @@ import {
   annualContext,
   buildStructureReading as buildReading,
   cycleWindows,
+  EVIDENCE_VERSION,
   features,
   readingMarkdown,
+  READING_VERSION,
 } from '../src/reading.ts';
 const manual = (pillars: string[], direction: 'none' | 'male' | 'female' = 'none') =>
   calculate({ mode: 'pillars', pillars, direction });
@@ -109,4 +111,15 @@ test('invalid exploration dates are rejected without silently rolling to another
   for (const date of ['', '2023-02-29', '2026-13-01', '1900-12-31', '2200-01-01'])
     assert.throws(() => annualContext(strong(), date));
   assert.doesNotThrow(() => annualContext(strong(), '2024-02-29'));
+});
+
+test('reading and evidence versions travel with structured report and markdown export', () => {
+  const c = strong(),
+    report = buildReading(c, '2026-09-20'),
+    md = readingMarkdown(c, '2026-09-20', 'zh');
+  assert.equal(report.version, READING_VERSION);
+  assert.equal(report.evidenceVersion, EVIDENCE_VERSION);
+  assert.match(EVIDENCE_VERSION, /^evidence-/);
+  assert.match(md, new RegExp(`Evidence: ${EVIDENCE_VERSION}`));
+  assert.match(md, /docs\/evidence\.md/);
 });

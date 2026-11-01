@@ -70,6 +70,14 @@ Analysis describes a symbolic style and possible friction. Suggestions occupy a 
 
 完整校准橱窗（测试表、开源边界、诚实清单）：[docs/evidence.md](docs/evidence.md)。
 
+## 本轮更新 · This round
+
+- **书页入口 · In-book entry:** After opening a sample or private reading, the page and sidebar expose **有据可查 / Evidence**, with three calibration hints linking to [docs/evidence.md](docs/evidence.md).
+- **可追溯导出 · Traceable export:** Markdown and JSON exports now include `evidenceVersion` (currently `evidence-calibration-1`) beside the reading `version`, so a saved book points back to this calibration showcase.
+- **差异化不变 · Differentiation held:** Local-first BaZi book, dual day-boundary comparison, analysis separate from advice — no Ziwei engine or third-party judgment dataset.
+
+
+
 ## 本地翻开 · Run locally
 
 需要 Node.js 22.12+。 / Requires Node.js 22.12+.

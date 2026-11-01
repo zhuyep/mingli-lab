@@ -59,4 +59,11 @@ npm run chart -- --date 1988-02-15 --time 23:30 --sect 1
 - **专业审阅？** 仍待完成；独立用户反馈仍开放（见 [roadmap](roadmap.md)）。
 - **和紫微/别家排盘引擎？** 本产品是**八字四柱命书**，本地优先、分析与建议分栏；不移植紫微斗数引擎或海量解读数据集。
 
+
+## 在命书里打开 · Open from the reading
+
+演示与本地应用的命书页提供「有据可查」入口（侧栏与正文提示），导出文件中的 `evidenceVersion` 与本页校准橱窗对应。当前版本标识：`evidence-calibration-1`。
+
+The live reading page links here from the sidebar and an in-book hint. Exported files carry `evidenceVersion` for this showcase. Current stamp: `evidence-calibration-1`.
+
 Sources last checked with the reading-method note (2026-09-20 / 2026-09-21). Fixtures above are maintained in `tests/` and must stay green in CI.
