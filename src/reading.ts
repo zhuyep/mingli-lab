@@ -15,8 +15,8 @@ export type Chapter = {
   rule: string;
 };
 export const READING_VERSION = 'tianji-rules-2-classical-depth-1';
-/** Calibration showcase stamp: fixtures + honest non-goals in docs/evidence.md */
-export const EVIDENCE_VERSION = 'evidence-calibration-1';
+/** Calibration stamp: in-app panel + docs/evidence.md archive */
+export const EVIDENCE_VERSION = 'evidence-calibration-2';
 const positions = ['年支', '月支', '日支', '时支'];
 const positionsEn = ['year branch', 'month branch', 'day branch', 'hour branch'];
 const phaseEn = ['Wood', 'Fire', 'Earth', 'Metal', 'Water'];

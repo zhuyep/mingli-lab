@@ -4,6 +4,7 @@ import { sleepAdvice, type SleepCheck } from './topics';
 import { yearNote } from './everyday';
 import { ACTIONS, selectedActions, type ActionTopic, type ActionSelection } from './actions';
 import { buildReading, EVIDENCE_VERSION, readingMarkdown, todayInChina } from './reading';
+import { evidenceEntryHtml, evidencePanelHtml } from './evidence';
 let readingDate = todayInChina();
 import {
   calculate,
@@ -40,6 +41,7 @@ let advancedOpen = false;
 let isExample = true;
 let actionSelection: ActionSelection = {};
 let sleepCheck: SleepCheck = { rhythm: 'unknown', quality: 'unknown' };
+let evidenceOpen = false;
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const t = (zh: string, en: string) => (lang === 'zh' ? zh : en);
@@ -181,13 +183,22 @@ function chapterView(c: ReturnType<typeof buildReading>['chapters'][number], ind
 }
 
 function evidenceEntry() {
-  const evidenceUrl = 'https://github.com/zhuyep/mingli-lab/blob/main/docs/evidence.md';
-  return `<aside class="evidence-entry" aria-label="${t('有据可查', 'Evidence & calibration')}"><div class="reading-section-label">${t('有据可查', 'EVIDENCE')}</div><p>${t('这一卷把能复算的观察和项目解释分开写。打开校准橱窗，可对照换日案例、TJ 规则与诚实边界。', 'This book separates reproducible observations from project interpretation. Open the calibration showcase for day-boundary fixtures, TJ rules and honest limits.')}</p><ul><li>${t('00:00 / 23:00 换日同屏可复算', 'Midnight vs late-Zi day boundary, recomputable')}</li><li>${t('无吉凶分数；分析与建议分栏', 'No fortune scores; analysis separate from advice')}</li><li>${t('测试钉住软件口径，不宣称预测有效', 'Tests nail software rules, not predictive validity')}</li></ul><p class="evidence-entry-meta"><a href="${evidenceUrl}" target="_blank" rel="noreferrer">${t('打开校准橱窗', 'Open calibration showcase')} ↗</a><span>${t('版本', 'Version')} ${EVIDENCE_VERSION}</span></p></aside>`;
+  return evidenceEntryHtml(t);
+}
+function syncEvidenceDialog() {
+  const dialog = document.querySelector<HTMLDialogElement>('#evidence-dialog');
+  if (!dialog) return;
+  if (evidenceOpen) {
+    if (!dialog.open) dialog.showModal();
+    dialog.querySelector<HTMLButtonElement>('[data-close-evidence]')?.focus();
+  } else if (dialog.open) {
+    dialog.close();
+  }
 }
 
 function board() {
   const report = buildReading(result, readingDate);
-  return `<section class="board" id="results" tabindex="-1" aria-label="${t('命书结果', 'Your reading')}"><div class="result-top"><button id="edit" class="text-button">← ${t('修改生辰', 'Edit details')}</button><span>${isExample ? t('示例命书', 'SAMPLE BOOK') : t('私人命书', 'YOUR BOOK')}</span><button data-export="reading" class="text-button">${t('保存命书', 'Save reading')} ↓</button></div><div class="book-spread"><aside class="book-index"><span class="index-seal" aria-hidden="true">✳</span><p>${t('慢慢读，也没关系', 'TAKE YOUR TIME')}</p><nav aria-label="${t('命书目录', 'Reading chapters')}">${report.chapters.map((c, i) => `<a href="#chapter-${c.id}"><small>0${i + 1}</small>${c.everyday.title[lang]}</a>`).join('')}</nav><small class="index-note">${t('先看风格<br/>再谈调整', 'Style first.<br/>Suggestions next.')}</small><a class="index-evidence" href="https://github.com/zhuyep/mingli-lab/blob/main/docs/evidence.md" target="_blank" rel="noreferrer">${t('有据可查', 'Evidence')} ↗</a></aside><div class="book-pages"><div class="reading-hero"><span class="form-kicker">${t('见字如面，这一页写给你。', 'A NOTE TO YOURSELF.')}</span><h1>${t('先看你的风格，<br/>再谈怎么调整。', 'Understand the style.<br/>Then consider a change.')}</h1><p class="hero-note">${t('“命理倾向分析”讲这张盘对应的风格、长处和卡点；“调整建议”另起一栏。倾向不等于已确认的现状，实际遇到什么由你补充。', 'Symbolic analysis describes a style, strengths and possible friction. Suggestions have their own section. Actual circumstances come from you, not the chart.')}</p><details class="chart-summary"><summary>${t('你的八字', 'Your chart')} · ${result.pillars.map((p) => p.text).join(' · ')} ＋</summary><p>${report.title[lang]} · ${report.subtitle[lang]}</p><div class="simple-pillars">${Array.from(
+  return `<section class="board" id="results" tabindex="-1" aria-label="${t('命书结果', 'Your reading')}"><div class="result-top"><button id="edit" class="text-button">← ${t('修改生辰', 'Edit details')}</button><span>${isExample ? t('示例命书', 'SAMPLE BOOK') : t('私人命书', 'YOUR BOOK')}</span><button data-export="reading" class="text-button">${t('保存命书', 'Save reading')} ↓</button></div><div class="book-spread"><aside class="book-index"><span class="index-seal" aria-hidden="true">✳</span><p>${t('慢慢读，也没关系', 'TAKE YOUR TIME')}</p><nav aria-label="${t('命书目录', 'Reading chapters')}">${report.chapters.map((c, i) => `<a href="#chapter-${c.id}"><small>0${i + 1}</small>${c.everyday.title[lang]}</a>`).join('')}</nav><small class="index-note">${t('先看风格<br/>再谈调整', 'Style first.<br/>Suggestions next.')}</small><button type="button" class="index-evidence" data-open-evidence>${t('有据可查', 'Evidence')}</button></aside><div class="book-pages"><div class="reading-hero"><span class="form-kicker">${t('见字如面，这一页写给你。', 'A NOTE TO YOURSELF.')}</span><h1>${t('先看你的风格，<br/>再谈怎么调整。', 'Understand the style.<br/>Then consider a change.')}</h1><p class="hero-note">${t('“命理倾向分析”讲这张盘对应的风格、长处和卡点；“调整建议”另起一栏。倾向不等于已确认的现状，实际遇到什么由你补充。', 'Symbolic analysis describes a style, strengths and possible friction. Suggestions have their own section. Actual circumstances come from you, not the chart.')}</p><details class="chart-summary"><summary>${t('你的八字', 'Your chart')} · ${result.pillars.map((p) => p.text).join(' · ')} ＋</summary><p>${report.title[lang]} · ${report.subtitle[lang]}</p><div class="simple-pillars">${Array.from(
     { length: 4 },
     (_, i) => {
       const p = result.pillars[i];
@@ -201,7 +212,15 @@ function render() {
   document.body.classList.toggle('reading-open', showingResult);
   document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
   document.title = t('天机簿 · 天机可问，人生自书', 'Tianji Bu · A personal book of BaZi');
-  app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><header class="site-header"><button class="brand" id="home" aria-label="${t('天机簿首页', 'Tianji Bu home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>天机簿</strong><span>TIANJI BU</span></button><nav><span class="nav-note">${t('天机可问，人生自书。', 'YOUR LIFE IS STILL YOURS.')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>天机簿 · TIANJI BU <small>v0.8.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p><a href="https://github.com/zhuyep/mingli-lab/blob/main/docs/evidence.md" target="_blank" rel="noreferrer">${t('有据可查', 'Evidence')} ↗</a><a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源于 GitHub', 'Open source on GitHub')} ↗</a></footer><div id="toast" class="toast" role="status"></div>`;
+  app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><header class="site-header"><button class="brand" id="home" aria-label="${t('天机簿首页', 'Tianji Bu home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>天机簿</strong><span>TIANJI BU</span></button><nav><span class="nav-note">${t('天机可问，人生自书。', 'YOUR LIFE IS STILL YOURS.')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>天机簿 · TIANJI BU <small>v0.8.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p><button type="button" class="footer-evidence" data-open-evidence>${t('有据可查', 'Evidence')}</button><a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源仓库', 'Open-source repo')} ↗</a></footer>${evidencePanelHtml(lang, t)}<div id="toast" class="toast" role="status"></div>`;
+  const evidenceDialog = document.querySelector<HTMLDialogElement>('#evidence-dialog');
+  evidenceDialog?.addEventListener('close', () => {
+    evidenceOpen = false;
+  });
+  evidenceDialog?.addEventListener('cancel', () => {
+    evidenceOpen = false;
+  });
+  syncEvidenceDialog();
 }
 function showResult() {
   actionSelection = {};
@@ -248,6 +267,16 @@ app.addEventListener('submit', (event) => {
 app.addEventListener('click', (event) => {
   const button = (event.target as HTMLElement).closest('button');
   if (!button) return;
+  if (button.dataset.openEvidence !== undefined) {
+    evidenceOpen = true;
+    syncEvidenceDialog();
+    return;
+  }
+  if (button.dataset.closeEvidence !== undefined) {
+    evidenceOpen = false;
+    syncEvidenceDialog();
+    return;
+  }
   if (button.id === 'language') {
     lang = lang === 'zh' ? 'en' : 'zh';
     advancedOpen = !!document.querySelector<HTMLDetailsElement>('.form-options')?.open;

@@ -72,8 +72,8 @@ Analysis describes a symbolic style and possible friction. Suggestions occupy a 
 
 ## 本轮更新 · This round
 
-- **书页入口 · In-book entry:** After opening a sample or private reading, the page and sidebar expose **有据可查 / Evidence**, with three calibration hints linking to [docs/evidence.md](docs/evidence.md).
-- **可追溯导出 · Traceable export:** Markdown and JSON exports now include `evidenceVersion` (currently `evidence-calibration-1`) beside the reading `version`, so a saved book points back to this calibration showcase.
+- **页内校准 · In-app calibration:** **有据可查 / Evidence** opens an **on-page dialog** (day-boundary dual convention, analysis/advice split, no fortune scores, honest limits) from the sidebar, reading hero and footer—not a primary jump to GitHub. Maintainer archive remains [docs/evidence.md](docs/evidence.md).
+- **可追溯导出 · Traceable export:** Markdown and JSON exports include `evidenceVersion` (currently `evidence-calibration-2`) matching the in-app panel stamp.
 - **差异化不变 · Differentiation held:** Local-first BaZi book, dual day-boundary comparison, analysis separate from advice — no Ziwei engine or third-party judgment dataset.
 
 
