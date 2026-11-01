@@ -523,9 +523,16 @@ footer a {
   margin: 0 !important;
   font-size: 12px !important;
 }
-.evidence-entry-meta a {
+.evidence-entry-meta .evidence-open {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
   color: #111;
+  text-decoration: underline;
   text-underline-offset: 3px;
+  cursor: pointer;
 }
 .evidence-entry-meta span {
   font: 10px monospace;
@@ -535,11 +542,103 @@ footer a {
 .index-evidence {
   display: inline-block;
   margin-top: 22px;
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
   font: 11px/1.4 monospace;
   letter-spacing: 0.6px;
   color: #111;
   text-decoration: underline;
   text-underline-offset: 3px;
+  cursor: pointer;
+}
+.footer-evidence {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.evidence-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(860px, calc(100vh - 48px));
+  margin: auto;
+  padding: 0;
+  border: 1px solid #111;
+  background: #fff;
+  color: #111;
+}
+.evidence-dialog::backdrop {
+  background: rgba(17, 17, 17, 0.42);
+}
+.evidence-dialog-sheet {
+  padding: 22px 22px 20px;
+  overflow: auto;
+  max-height: min(860px, calc(100vh - 48px));
+}
+.evidence-dialog-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.evidence-dialog-head h2 {
+  margin: 6px 0 0;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+.evidence-dialog-lead {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: #333;
+  max-width: 46ch;
+}
+.evidence-panel-section {
+  padding: 14px 0 12px;
+  border-top: 1px solid var(--line);
+}
+.evidence-panel-section h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+.evidence-panel-section p {
+  margin: 0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.65;
+}
+.evidence-panel-section ul {
+  margin: 10px 0 0;
+  padding-left: 1.15em;
+  font-size: 12px;
+  color: #444;
+}
+.evidence-panel-section li {
+  margin: 4px 0;
+}
+.evidence-dialog-version {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: baseline;
+  margin: 18px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #111;
+  font: 11px monospace;
+  letter-spacing: 0.4px;
+}
+.evidence-dialog-version small {
+  font: 10px/1.4 sans-serif;
+  color: var(--muted);
+  letter-spacing: 0;
 }
 .chapter {
   scroll-margin-top: 24px;

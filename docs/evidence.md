@@ -62,8 +62,8 @@ npm run chart -- --date 1988-02-15 --time 23:30 --sect 1
 
 ## 在命书里打开 · Open from the reading
 
-演示与本地应用的命书页提供「有据可查」入口（侧栏与正文提示），导出文件中的 `evidenceVersion` 与本页校准橱窗对应。当前版本标识：`evidence-calibration-1`。
+演示与本地应用在**页内**打开「有据可查」校准说明（侧栏、正文「打开校准说明」、页脚同一入口），不再把读者首跳到本文件。本页仍给星标者与二次开发者留档。导出文件中的 `evidenceVersion` 与页内说明一致。当前版本标识：`evidence-calibration-2`。
 
-The live reading page links here from the sidebar and an in-book hint. Exported files carry `evidenceVersion` for this showcase. Current stamp: `evidence-calibration-1`.
+The live app opens **有据可查** as an **in-page** dialog from the sidebar, reading hero, and footer. This markdown file remains the maintainer archive. Exports carry matching `evidenceVersion`. Current stamp: `evidence-calibration-2`.
 
 Sources last checked with the reading-method note (2026-09-20 / 2026-09-21). Fixtures above are maintained in `tests/` and must stay green in CI.
