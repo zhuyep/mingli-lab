@@ -8,7 +8,7 @@
 [![本地优先](https://img.shields.io/badge/隐私-本地优先-lightgrey.svg)](docs/privacy.md)
 [![无吉凶分](https://img.shields.io/badge/主张-无吉凶分数-lightgrey.svg)](docs/evidence.md)
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [完整双语说明 · Bilingual README](README.md) · [有据可查](docs/evidence.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
+[**翻开示例命书 · 直达换日拨动 →**](https://zhuyep.github.io/mingli-lab/#sample/flip) · [完整双语说明 · Bilingual README](README.md) · [有据可查](docs/evidence.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
 
 ![天机簿黑白手绘首页](docs/images/desktop.png)
 
@@ -43,6 +43,7 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 
 ## 本轮更新
 
+- **深链直达示例：** `#sample/flip` 一开就是 1988-02-15 23:30 命书并停在换日拨动（[试一下](https://zhuyep.github.io/mingli-lab/#sample/flip)），方便 README / 帖子一句话引流。
 - **交互换日校准：** 命书页可一键切换 00:00 / 23:00 换日，四柱高亮变化，六章随日柱重写；示例默认 1988-02-15 23:30，一点就能体会差异。
 - **产品体验优先：** 侧栏/页脚主入口是「换日校准」，不再把读者首跳到 GitHub 文档；分析与建议分栏、无吉凶分、本地八字不变。
 - **可追溯导出：** Markdown / JSON 仍带 `evidenceVersion`（`evidence-calibration-2`）。
