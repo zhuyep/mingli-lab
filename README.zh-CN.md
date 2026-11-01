@@ -3,7 +3,12 @@
 **一纸生辰，万象成章。你的故事，不止八个字。**<br>
 **A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [完整双语说明 · Bilingual README](README.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
+[![CI](https://github.com/zhuyep/mingli-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/zhuyep/mingli-lab/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![本地优先](https://img.shields.io/badge/隐私-本地优先-lightgrey.svg)](docs/privacy.md)
+[![无吉凶分](https://img.shields.io/badge/主张-无吉凶分数-lightgrey.svg)](docs/evidence.md)
+
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [完整双语说明 · Bilingual README](README.md) · [有据可查](docs/evidence.md) · [解读方法](docs/reading-method.md) · [历法口径](docs/method.md) · [MIT](LICENSE)
 
 ![天机簿黑白手绘首页](docs/images/desktop.png)
 
@@ -23,6 +28,18 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 | 今年与前后几年 | 所选大运、年度关系与前后年份对照 |
 
 专业说法后先讲风格、长处和卡点，再用 16 个展开小节说明术语、古籍出处、本盘字位和判断条件。八则古籍短引可点击核对，白话与生活例子为项目编写；调整建议另起一栏。九个困扰选项默认收起，选择后明确标为“你填写的现状”，再提供对应步骤。Markdown 命书保留短引与链接，JSON 同带出处目录；睡眠回答不保存、不上传、不进入导出。附录保留十神推演与 23 点换日对照。
+
+## 能力与校准（摘）
+
+| 项 | 说明 |
+| --- | --- |
+| 体系 | 八字四柱命书（非紫微引擎） |
+| 阅读 | 六章；分析与建议分栏；自填现状显式标注 |
+| 依据 | TJ 规则 + 公版短引 + 固定案例可复算 |
+| 换日 | 00:00 / 23:00 同屏对照（例：1988-02-15 23:30 → 庚子 vs 辛丑） |
+| 不做 | 吉凶分数、疾病断言、云端存盘、私人讲稿数据集 |
+
+完整校准橱窗：[有据可查 · docs/evidence.md](docs/evidence.md)。
 
 > v0.8.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
 
@@ -62,4 +79,4 @@ npm run chart -- --date 2005-12-23 --time 08:37
 
 If you enjoy the book, **star the project** to find it again. Specific usability or calculation feedback is welcome; please use fictional or reference dates in public.
 
-[贡献指南](CONTRIBUTING.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.8.0 双语发布说明](docs/releases/v0.8.0.md)
+[贡献指南](CONTRIBUTING.md) · [有据可查](docs/evidence.md) · [隐私](docs/privacy.md) · [许可与图片来源](THIRD_PARTY_NOTICES.md) · [路线](docs/roadmap.md) · [v0.8.0 双语发布说明](docs/releases/v0.8.0.md)

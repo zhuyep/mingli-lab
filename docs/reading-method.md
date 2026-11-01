@@ -2,6 +2,8 @@
 
 Version: `tianji-rules-2-analysis-advice-1`. Calculation and technical rules were introduced in v0.3.0; the plain-language presentation layer was added in v0.4.0. v0.5.0 replaces repeated reflections with six separate topic chapters. The rules are deterministic and bilingual. There is no hidden model call, generated certainty score or purported prediction accuracy. Original project prose joins chart-specific facts to explicitly conditional cultural interpretations.
 
+**Calibration showcase:** reproducible fixtures, TJ identifiers and the open/closed boundary are summarized in [evidence.md](evidence.md) for stars and reviewers who need a five-minute check before reading this full method note.
+
 ## What is calculated, and what is interpreted
 
 | Rule | Reproducible observation | Interpretation / limit |
