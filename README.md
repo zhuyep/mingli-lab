@@ -72,9 +72,9 @@ Analysis describes a symbolic style and possible friction. Suggestions occupy a 
 
 ## 本轮更新 · This round
 
-- **页内校准 · In-app calibration:** **有据可查 / Evidence** opens an **on-page dialog** (day-boundary dual convention, analysis/advice split, no fortune scores, honest limits) from the sidebar, reading hero and footer—not a primary jump to GitHub. Maintainer archive remains [docs/evidence.md](docs/evidence.md).
-- **可追溯导出 · Traceable export:** Markdown and JSON exports include `evidenceVersion` (currently `evidence-calibration-2`) matching the in-app panel stamp.
-- **差异化不变 · Differentiation held:** Local-first BaZi book, dual day-boundary comparison, analysis separate from advice — no Ziwei engine or third-party judgment dataset.
+- **Interactive day-boundary · 交互换日:** Flip 00:00 / 23:00 on the reading page; changed pillars highlight and chapters rewrite from the new day stem. Sample defaults to 1988-02-15 23:30 so the split is obvious in one tap.
+- **Product UX first:** Sidebar/footer primary entry is **换日校准 / Day boundary**, not a GitHub-doc jump. Analysis vs advice columns, no fortune scores, local BaZi held.
+- **Traceable export:** Markdown/JSON still carry `evidenceVersion` (`evidence-calibration-2`).
 
 
 
