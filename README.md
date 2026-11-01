@@ -3,14 +3,19 @@
 **一纸生辰，万象成章。你的故事，不止八个字。**<br>
 **A moment becomes a chart. A chart opens a story. Yours is still being written.**
 
+[![CI](https://github.com/zhuyep/mingli-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/zhuyep/mingli-lab/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Local-first](https://img.shields.io/badge/privacy-local--first-lightgrey.svg)](docs/privacy.md)
+[![No scores](https://img.shields.io/badge/claims-no%20fortune%20scores-lightgrey.svg)](docs/evidence.md)
+
 翻开一卷黑白命书，在干支与五行之间，分别看工作、收入、感情与年份。每章从术语、古籍短引讲到本盘依据与生活例子，说明哪些条件会改变判断；分析、调整建议和你填写的实际情况分开阅读。
 
 Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Six chapters combine classical excerpts, original plain-language explanations and chart-specific reasoning. Analysis stays separate from suggestions and self-reported circumstances.
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.8.0)
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [有据可查 · Evidence](docs/evidence.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.8.0)
 
-**无需登录 · 无需 API Key · 生辰本地计算 · 中英双语**<br>
-**No account · No API key · Local birth-data processing · Chinese & English**
+**无需登录 · 无需 API Key · 生辰本地计算 · 中英双语 · 规则可展开核对**<br>
+**No account · No API key · Local birth-data processing · Chinese & English · Inspectable rules**
 
 ![天机簿黑白手绘首页 · Tianji Bu, an ink-and-paper reading experience](docs/images/desktop.png)
 
@@ -38,16 +43,32 @@ Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Six
 
 Analysis describes a symbolic style and possible friction. Suggestions occupy a separate section with conditional steps and examples. Nine optional situations are explicitly labelled as self-reported context when selected. Sleep notes use only actual responses, independently of birth symbols, and stay out of exports. The appendix retains guided questions, ten-god reasoning and day-boundary comparisons.
 
+## 产品能力一览 · What this book does
+
+| 能力 · Capability | 天机簿做法 · Our approach |
+| --- | --- |
+| 体系 · System | **八字四柱**命书，不是紫微斗数排盘引擎 |
+| 阅读结构 · Reading | 六章白话；**分析与调整建议分栏**；九个选填困扰显式标为自填现状 |
+| 依据 · Evidence | TJ 规则标识、古籍公版短引、可展开月令/根气/透干；见 [有据可查](docs/evidence.md) |
+| 换日口径 · Day boundary | **同时保留** 00:00 与 23:00，对照同一时刻的日柱差异 |
+| 校准 · Calibration | 未知时辰/杂气月等**不定强弱**；无吉凶分数；测试钉住软件口径而非人生预测 |
+| 隐私 · Privacy | 浏览器本地计算；无账号、无 API Key、不存命盘 |
+| 开源 · Open source | MIT 内核与确定性文案；不捆绑私人讲稿或第三方断语库 |
+
 ## 意境之外，依据可查 · Atmosphere on the surface, rules underneath
 
-- **推演可展开。** 查看月令、根气、透干、条件化平衡路径与规则标识。<br>
-  **Inspectable reasoning.** Follow month context, roots, visible stems, conditional balance paths and rule identifiers.
+- **推演可展开。** 查看月令、根气、透干、条件化平衡路径与规则标识（TJ-01…TJ-09）。<br>
+  **Inspectable reasoning.** Follow month context, roots, visible stems, conditional balance paths and rule identifiers (TJ-01…TJ-09).
 - **不确定就留白。** 未知时辰不补造；杂气月和部分集中结构不强行定强弱。<br>
   **Uncertainty stays visible.** Unknown hours are not invented; mixed Earth months and some concentrated charts withhold strength judgments.
+- **固定案例可复算。** 例如 `1988-02-15 23:30`：00:00 换日得日柱庚子，23:00 换日得辛丑，时柱同为戊子——README 表与 `npm test` 同一组钉。<br>
+  **Fixed fixtures you can recompute.** e.g. `1988-02-15 23:30`: midnight day pillar 庚子 vs late-Zi 辛丑, same hour pillar 戊子 — the README table and `npm test` share one nail.
 - **私密、不依赖云模型。** 计算与解读均在浏览器本地完成，不调用模型服务、不存储命盘。<br>
   **Private, without a cloud model.** Calculation and interpretation run in the browser, without model calls or chart storage.
 - **可复用的开源内核。** 不依赖 DOM 的 TypeScript 模块、规则案例与结构化导出，方便研究和二次开发。<br>
   **A reusable open-source core.** DOM-independent TypeScript modules, rule cases and structured exports support inspection and adaptation.
+
+完整校准橱窗（测试表、开源边界、诚实清单）：[docs/evidence.md](docs/evidence.md)。
 
 ## 本地翻开 · Run locally
 
@@ -122,7 +143,7 @@ console.log(chart.pillars.map(p => p.text));
 - **隐私与离线 / Privacy and offline use:** 不发起 API 请求、不保存浏览器命盘数据；静态托管仍可记录普通访问元数据。已加载页面可离线计算，但不保证首次离线打开。导出与截图可能含个人四柱，JSON 还含原始输入，请自行保管。<br>
   No API requests or browser chart storage. Static hosting can still log ordinary asset requests. Calculation works after the page has loaded; offline cold starts are not supported. Exports and screenshots may contain personal pillars, and JSON includes the original input. Keep them private.
 
-[解读方法 · Reading method](docs/reading-method.md) · [历法口径 · Calendar contract](docs/method.md) · [隐私说明 · Privacy](docs/privacy.md)
+[有据可查 · Evidence](docs/evidence.md) · [解读方法 · Reading method](docs/reading-method.md) · [历法口径 · Calendar contract](docs/method.md) · [隐私说明 · Privacy](docs/privacy.md)
 
 ## 一起续写 · Build the next page
 
