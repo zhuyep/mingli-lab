@@ -12,7 +12,7 @@
 
 Open an ink-and-paper book of BaZi — the traditional Chinese Four Pillars. Six chapters combine classical excerpts, original plain-language explanations and chart-specific reasoning. Analysis stays separate from suggestions and self-reported circumstances.
 
-[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [有据可查 · Evidence](docs/evidence.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.8.0)
+[**翻开示例命书 · Read a sample →**](https://zhuyep.github.io/mingli-lab/#sample/flip) · [中文快速指南 · Chinese guide](README.zh-CN.md) · [有据可查 · Evidence](docs/evidence.md) · [解读方法 · Reading method](docs/reading-method.md) · [版本说明 · Release notes](https://github.com/zhuyep/mingli-lab/releases/tag/v0.8.0)
 
 **无需登录 · 无需 API Key · 生辰本地计算 · 中英双语 · 规则可展开核对**<br>
 **No account · No API key · Local birth-data processing · Chinese & English · Inspectable rules**
@@ -72,6 +72,7 @@ Analysis describes a symbolic style and possible friction. Suggestions occupy a 
 
 ## 本轮更新 · This round
 
+- **Deep-link sample · 深链直达:** `#sample/flip` opens the late-Zi reading already on the 23:00 boundary ([try it](https://zhuyep.github.io/mingli-lab/#sample/flip)) — one URL for README / X / forum posts.
 - **Interactive day-boundary · 交互换日:** Flip 00:00 / 23:00 on the reading page; changed pillars highlight and chapters rewrite from the new day stem. Sample defaults to 1988-02-15 23:30 so the split is obvious in one tap.
 - **Product UX first:** Sidebar/footer primary entry is **换日校准 / Day boundary**, not a GitHub-doc jump. Analysis vs advice columns, no fortune scores, local BaZi held.
 - **Traceable export:** Markdown/JSON still carry `evidenceVersion` (`evidence-calibration-2`).

@@ -5,6 +5,7 @@ import { yearNote } from './everyday';
 import { ACTIONS, selectedActions, type ActionTopic, type ActionSelection } from './actions';
 import { buildReading, EVIDENCE_VERSION, readingMarkdown, todayInChina } from './reading';
 import { boundaryHeadline, changedPillarIndexes } from './boundary';
+import { hashForSample, parseHash } from './route';
 let readingDate = todayInChina();
 import {
   calculate,
@@ -217,6 +218,88 @@ function render() {
   document.title = t('天机簿 · 天机可问，人生自书', 'Tianji Bu · A personal book of BaZi');
   app.innerHTML = `<a class="skip-link" href="${showingResult ? '#results' : '#workspace'}">${t('跳至主要内容', 'Skip to content')}</a><header class="site-header"><button class="brand" id="home" aria-label="${t('天机簿首页', 'Tianji Bu home')}"><img src="./mark.svg" width="34" height="34" alt=""/><strong>天机簿</strong><span>TIANJI BU</span></button><nav><span class="nav-note">${t('天机可问，人生自书。', 'YOUR LIFE IS STILL YOURS.')}</span><button id="language">${lang === 'zh' ? 'English' : '中文'}</button></nav></header><main>${showingResult ? board() : form()}</main><footer><span>天机簿 · TIANJI BU <small>v0.8.0</small></span><p>${t('传统文化体验，仅供娱乐与自我思考。', 'A cultural experience for entertainment and reflection.')}</p>${showingResult ? `<button type="button" class="footer-evidence" data-scroll-boundary>${t('换日校准', 'Day boundary')}</button>` : `<button type="button" class="footer-evidence" data-example="standard">${t('先看示例', 'Try sample')}</button>`}<a href="https://github.com/zhuyep/mingli-lab" target="_blank" rel="noreferrer">${t('开源仓库', 'Open-source repo')} ↗</a></footer><div id="toast" class="toast" role="status"></div>`;
 }
+
+const SAMPLE_BIRTH = {
+  date: '1988-02-15',
+  time: '23:30',
+  direction: 'none' as const,
+  pillars: '乙酉 戊子 辛巳 壬辰',
+};
+
+let applyingRoute = false;
+
+function setHashQuiet(next: string) {
+  const want = next ? `#${next}` : '';
+  if (window.location.hash === want) return;
+  applyingRoute = true;
+  if (want) window.location.hash = want;
+  else history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+  queueMicrotask(() => {
+    applyingRoute = false;
+  });
+}
+
+function syncDemoHash() {
+  if (!showingResult || !isExample || result.input.mode !== 'solar') {
+    if (!showingResult) setHashQuiet('');
+    return;
+  }
+  setHashQuiet(hashForSample(result.input.sect, false));
+}
+
+function openSample(opts: { sect?: 1 | 2; openCompare?: boolean; syncHash?: boolean } = {}) {
+  const sect = (opts.sect ?? 2) as Sect;
+  mode = 'solar';
+  draft = {
+    date: SAMPLE_BIRTH.date,
+    time: SAMPLE_BIRTH.time,
+    sect: String(sect),
+    direction: SAMPLE_BIRTH.direction,
+    pillars: SAMPLE_BIRTH.pillars,
+  };
+  result = calculate({
+    mode: 'solar',
+    date: SAMPLE_BIRTH.date,
+    time: SAMPLE_BIRTH.time,
+    sect,
+    direction: 'none',
+  });
+  selected = 2;
+  isExample = true;
+  if (opts.syncHash !== false) setHashQuiet(hashForSample(sect, !!opts.openCompare));
+  showResult();
+  document.querySelector('#boundary-live')?.scrollIntoView({ block: 'nearest' });
+  document.querySelector('.live-pillars')?.classList.add('just-flipped');
+  if (opts.openCompare) {
+    const detail = document.querySelectorAll<HTMLDetailsElement>('.deep-reading>details')[1];
+    if (detail) {
+      detail.open = true;
+      detail.scrollIntoView({ block: 'start' });
+    }
+  }
+}
+
+function applyRouteFromHash() {
+  if (applyingRoute) return;
+  const route = parseHash(window.location.hash);
+  if (route.kind === 'home') {
+    if (showingResult) {
+      showingResult = false;
+      render();
+      window.scrollTo(0, 0);
+    }
+    return;
+  }
+  if (route.kind === 'chapter') {
+    // Chapter anchors only make sense on an open reading; ignore on the form.
+    if (showingResult) {
+      document.getElementById(`chapter-${route.id}`)?.scrollIntoView({ block: 'start' });
+    }
+    return;
+  }
+  openSample({ sect: route.sect, openCompare: route.openCompare, syncHash: false });
+}
+
 function showResult() {
   actionSelection = {};
   sleepCheck = { rhythm: 'unknown', quality: 'unknown' };
@@ -253,6 +336,7 @@ app.addEventListener('submit', (event) => {
     result = calculate(readInput());
     selected = 2;
     isExample = false;
+    setHashQuiet('');
     showResult();
   } catch (err) {
     document.querySelector('#form-status')!.textContent =
@@ -295,6 +379,7 @@ app.addEventListener('click', (event) => {
             'Switched to 23:00 boundary; reading rebuilt.',
           ),
     );
+    if (isExample) syncDemoHash();
     return;
   }
   if (button.id === 'language') {
@@ -305,6 +390,7 @@ app.addEventListener('click', (event) => {
   }
   if (button.id === 'edit' || button.id === 'home') {
     showingResult = false;
+    setHashQuiet('');
     render();
     window.scrollTo(0, 0);
     document.querySelector<HTMLInputElement>('#date, #pillars')?.focus({ preventScroll: true });
@@ -329,27 +415,10 @@ app.addEventListener('click', (event) => {
   }
   if (button.dataset.example) {
     const kind = button.dataset.example;
-    mode = 'solar';
-    draft = {
-      date: '1988-02-15',
-      time: '23:30',
-      sect: '2',
-      direction: 'none',
-      pillars: '乙酉 戊子 辛巳 壬辰',
-    };
-    result = calculate(readInput());
-    selected = 2;
-    isExample = true;
-    showResult();
-    document.querySelector('#boundary-live')?.scrollIntoView({ block: 'nearest' });
-    document.querySelector('.live-pillars')?.classList.add('just-flipped');
-    if (kind === 'zi') {
-      const detail = document.querySelectorAll<HTMLDetailsElement>('.deep-reading>details')[1];
-      if (detail) {
-        detail.open = true;
-        detail.scrollIntoView({ block: 'start' });
-      }
-    }
+    openSample({
+      sect: kind === 'zi' ? 1 : 2,
+      openCompare: kind === 'zi',
+    });
   }
 
   if (button.dataset.actionTopic && button.dataset.situation) {
@@ -460,7 +529,17 @@ app.addEventListener('change', (event) => {
   }
 });
 
-render();
+window.addEventListener('hashchange', () => {
+  if (applyingRoute) return;
+  applyRouteFromHash();
+});
+
+if (parseHash(window.location.hash).kind === 'sample') {
+  applyRouteFromHash();
+} else {
+  render();
+}
+
 // Same-origin parent handshake: the personal workbench waits for a rendered app.
 if (window.parent !== window)
   window.parent.postMessage(
