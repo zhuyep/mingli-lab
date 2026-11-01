@@ -41,6 +41,12 @@ Open an ink-and-paper book of BaZi. Six plain-language chapters, with the chart 
 
 完整校准橱窗：[有据可查 · docs/evidence.md](docs/evidence.md)。
 
+## 本轮更新
+
+- **命书页入口：** 翻开示例或私人命书后，正文与侧栏均有「有据可查」入口，三点校准提示直达 [docs/evidence.md](docs/evidence.md)。
+- **可追溯导出：** Markdown / JSON 导出新增 `evidenceVersion`（当前 `evidence-calibration-1`），与解读 `version` 并列，方便对照本轮校准橱窗。
+- **差异化不变：** 八字本地命书、换日双口径、分析与建议分栏；不移植紫微引擎或外部断语数据集。
+
 > v0.8.0 公开预览。强弱筛选是透明的项目启发式；未知时辰、杂气月和部分集中结构不定强弱。白话是传统符号的现代反思类比，不是心理测量。专业规则审阅及独立使用反馈仍待完成，不宣称命理预测有效。
 
 ## 本地运行

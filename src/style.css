@@ -494,6 +494,53 @@ footer a {
   font-size: 10px;
   color: var(--muted);
 }
+.evidence-entry {
+  margin-top: 22px;
+  padding: 16px 16px 14px;
+  border: 1px solid var(--line);
+  background: #fafafa;
+}
+.evidence-entry p {
+  font-size: 13px;
+  color: #333;
+  max-width: 540px;
+  margin: 8px 0 12px;
+}
+.evidence-entry ul {
+  margin: 0 0 12px;
+  padding-left: 1.1em;
+  font-size: 12px;
+  color: #444;
+}
+.evidence-entry li {
+  margin: 4px 0;
+}
+.evidence-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: baseline;
+  margin: 0 !important;
+  font-size: 12px !important;
+}
+.evidence-entry-meta a {
+  color: #111;
+  text-underline-offset: 3px;
+}
+.evidence-entry-meta span {
+  font: 10px monospace;
+  color: var(--muted);
+  letter-spacing: 0.4px;
+}
+.index-evidence {
+  display: inline-block;
+  margin-top: 22px;
+  font: 11px/1.4 monospace;
+  letter-spacing: 0.6px;
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .chapter {
   scroll-margin-top: 24px;
   padding: 39px 0 30px;
